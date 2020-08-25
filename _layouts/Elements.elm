@@ -8,9 +8,17 @@ logo : Html Never
 logo =
     div []
         [ h1 [] <|
-            [ span [ style "text-decoration" "underline 0.13em #66220065" ] [ text "tanh" ]
+            [ span
+                [ style "text-decoration" "underline solid #66220065"
+                , style "text-decoration-thickness" "0.1rem"
+                ]
+                [ text "tanh" ]
             , span [ style "color" "#662200" ] [ text "." ]
-            , span [ style "text-decoration" "line-through 0.13em #66220065" ] [ text "xyz" ]
+            , span
+                [ style "text-decoration" "line-through solid #66220065 "
+                , style "text-decoration-thickness" "0.1rem"
+                ]
+                [ text "xyz" ]
             ]
         ]
 
