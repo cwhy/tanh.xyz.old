@@ -1,3 +1,8 @@
+# tanh.xyz
+
+## Description
+Source code of tanh.xyz, a blog by cwhy
+
 ## Init
 yarn global add elmstatic browser-sync
 
