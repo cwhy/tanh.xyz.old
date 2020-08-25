@@ -5566,7 +5566,8 @@ var $author$project$Elements$logo = A2(
 					$elm$html$Html$span,
 					_List_fromArray(
 						[
-							A2($elm$html$Html$Attributes$style, 'text-decoration', 'underline 0.13em #66220065')
+							A2($elm$html$Html$Attributes$style, 'text-decoration', 'underline solid #66220065'),
+							A2($elm$html$Html$Attributes$style, 'text-decoration-thickness', '0.1rem')
 						]),
 					_List_fromArray(
 						[
@@ -5586,7 +5587,8 @@ var $author$project$Elements$logo = A2(
 					$elm$html$Html$span,
 					_List_fromArray(
 						[
-							A2($elm$html$Html$Attributes$style, 'text-decoration', 'line-through 0.13em #66220065')
+							A2($elm$html$Html$Attributes$style, 'text-decoration', 'line-through solid #66220065 '),
+							A2($elm$html$Html$Attributes$style, 'text-decoration-thickness', '0.1rem')
 						]),
 					_List_fromArray(
 						[
