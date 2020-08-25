@@ -4,7 +4,7 @@
         <title>tanh.xyz</title>
         <link>https://tanh.xyz/posts</link>
         <description>A series of organized thoughts</description>
-        <lastBuildDate>Tue, 25 Aug 2020 12:31:22 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 25 Aug 2020 12:44:11 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Elmstatic</generator>
         <language>en</language>
@@ -19,6 +19,12 @@
             <link>https://tanh.xyz/posts/2019-07-29-elmstatic-supports-elm-markup</link>
             <guid>https://tanh.xyz/posts/2019-07-29-elmstatic-supports-elm-markup</guid>
             <pubDate>Mon, 29 Jul 2019 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Another Post]]></title>
+            <link>https://tanh.xyz/posts/2020-08-25-another-post</link>
+            <guid>https://tanh.xyz/posts/2020-08-25-another-post</guid>
+            <pubDate>Tue, 25 Aug 2020 00:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
