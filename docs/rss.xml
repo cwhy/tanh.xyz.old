@@ -4,13 +4,13 @@
         <title>tanh.xyz</title>
         <link>https://tanh.xyz/posts</link>
         <description>A series of organized thoughts</description>
-        <lastBuildDate>Tue, 25 Aug 2020 11:04:28 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 25 Aug 2020 11:27:15 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Elmstatic</generator>
         <language>en</language>
         <image>
             <title>tanh.xyz</title>
-            <url>https://tanh.xyz/img/logo.png</url>
+            <url>https://tanh.xyz/icon192.png</url>
             <link>https://tanh.xyz/posts</link>
         </image>
         <copyright>Copyright: CWhy</copyright>

@@ -5646,8 +5646,8 @@ var $author$project$Page$header = _List_fromArray(
 				$elm$html$Html$img,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$alt('Author\'s blog'),
-						$elm$html$Html$Attributes$src('/img/logo.png'),
+						$elm$html$Html$Attributes$alt('tanh.xyz'),
+						$elm$html$Html$Attributes$src('/img/logo.svg'),
 						A2($elm$html$Html$Attributes$attribute, 'width', '100')
 					]),
 				_List_Nil)

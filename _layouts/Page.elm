@@ -40,7 +40,7 @@ M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-
 header : List (Html Never)
 header =
     [ div [ class "header-logo" ]
-        [ img [ alt "Author's blog", src "/img/logo.png", attribute "width" "100" ]
+        [ img [ alt "tanh.xyz", src "/img/logo.svg", attribute "width" "100" ]
             []
         ]
     , div [ class "navigation" ]

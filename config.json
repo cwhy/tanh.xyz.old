@@ -10,12 +10,12 @@
         "description": "A series of organized thoughts",
         "id": "https://tanh.xyz",
         "link": "https://tanh.xyz/posts",
-        "image": "https://tanh.xyz/img/logo.png",
+        "image": "https://tanh.xyz/icon192.png",
         "copyright": "Copyright: CWhy",
         "language": "en",
         "generator": "Elmstatic",
         "author": {
-          "name": "Author",
+          "name": "CWhy",
           "link": "https://chenyuio.com"
         }
     },
