@@ -1,6 +1,6 @@
 {
     "siteTitle": "tanh.xyz",
-    "outputDir": "docs",
+    "outputDir": "_site",
     "copy": {
         "/posts": "/"
     },
