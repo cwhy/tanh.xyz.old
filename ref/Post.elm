@@ -3,8 +3,8 @@ module Post exposing (main, metadataHtml)
 import ElmMarkup
 import Elmstatic exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (class, href)
-import Layouts exposing (pageLayout)
+import Html.Attributes as Attr exposing (alt, attribute, class, href, src)
+import Page
 
 
 tagsToHtml : List String -> List (Html Never)
@@ -35,7 +35,7 @@ main =
         \content ->
             case ElmMarkup.markupToHtml content.content of
                 Ok html ->
-                    pageLayout content.title <|
+                    Page.layout content.title <|
                         Ok (metadataHtml content :: html)
 
                 Err error ->

@@ -1,18 +1,8 @@
 module Elements exposing (..)
 
+--import Elmstatic exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (attribute, style)
-
-
-logo : Html Never
-logo =
-    div []
-        [ h1 [] <|
-            [ span [ style "text-decoration" "underline 0.13em #66220065" ] [ text "tanh" ]
-            , span [ style "color" "#662200" ] [ text "." ]
-            , span [ style "text-decoration" "line-through 0.13em #66220065" ] [ text "xyz" ]
-            ]
-        ]
+import Html.Attributes exposing (attribute)
 
 
 githubIcon : Html Never

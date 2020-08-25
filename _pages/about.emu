@@ -1,4 +1,11 @@
 |> Metadata 
-    title = About the author
+    title = About this blog
 
-You can write something about *yourself* here using `elm-markup`{name}.
+I'll probably just dump my thought here.
+
+Sometimes they are organized thoughts, sometimes they are just me ranting.
+
+This website is made using [elmstatic]{link | url = https://github.com/alexkorban/elmstatic}
+                         , [elm-ui]{link | url = https://github.com/mdgriffith/elm-ui}
+                       and [elm-markup]{link | url = https://github.com/mdgriffith/elm-markup}.
+

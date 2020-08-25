@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>Elmstatic now supports elm-markup | tanh.xyz</title><meta charset="utf-8"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad();</script><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/styles/default.min.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Open+Sans|Proza+Libre|Inconsolata" rel="stylesheet" type="text/css"></head><body><div class="header-logo"><img alt="tanh.xyz" src="/img/logo.svg" width="100"></div><div class="navigation"><ul><li><a href="/posts">Posts</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div class="sidebar"></div><div class="sidebar2"></div><div class="content"><h1>Elmstatic now supports elm-markup</h1><div class="post-metadata"><span>2019-07-29</span><span>•</span><a href="/tags/software">software</a><a href="/tags/other">other</a></div><article><p><span class="bold">Elmstatic</span> now supports <code>elm-markup</code>!</p><h2>Let’s look at some <span class="italic">code</span></h2><p>Code is highlighted using <a href="https://highlightjs.org">Highlight.js</a>:</p><pre><code class="elm">view =
+<!doctype html><html><head><title>Elmstatic now supports elm-markup | tanh.xyz</title><meta charset="utf-8"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad();</script><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/styles/default.min.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Crimson+Pro|Livvic|Fira+Code" rel="stylesheet" type="text/css"></head><body><div class="header-text"><div><h1><span style="text-decoration: underline 0.13em #66220065;">tanh</span><span style="color: rgb(102, 34, 0);">.</span><span style="text-decoration: line-through 0.13em #66220065;">xyz</span></h1></div></div><div class="navigation"><ul><li><a href="/posts">Posts</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div class="sidebar"></div><div class="sidebar2"></div><div class="content"><h2>Elmstatic now supports elm-markup</h2><div class="post-metadata"><span>2019-07-29</span><span>•</span><a href="/tags/software">software</a><a href="/tags/other">other</a></div><article><p><span class="bold">Elmstatic</span> now supports <code>elm-markup</code>!</p><h2>Let’s look at some <span class="italic">code</span></h2><p>Code is highlighted using <a href="https://highlightjs.org">Highlight.js</a>:</p><pre><code class="elm">view =
     \contentJson -&gt;
         case Json.Decode.decodeValue decoder contentJson of
             Err error -&gt;
@@ -19,23 +19,25 @@
                         }</code></pre><h2>What does a <span class="bold">list</span> look like?</h2><ol><li><div><div>This is definitely the first thing.
 Add all together now
 With some Content</div></div><ul></ul></li><li><div><div>Another thing.</div></div><ol><li><div><div>sublist</div></div><ul></ul></li><li><div><div>more sublist</div></div><ul><li><div><div>indented</div></div><ul></ul></li></ul></li><li><div><div>other sublist</div></div><ul><li><div><div>subthing</div></div><ul></ul></li><li><div><div>other subthing</div></div><ul></ul></li></ul></li></ol></li><li><div><div>and yet, another</div></div><ul><li><div><div>and another one
-with some content</div></div><ul></ul></li></ul></li></ol></article></div><div class="footer"><img alt="Elmstatic now supports elm-markup" src="/img/logo.svg" style="float: left; padding-top: 7px" width="75"></div><link href="/styles.css" rel="stylesheet" type="text/css"><style>body {
+with some content</div></div><ul></ul></li></ul></li></ol></article></div><link href="/styles.css" rel="stylesheet" type="text/css"><style>body {
     padding:0px;
     margin:0px;
     background-color:#ffffff;
-    color:#363636;
-    font-family:Open Sans, Arial, sans-serif;
+    color:#333333;
+    font-family:Crimson Pro, Times New Roman, serif;
     font-size:18px;
     line-height:1.4em;
 }
 
 a {
-    color:#348aa7;
-    text-decoration:none;
+    color:#324354;
+    text-decoration:underline dashed;
+    text-decoration-thickness:0.1rem;
 }
 
 code {
-    font-family:Inconsolata, monospace;
+    font-family:Fira Code, monospace;
+    font-size:0.7em;
 }
 
 pre  code {
@@ -43,27 +45,27 @@ pre  code {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family:Proza Libre, Helvetica, sans-serif;
+    font-family:Livvic, Arial, Helvetica, sans-serif;
     line-height:1.1em;
 }
 
 h1 {
-    font-size:2.66667em;
+    font-size:2.3em;
     margin-bottom:2.0202rem;
 }
 
 h2 {
-    font-size:2em;
+    font-size:1.8em;
     margin-bottom:1.61616rem;
 }
 
 h3 {
-    font-size:1.33333em;
+    font-size:1.2em;
     margin-bottom:1.21212rem;
 }
 
 h4 {
-    font-size:1.2em;
+    font-size:1.1em;
     margin-bottom:0.80808rem;
 }
 
@@ -80,23 +82,19 @@ small {
     font-size:65%;
 }
 
-.header-logo {
-    padding-top:6px;
+.header-text {
+    padding-left:2rem;
     text-align:center;
-    background-color:#f2fae8;
 }
 
 @media only screen and (min-width: 600px) {
-    .header-logo {
+    .header-text {
         text-align:left;
-    border-bottom:2px solid #3c8765;
     }
 }
 
 .navigation {
     text-align:center;
-    border-bottom:2px solid #3c8765;
-    background-color:#f2fae8;
     padding:10px;
     margin-top:-20px;
 }
@@ -129,37 +127,6 @@ small {
     max-width:100vw;
 }
 
-.footer {
-    text-align:center;
-    border-top:2px solid #2f4858;
-    background-color:#348aa7;
-    color:#ffffff;
-}
-
-@media only screen and (min-width: 600px) {
-    .footer {
-        line-height:80px;
-    text-align:right;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-    .footer  .link {
-        display:inline-block;
-    margin-right:20px;
-    }
-}
-
-.footer  a {
-    color:#ffffff;
-    text-decoration:none;
-}
-
-.footer  svg {
-    padding-right:5px;
-    vertical-align:baseline;
-}
-
 .post-metadata {
     margin-top:-0.5em;
     margin-bottom:2em;
@@ -173,7 +140,6 @@ small {
 .post-metadata  a {
     border:1px solid #e0e0e0;
     border-radius:3px;
-    background-color:#f2fae8;
     padding-left:5px;
     padding-right:5px;
 }</style></body></html>
