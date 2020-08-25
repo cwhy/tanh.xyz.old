@@ -1,0 +1,1 @@
+~/.yarn/bin/elmstatic build

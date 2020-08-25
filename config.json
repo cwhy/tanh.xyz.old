@@ -1,0 +1,23 @@
+{
+    "siteTitle": "tanh.xyz",
+    "outputDir": "docs",
+    "copy": {
+        "/posts": "/"
+    },
+    "feed": {
+        "type": "rss",
+        "title": "tanh.xyz",
+        "description": "A series of organized thoughts",
+        "id": "https://tanh.xyz",
+        "link": "https://tanh.xyz/posts",
+        "image": "https://tanh.xyz/img/logo.png",
+        "copyright": "Copyright: CWhy",
+        "language": "en",
+        "generator": "Elmstatic",
+        "author": {
+          "name": "Author",
+          "link": "https://chenyuio.com"
+        }
+    },
+    "tags": ["other", "software"]
+}
