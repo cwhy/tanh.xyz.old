@@ -144,7 +144,7 @@ htmlTemplate title contentNodes =
             , script "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/languages/elm.min.js"
             , inlineScript "hljs.initHighlightingOnLoad();"
             , stylesheet "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/styles/default.min.css"
-            , stylesheet "//fonts.googleapis.com/css?family=Crimson+Pro|Livvic|Fira+Code"
+            , stylesheet "//fonts.googleapis.com/css?family=Red+Hat+Text|Crimson+Pro|Livvic|Jetbrain+Mono"
             ]
         , node "body" [] contentNodes
         ]

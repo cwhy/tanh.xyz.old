@@ -43,6 +43,7 @@ pageLayout title contentItems =
                             []
                        , div [ class "content" ]
                             ([ h2 [] [ text title ] ] ++ contentHtml)
+                       , Elmstatic.stylesheet "/fonts/font.css"
                        , Elmstatic.stylesheet "/styles.css"
                        , Styles.styles
                        ]

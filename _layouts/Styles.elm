@@ -7,78 +7,185 @@ import Html exposing (Html)
 import Html.Styled
 
 
-linkColor =
-    "324354"
+typographyTemplates =
+    let
+        serifFam =
+            fontFamilies [ "Crimson Pro", "Times New Roman", .value serif ]
+
+        sansFam =
+            fontFamilies [ "Red Hat Text", "Arial", "Helvetica", .value sansSerif ]
+
+        sansFamHeader =
+            fontFamilies [ "Livvic", "Arial", "Helvetica", .value sansSerif ]
+    in
+    { default =
+        [ fontSize <| px 18
+        , Css.color <| hex "333333"
+        , lineHeight <| Css.em 1.4
+        , sansFam
+        ]
+    , serif1 =
+        [ lineHeight <| Css.rem 1.4
+        , fontSize <| rem 1
+        , serifFam
+        ]
+    , serif4 =
+        [ lineHeight <| Css.rem 1.4
+        , fontSize <| rem 1.8
+        , serifFam
+        ]
+    , sans1 =
+        [ fontSize <| rem 1
+        , sansFam
+        , lineHeight <| Css.rem 1.4
+        ]
+    , sans2 =
+        [ fontSize <| rem 1.1
+        , sansFamHeader
+        , lineHeight <| Css.rem 1.4
+        ]
+    , sans3 =
+        [ fontSize <| rem 1.2
+        , sansFamHeader
+        , lineHeight <| Css.rem 1.4
+        ]
+    , sans4 =
+        [ fontSize <| rem 1.8
+        , sansFamHeader
+        , lineHeight <| Css.rem 1.4
+        ]
+    , sans5 =
+        [ fontSize <| rem 2.3
+        , sansFamHeader
+        , lineHeight <| Css.rem 1.4
+        ]
+    , fontCode =
+        [ fontFamilies [ "mononoki", "JetBrains Mono", .value monospace ]
+        , fontSize <| Css.rem 0.82
+        , lineHeight <| Css.rem 1.2
+        ]
+    }
 
 
-styles : Html msg
-styles =
+withTypography typeStyle attrs =
+    typeStyle typographyTemplates ++ attrs
+
+
+resets =
+    [ Css.Global.pre
+        [ descendants
+            [ code [ important <| overflowX Css.scroll ] ]
+        ]
+    ]
+
+
+elements =
+    let
+        color =
+            [ 50, 67, 84 ]
+    in
+    [ a
+        [ Css.color <| rgba 50 67 84 1
+        , textDecoration3 underline dashed <| rgba 50 67 84 0.3
+        , property "text-underline-offset" "0.15em"
+        , property "text-decoration-thickness" "0.1em"
+        ]
+    , li
+        []
+    ]
+
+
+getHeaderMargins n =
+    let
+        x =
+            case n of
+                1 ->
+                    2.0202
+
+                2 ->
+                    1.61616
+
+                3 ->
+                    1.21212
+
+                4 ->
+                    0.80808
+
+                _ ->
+                    0.60606
+    in
+    [ marginBottom <| rem x
+    , marginTop <| rem x
+    ]
+
+
+typography =
+    [ h1 <| withTypography .sans5 <| getHeaderMargins 1
+    , h2 <| withTypography .serif4 <| getHeaderMargins 2
+    , h3 <| withTypography .sans3 <| getHeaderMargins 3
+    , h4 <| withTypography .sans2 <| getHeaderMargins 4
+    , each [ h5, h6 ] <| withTypography .sans1 <| getHeaderMargins 5
+    , p <| withTypography .sans1 [ margin3 auto auto (rem 1) ]
+    , li <| withTypography .sans1 [ margin4 (rem 0.2) auto (rem 0.5) auto ]
+    , Css.Global.small [ fontSize <| pct 65 ]
+    , code typographyTemplates.fontCode
+    ]
+
+
+layouts =
     let
         wideScreen =
             withMedia [ only screen [ Media.minWidth <| Css.px 600 ] ]
-
-        codeStyle =
-            [ fontFamilies [ "Fira Code", .value monospace ]
-            , fontSize <| Css.em 0.7
-            ]
     in
-    global
-        [ body
+    [ html <|
+        withTypography .default
             [ padding <| px 0
             , margin <| px 0
-            , backgroundColor <| hex "ffffff"
-            , Css.color <| hex "333333"
-            , fontFamilies [ "Crimson Pro", "Times New Roman", .value serif ]
-            , fontSize <| px 18
-            , lineHeight <| Css.em 1.4
+            , backgroundColor <| hex "eeeeee"
             ]
-        , a
-            [ Css.color <| hex linkColor
-            , textDecoration2 underline dashed
-            , property "text-decoration-thickness" "0.1rem"
-            ]
-        , code codeStyle
-        , Css.Global.pre
-            [ descendants
-                [ code [ important <| overflowX Css.scroll ] ]
-            ]
-        , each [ h1, h2, h3, h4, h5, h6 ]
-            [ fontFamilies [ "Livvic", "Arial", "Helvetica", .value sansSerif ]
-            , lineHeight <| Css.em 1.1
-            ]
-        , h1 [ fontSize <| Css.em 2.3, marginBottom <| rem 2.0202 ]
-        , h2 [ fontSize <| Css.em 1.8, marginBottom <| rem 1.61616 ]
-        , h3 [ fontSize <| Css.em 1.2, marginBottom <| rem 1.21212 ]
-        , h4 [ fontSize <| Css.em 1.1, marginBottom <| rem 0.80808 ]
-        , each [ h5, h6 ] [ fontSize <| Css.em 1.0, marginBottom <| rem 0.60606 ]
-        , p [ margin3 auto auto (rem 1.5) ]
-        , Css.Global.small [ fontSize <| pct 65 ]
-        , class "header-text"
-            [ paddingLeft <| rem 2
-            , textAlign center
-            , wideScreen [ textAlign left ]
-            ]
-        , class "navigation"
-            [ textAlign center
-            , padding <| px 10
-            , marginTop <| px -20
-            , descendants
-                [ ul
-                    [ margin <| px 0
-                    , padding <| px 0
-                    , wideScreen [ lineHeight <| px 100 ]
-                    ]
-                , li
-                    [ display inlineBlock
-                    , marginRight <| px 20
-                    ]
+    , article
+        [ paddingLeft <| Css.em 0.5
+        , paddingTop <| Css.em 0.5
+        ]
+    , class "header-text"
+        [ paddingLeft <| rem 2
+        , textAlign center
+        , wideScreen [ textAlign left ]
+        ]
+    , class "navigation"
+        [ textAlign center
+        , padding <| px 10
+        , marginTop <| px -20
+        , descendants
+            [ ul
+                [ margin <| px 0
+                , padding <| px 0
+                , wideScreen [ lineHeight <| px 100 ]
                 ]
-            , wideScreen [ marginTop <| px 0, padding <| px 0, textAlign right ]
+            , li <|
+                withTypography .sans2
+                    [ display inlineBlock
+                    , marginRight <| Css.em 1
+                    ]
             ]
-        , class "content" [ Css.maxWidth <| vw 100 ]
-        , class "post-metadata"
-            [ marginTop <| Css.em -0.5
-            , marginBottom <| Css.em 2.0
+        , wideScreen [ marginTop <| px 0, padding <| px 0, textAlign right ]
+        ]
+    , class "content"
+        [ Css.maxWidth <| vw 100
+        ]
+    , class "post-list-item"
+        [ paddingLeft <| Css.em 0.5
+        , paddingTop <| Css.em 0.5
+        , displayFlex
+        , justifyContent spaceBetween
+        , alignItems flexEnd
+        , flexWrap wrap
+        ]
+    , class "post-metadata" <|
+        withTypography .serif1
+            [ alignSelf flexEnd
+            , textAlign right
+            , flexGrow <| num 100
             , descendants
                 [ each [ a, span ]
                     [ display inlineBlock
@@ -92,5 +199,15 @@ styles =
                     ]
                 ]
             ]
-        ]
-        |> Html.Styled.toUnstyled
+            ++ getHeaderMargins 4
+    ]
+
+
+styles : Html msg
+styles =
+    Html.Styled.toUnstyled <|
+        global <|
+            resets
+                ++ typography
+                ++ elements
+                ++ layouts

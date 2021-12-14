@@ -90,7 +90,7 @@ metadataBlock =
 header1 =
     Mark.block "H1"
         (\children ->
-            Html.h1 []
+            Html.h3 []
                 children
         )
         text
@@ -99,7 +99,7 @@ header1 =
 header2 =
     Mark.block "H2"
         (\children ->
-            Html.h2 []
+            Html.h4 []
                 children
         )
         text
@@ -108,7 +108,7 @@ header2 =
 header3 =
     Mark.block "H3"
         (\children ->
-            Html.h3 []
+            Html.h5 []
                 children
         )
         text

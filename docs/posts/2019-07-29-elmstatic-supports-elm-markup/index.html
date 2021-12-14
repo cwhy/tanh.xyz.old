@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>Elmstatic now supports elm-markup | tanh.xyz</title><meta charset="utf-8"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad();</script><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/styles/default.min.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Crimson+Pro|Livvic|Fira+Code" rel="stylesheet" type="text/css"></head><body><div class="header-text"><div><h1><span style="text-decoration: underline solid #66220065;">tanh</span><span style="color: rgb(102, 34, 0);">.</span><span style="text-decoration: line-through solid #66220065 ;">xyz</span></h1></div></div><div class="navigation"><ul><li><a href="/posts">Posts</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div class="sidebar"></div><div class="sidebar2"></div><div class="content"><h2>Elmstatic now supports elm-markup</h2><div class="post-metadata"><span>2019-07-29</span><span>•</span><a href="/tags/software">software</a><a href="/tags/other">other</a></div><article><p><span class="bold">Elmstatic</span> now supports <code>elm-markup</code>!</p><h2>Let’s look at some <span class="italic">code</span></h2><p>Code is highlighted using <a href="https://highlightjs.org">Highlight.js</a>:</p><pre><code class="elm">view =
+<!doctype html><html><head><title>Elmstatic now supports elm-markup | tanh.xyz</title><meta charset="utf-8"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad();</script><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/styles/default.min.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Red+Hat+Text|Crimson+Pro|Livvic|Jetbrain+Mono" rel="stylesheet" type="text/css"></head><body><div class="header-text"><a href="/" style="text-decoration: none;"><h1><span style="text-decoration: underline solid #66220065;">tanh</span><span style="color: rgb(102, 34, 0);">.</span><span style="text-decoration: line-through solid #66220065 ;">xyz</span></h1></a></div><div class="navigation"><ul><li><a href="/posts">Posts</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div class="sidebar"></div><div class="sidebar2"></div><div class="content"><h2>Elmstatic now supports elm-markup</h2><div class="post-metadata"><span>2019-07-29</span><span>•</span><a href="/tags/software">software</a><a href="/tags/other">other</a></div><article><p><span class="bold">Elmstatic</span> now supports <code>elm-markup</code>!</p><h4>Let’s look at some <span class="italic">code</span></h4><p>Code is highlighted using <a href="https://highlightjs.org">Highlight.js</a>:</p><pre><code class="elm">view =
     \contentJson -&gt;
         case Json.Decode.decodeValue decoder contentJson of
             Err error -&gt;
@@ -16,70 +16,97 @@
                     Ok viewHtml -&gt;
                         { title = ""
                         , body = [ htmlTemplate content.siteTitle &lt;| viewHtml ]
-                        }</code></pre><h2>What does a <span class="bold">list</span> look like?</h2><ol><li><div><div>This is definitely the first thing.
+                        }</code></pre><h4>What does a <span class="bold">list</span> look like?</h4><ol><li><div><div>This is definitely the first thing.
 Add all together now
 With some Content</div></div><ul></ul></li><li><div><div>Another thing.</div></div><ol><li><div><div>sublist</div></div><ul></ul></li><li><div><div>more sublist</div></div><ul><li><div><div>indented</div></div><ul></ul></li></ul></li><li><div><div>other sublist</div></div><ul><li><div><div>subthing</div></div><ul></ul></li><li><div><div>other subthing</div></div><ul></ul></li></ul></li></ol></li><li><div><div>and yet, another</div></div><ul><li><div><div>and another one
-with some content</div></div><ul></ul></li></ul></li></ol></article></div><link href="/styles.css" rel="stylesheet" type="text/css"><style>body {
-    padding:0px;
-    margin:0px;
-    background-color:#ffffff;
-    color:#333333;
-    font-family:Crimson Pro, Times New Roman, serif;
-    font-size:18px;
-    line-height:1.4em;
-}
-
-a {
-    color:#324354;
-    text-decoration:underline dashed;
-    text-decoration-thickness:0.1rem;
-}
-
-code {
-    font-family:Fira Code, monospace;
-    font-size:0.7em;
-}
-
-pre  code {
+with some content</div></div><ul></ul></li></ul></li></ol></article></div><link href="/fonts/font.css" rel="stylesheet" type="text/css"><link href="/styles.css" rel="stylesheet" type="text/css"><span><style>pre  code {
     overflow-x:scroll !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family:Livvic, Arial, Helvetica, sans-serif;
-    line-height:1.1em;
-}
-
 h1 {
-    font-size:2.3em;
+    font-size:2.3rem;
+    font-family:Livvic, Arial, Helvetica, sans-serif;
+    line-height:1.4rem;
     margin-bottom:2.0202rem;
+    margin-top:2.0202rem;
 }
 
 h2 {
-    font-size:1.8em;
+    line-height:1.4rem;
+    font-size:1.8rem;
+    font-family:Crimson Pro, Times New Roman, serif;
     margin-bottom:1.61616rem;
+    margin-top:1.61616rem;
 }
 
 h3 {
-    font-size:1.2em;
+    font-size:1.2rem;
+    font-family:Livvic, Arial, Helvetica, sans-serif;
+    line-height:1.4rem;
     margin-bottom:1.21212rem;
+    margin-top:1.21212rem;
 }
 
 h4 {
-    font-size:1.1em;
+    font-size:1.1rem;
+    font-family:Livvic, Arial, Helvetica, sans-serif;
+    line-height:1.4rem;
     margin-bottom:0.80808rem;
+    margin-top:0.80808rem;
 }
 
 h5, h6 {
-    font-size:1em;
+    font-size:1rem;
+    font-family:Red Hat Text, Arial, Helvetica, sans-serif;
+    line-height:1.4rem;
     margin-bottom:0.60606rem;
+    margin-top:0.60606rem;
 }
 
 p {
-    margin:auto auto 1.5rem;
+    font-size:1rem;
+    font-family:Red Hat Text, Arial, Helvetica, sans-serif;
+    line-height:1.4rem;
+    margin:auto auto 1rem;
+}
+
+li {
+    font-size:1rem;
+    font-family:Red Hat Text, Arial, Helvetica, sans-serif;
+    line-height:1.4rem;
+    margin:0.2rem auto 0.5rem auto;
 }
 
 small {
     font-size:65%;
+}
+
+code {
+    font-family:mononoki, JetBrains Mono, monospace;
+    font-size:0.82rem;
+    line-height:1.2rem;
+}
+
+a {
+    color:rgba(50, 67, 84, 1);
+    text-decoration:underline dashed rgba(50, 67, 84, 0.3);
+    text-underline-offset:0.15em;
+    text-decoration-thickness:0.1em;
+}
+
+html {
+    font-size:18px;
+    color:#333333;
+    line-height:1.4em;
+    font-family:Red Hat Text, Arial, Helvetica, sans-serif;
+    padding:0px;
+    margin:0px;
+    background-color:#eeeeee;
+}
+
+article {
+    padding-left:0.5em;
+    padding-top:0.5em;
 }
 
 .header-text {
@@ -119,17 +146,35 @@ small {
 }
 
 .navigation  li {
+    font-size:1.1rem;
+    font-family:Livvic, Arial, Helvetica, sans-serif;
+    line-height:1.4rem;
     display:inline-block;
-    margin-right:20px;
+    margin-right:1em;
 }
 
 .content {
     max-width:100vw;
 }
 
+.post-list-item {
+    padding-left:0.5em;
+    padding-top:0.5em;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+}
+
 .post-metadata {
-    margin-top:-0.5em;
-    margin-bottom:2em;
+    line-height:1.4rem;
+    font-size:1rem;
+    font-family:Crimson Pro, Times New Roman, serif;
+    align-self:flex-end;
+    text-align:right;
+    flex-grow:100;
+    margin-bottom:0.80808rem;
+    margin-top:0.80808rem;
 }
 
 .post-metadata  a, .post-metadata  span {
@@ -142,4 +187,4 @@ small {
     border-radius:3px;
     padding-left:5px;
     padding-right:5px;
-}</style></body></html>
+}</style></span></body></html>

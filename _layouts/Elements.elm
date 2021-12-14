@@ -1,12 +1,12 @@
 module Elements exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (attribute, style)
+import Html.Attributes exposing (attribute, href, style)
 
 
 logo : Html Never
 logo =
-    div []
+    a [ href "/", style "border" "none", style "text-decoration" "none" ]
         [ h1 [] <|
             [ span
                 [ style "text-decoration" "underline solid #66220065"
