@@ -1,6 +1,6 @@
 |> Metadata
     title = Elmstatic now supports elm-markup
-    tags = software other
+    tags = programming math
 
 
 *Elmstatic* now supports `elm-markup`{name}!

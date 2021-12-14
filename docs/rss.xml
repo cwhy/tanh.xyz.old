@@ -4,7 +4,7 @@
         <title>tanh.xyz</title>
         <link>https://tanh.xyz/posts</link>
         <description>A series of organized thoughts</description>
-        <lastBuildDate>Tue, 14 Dec 2021 15:29:38 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 14 Dec 2021 15:51:26 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Elmstatic</generator>
         <language>en</language>
@@ -25,6 +25,12 @@
             <link>https://tanh.xyz/posts/2020-08-25-another-post</link>
             <guid>https://tanh.xyz/posts/2020-08-25-another-post</guid>
             <pubDate>Tue, 25 Aug 2020 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Multiplication from scratch]]></title>
+            <link>https://tanh.xyz/posts/2021-12-14-elementary-math-1</link>
+            <guid>https://tanh.xyz/posts/2021-12-14-elementary-math-1</guid>
+            <pubDate>Tue, 14 Dec 2021 00:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
