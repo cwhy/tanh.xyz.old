@@ -5656,22 +5656,6 @@ var $author$project$Layouts$header = _List_fromArray(
 									[
 										$elm$html$Html$text('About')
 									]))
-							])),
-						A2(
-						$elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('/contact')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Contact')
-									]))
 							]))
 					]))
 			]))

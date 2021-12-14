@@ -2,7 +2,7 @@
     title = About this blog
 
 |> H2
-[I]{link | url = chenyuio.com} set up this website to write some of my organized thoughts to share with my friends.
+    [I]{link | url = chenyuio.com} set up this website to write some of my organized thoughts to share with my friends.
 
 This website is made using [elmstatic]{link | url = https://github.com/alexkorban/elmstatic}
                          , [elm-css]{link | url = https://github.com/rtfeldman/elm-css}
