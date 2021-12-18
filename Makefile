@@ -8,11 +8,11 @@ new:
 
 
 build:
-	echo "Here"
+	echo "builing "
 	~/.yarn/bin/elmstatic build
 
 watch:
-	echo "Here watch"
+	echo "watching"
 	~/.yarn/bin/elmstatic watch &
 	(cd docs; ~/.yarn/bin/browser-sync start --server --files "." --no-ui  --reload-delay 500 --reload-debounce 500)
 

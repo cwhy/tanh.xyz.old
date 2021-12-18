@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/drafts/math_from_the_ground_up/rust/kids_math/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/drafts/math_from_the_ground_up/rust/kids_math/target" />
+      <excludePattern pattern="elm-stuff" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

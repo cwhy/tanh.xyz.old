@@ -2,6 +2,19 @@
     title = Multiplication from scratch
     tags = programming math
 
+On a weekend, I thought of an interesting challenge: trying int multiplication without using arithmatic or math library.
+In a more specific manner, it is "int multiplication without number types" -- yeah, no numbers are involved.
+
+But how do we represent the inputs and outputs then? -- We still have strings~
+
+So we are looking for something like a function like thiS:
+|> Code
+    lang = python
+    code =
+        mult("123134254", "32131")
+
+we already know the algorithm!
+let's go back to our primary school and experience the hardship
 |> Code
     lang = python
     code =
