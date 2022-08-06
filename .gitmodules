@@ -1,0 +1,3 @@
+[submodule "elm-markup"]
+	path = elm-markup
+	url = git@github.com:cwhy/elm-markup.git

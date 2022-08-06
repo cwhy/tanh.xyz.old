@@ -1,3 +1,4 @@
 {
-    "nixEnvSelector.nixShellConfig": "${workspaceRoot}/elm.nix"
+    "nixEnvSelector.nixShellConfig": "${workspaceRoot}/elm.nix",
+    "nixEnvSelector.nixFile": "${workspaceRoot}/elm.nix"
 }
