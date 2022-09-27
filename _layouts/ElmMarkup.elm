@@ -9,7 +9,7 @@ import Mark.Error
 markupToHtml : String -> Result String (List (Html Never))
 markupToHtml markup =
     case Mark.compile document markup of
-        Mark.Success html ->
+        Mark.Success  html ->
             Ok [ html ]
 
         Mark.Almost { result, errors } ->

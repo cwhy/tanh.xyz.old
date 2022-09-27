@@ -32,10 +32,6 @@ styles =
             , textDecoration none
             ]
         , code codeStyle
-        , Css.Global.pre
-            [ descendants
-                [ code [ important <| overflowX Css.scroll ] ]
-            ]
         , each [ h1, h2, h3, h4, h5, h6 ]
             [ fontFamilies [ "Proza Libre", "Helvetica", .value sansSerif ]
             , lineHeight <| Css.em 1.1

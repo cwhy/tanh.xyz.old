@@ -72,11 +72,7 @@ withTypography typeStyle attrs =
 
 
 resets =
-    [ Css.Global.pre
-        [ descendants
-            [ code [ important <| overflowX Css.scroll ] ]
-        ]
-    ]
+    []
 
 
 elements =

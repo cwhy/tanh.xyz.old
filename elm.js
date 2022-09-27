@@ -519,11 +519,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.cx.bm === region.c4.bm)
+	if (region.bY.cl === region.bE.cl)
 	{
-		return 'on line ' + region.cx.bm;
+		return 'on line ' + region.bY.cl;
 	}
-	return 'on lines ' + region.cx.bm + ' through ' + region.c4.bm;
+	return 'on lines ' + region.bY.cl + ' through ' + region.bE.cl;
 }
 
 
@@ -2659,9 +2659,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		aq: func(record.aq),
-		cy: record.cy,
-		cq: record.cq
+		fv: func(record.fv),
+		cA: record.cA,
+		ct: record.ct
 	}
 });
 
@@ -2929,11 +2929,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.aq;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.cy;
+		var message = !tag ? value : tag < 3 ? value.a : value.fv;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.cA;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.cq) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.ct) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3923,7 +3923,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		impl.gw,
 		impl.gb,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.cw && impl.cw(sendToApp)
+			var divertHrefToApp = impl.cz && impl.cz(sendToApp)
 			var view = impl.gy;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
@@ -3932,7 +3932,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.eH);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.eG);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
@@ -3998,7 +3998,7 @@ function _Browser_application(impl)
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		cw: function(sendToApp)
+		cz: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4014,7 +4014,7 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.dL === next.dL
+							&& curr.dK === next.dK
 							&& curr.dk === next.dk
 							&& curr.dH.a === next.dH.a
 						)
@@ -4096,17 +4096,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { fa: 'hidden', eQ: 'visibilitychange' }
+		? { fa: 'hidden', eP: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { fa: 'mozHidden', eQ: 'mozvisibilitychange' }
+		? { fa: 'mozHidden', eP: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { fa: 'msHidden', eQ: 'msvisibilitychange' }
+		? { fa: 'msHidden', eP: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { fa: 'webkitHidden', eQ: 'webkitvisibilitychange' }
-		: { fa: 'hidden', eQ: 'visibilitychange' };
+		? { fa: 'webkitHidden', eP: 'webkitvisibilitychange' }
+		: { fa: 'hidden', eP: 'visibilitychange' };
 }
 
 
@@ -4187,11 +4187,11 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		dW: _Browser_getScene(),
-		eg: {
-			ek: _Browser_window.pageXOffset,
-			el: _Browser_window.pageYOffset,
-			eh: _Browser_doc.documentElement.clientWidth,
+		dV: _Browser_getScene(),
+		ef: {
+			ej: _Browser_window.pageXOffset,
+			ek: _Browser_window.pageYOffset,
+			eg: _Browser_doc.documentElement.clientWidth,
 			dg: _Browser_doc.documentElement.clientHeight
 		}
 	};
@@ -4202,7 +4202,7 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		eh: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		eg: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
 		dg: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
@@ -4226,14 +4226,14 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			dW: {
-				eh: node.scrollWidth,
+			dV: {
+				eg: node.scrollWidth,
 				dg: node.scrollHeight
 			},
-			eg: {
-				ek: node.scrollLeft,
-				el: node.scrollTop,
-				eh: node.clientWidth,
+			ef: {
+				ej: node.scrollLeft,
+				ek: node.scrollTop,
+				eg: node.clientWidth,
 				dg: node.clientHeight
 			}
 		};
@@ -4264,17 +4264,17 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			dW: _Browser_getScene(),
-			eg: {
-				ek: x,
-				el: y,
-				eh: _Browser_doc.documentElement.clientWidth,
+			dV: _Browser_getScene(),
+			ef: {
+				ej: x,
+				ek: y,
+				eg: _Browser_doc.documentElement.clientWidth,
 				dg: _Browser_doc.documentElement.clientHeight
 			},
-			e4: {
-				ek: x + rect.left,
-				el: y + rect.top,
-				eh: rect.width,
+			e3: {
+				ej: x + rect.left,
+				ek: y + rect.top,
+				eg: rect.width,
 				dg: rect.height
 			}
 		};
@@ -4883,7 +4883,7 @@ var $elm$core$Array$treeFromBuilder = F2(
 	});
 var $elm$core$Array$builderToArray = F2(
 	function (reverseNodeList, builder) {
-		if (!builder.r) {
+		if (!builder.q) {
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
 				$elm$core$Elm$JsArray$length(builder.u),
@@ -4891,11 +4891,11 @@ var $elm$core$Array$builderToArray = F2(
 				$elm$core$Elm$JsArray$empty,
 				builder.u);
 		} else {
-			var treeLen = builder.r * $elm$core$Array$branchFactor;
+			var treeLen = builder.q * $elm$core$Array$branchFactor;
 			var depth = $elm$core$Basics$floor(
 				A2($elm$core$Basics$logBase, $elm$core$Array$branchFactor, treeLen - 1));
 			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.v) : builder.v;
-			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.r);
+			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.q);
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
 				$elm$core$Elm$JsArray$length(builder.u) + treeLen,
@@ -4914,7 +4914,7 @@ var $elm$core$Array$initializeHelp = F5(
 				return A2(
 					$elm$core$Array$builderToArray,
 					false,
-					{v: nodeList, r: (len / $elm$core$Array$branchFactor) | 0, u: tail});
+					{v: nodeList, q: (len / $elm$core$Array$branchFactor) | 0, u: tail});
 			} else {
 				var leaf = $elm$core$Array$Leaf(
 					A3($elm$core$Elm$JsArray$initialize, $elm$core$Array$branchFactor, fromIndex, fn));
@@ -4979,11 +4979,11 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $author$project$Elmstatic$PostList = F4(
 	function (posts, section, siteTitle, title) {
-		return {fK: posts, dX: section, bX: siteTitle, bc: title};
+		return {fK: posts, dW: section, bX: siteTitle, bc: title};
 	});
 var $author$project$Elmstatic$Post = F8(
 	function (content, date, format, link, section, siteTitle, tags, title) {
-		return {eV: content, e_: date, dc: format, ft: link, dX: section, bX: siteTitle, gc: tags, bc: title};
+		return {eU: content, eZ: date, dc: format, ft: link, dW: section, bX: siteTitle, gc: tags, bc: title};
 	});
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$oneOf = _Json_oneOf;
@@ -5072,7 +5072,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {dd: fragment, dk: host, dF: path, dH: port_, dL: protocol, dM: query};
+		return {dd: fragment, dk: host, dF: path, dH: port_, dK: protocol, dL: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5452,7 +5452,7 @@ var $author$project$Elmstatic$layout = F2(
 					if (_v1.$ === 1) {
 						var error = _v1.a;
 						return {
-							eH: _List_fromArray(
+							eG: _List_fromArray(
 								[
 									A2(
 									$elm$html$Html$div,
@@ -5473,7 +5473,7 @@ var $author$project$Elmstatic$layout = F2(
 						if (_v2.$ === 1) {
 							var viewError = _v2.a;
 							return {
-								eH: _List_fromArray(
+								eG: _List_fromArray(
 									[
 										A2(
 										$elm$html$Html$div,
@@ -5488,7 +5488,7 @@ var $author$project$Elmstatic$layout = F2(
 						} else {
 							var viewHtml = _v2.a;
 							return {
-								eH: _List_fromArray(
+								eG: _List_fromArray(
 									[
 										A2($author$project$Elmstatic$htmlTemplate, content.bX, viewHtml)
 									]),
@@ -5535,7 +5535,7 @@ var $author$project$Post$metadataHtml = function (post) {
 					_List_Nil,
 					_List_fromArray(
 						[
-							$elm$html$Html$text(post.e_)
+							$elm$html$Html$text(post.eZ)
 						])),
 					A2(
 					$elm$html$Html$span,
@@ -5696,10 +5696,10 @@ var $rtfeldman$elm_css$Css$property = F2(
 		return $rtfeldman$elm_css$Css$Preprocess$AppendProperty(key + (':' + value));
 	});
 var $rtfeldman$elm_css$Css$color = function (c) {
-	return A2($rtfeldman$elm_css$Css$property, 'color', c.b$);
+	return A2($rtfeldman$elm_css$Css$property, 'color', c.b0);
 };
 var $rtfeldman$elm_css$Css$Structure$Compatible = 0;
-var $rtfeldman$elm_css$Css$dashed = {I: 0, aO: 0, b$: 'dashed'};
+var $rtfeldman$elm_css$Css$dashed = {I: 0, aO: 0, b0: 'dashed'};
 var $rtfeldman$elm_css$Css$Global$li = $rtfeldman$elm_css$Css$Global$typeSelector('li');
 var $rtfeldman$elm_css$Css$cssFunction = F2(
 	function (funcName, args) {
@@ -5709,12 +5709,12 @@ var $elm$core$String$fromFloat = _String_fromNumber;
 var $rtfeldman$elm_css$Css$rgba = F4(
 	function (r, g, b, alpha) {
 		return {
-			b3: alpha,
-			b5: b,
-			c0: 0,
+			b4: alpha,
+			b6: b,
+			c2: 0,
 			ce: g,
-			cs: r,
-			b$: A2(
+			cv: r,
+			b0: A2(
 				$rtfeldman$elm_css$Css$cssFunction,
 				'rgba',
 				_Utils_ap(
@@ -5738,10 +5738,10 @@ var $rtfeldman$elm_css$Css$prop3 = F4(
 				$elm$core$String$join,
 				' ',
 				_List_fromArray(
-					[argA.b$, argB.b$, argC.b$])));
+					[argA.b0, argB.b0, argC.b0])));
 	});
 var $rtfeldman$elm_css$Css$textDecoration3 = $rtfeldman$elm_css$Css$prop3('text-decoration');
-var $rtfeldman$elm_css$Css$underline = {a9: 0, b$: 'underline'};
+var $rtfeldman$elm_css$Css$underline = {a9: 0, b0: 'underline'};
 var $author$project$Styles$elements = function () {
 	var color = _List_fromArray(
 		[50, 67, 84]);
@@ -5950,8 +5950,8 @@ var $rtfeldman$elm_css$Css$Structure$compactHelp = F2(
 					A2($elm$core$List$cons, declaration, declarations));
 			case 6:
 				var record = declaration.a;
-				return $elm$core$String$isEmpty(record.e$) ? _Utils_Tuple2(keyframesByName, declarations) : _Utils_Tuple2(
-					A3($elm$core$Dict$insert, record.fz, record.e$, keyframesByName),
+				return $elm$core$String$isEmpty(record.e_) ? _Utils_Tuple2(keyframesByName, declarations) : _Utils_Tuple2(
+					A3($elm$core$Dict$insert, record.s, record.e_, keyframesByName),
 					declarations);
 			case 7:
 				var properties = declaration.a;
@@ -5998,16 +5998,16 @@ var $rtfeldman$elm_css$Css$Structure$withKeyframeDeclarations = F2(
 					var name = _v0.a;
 					var decl = _v0.b;
 					return $rtfeldman$elm_css$Css$Structure$Keyframes(
-						{e$: decl, fz: name});
+						{e_: decl, s: name});
 				},
 				$elm$core$Dict$toList(keyframesByName)),
 			compactedDeclarations);
 	});
 var $rtfeldman$elm_css$Css$Structure$compactStylesheet = function (_v0) {
-	var charset = _v0.cW;
+	var charset = _v0.cY;
 	var imports = _v0.dl;
 	var namespaces = _v0.dx;
-	var declarations = _v0.e0;
+	var declarations = _v0.e$;
 	var _v1 = A3(
 		$elm$core$List$foldr,
 		$rtfeldman$elm_css$Css$Structure$compactHelp,
@@ -6016,7 +6016,7 @@ var $rtfeldman$elm_css$Css$Structure$compactStylesheet = function (_v0) {
 	var keyframesByName = _v1.a;
 	var compactedDeclarations = _v1.b;
 	var finalDeclarations = A2($rtfeldman$elm_css$Css$Structure$withKeyframeDeclarations, keyframesByName, compactedDeclarations);
-	return {cW: charset, e0: finalDeclarations, dl: imports, dx: namespaces};
+	return {cY: charset, e$: finalDeclarations, dl: imports, dx: namespaces};
 };
 var $elm$core$Maybe$map = F2(
 	function (f, maybe) {
@@ -6066,7 +6066,7 @@ var $rtfeldman$elm_css$Css$Structure$Output$mediaExpressionToString = function (
 		A2(
 			$elm$core$Maybe$map,
 			$elm$core$Basics$append(': '),
-			expression.b$)) + ')'));
+			expression.b0)) + ')'));
 };
 var $rtfeldman$elm_css$Css$Structure$Output$mediaTypeToString = function (mediaType) {
 	switch (mediaType) {
@@ -6308,8 +6308,8 @@ var $rtfeldman$elm_css$Css$Structure$Output$prettyPrintDeclaration = function (d
 		case 5:
 			return 'TODO';
 		case 6:
-			var name = decl.a.fz;
-			var declaration = decl.a.e$;
+			var name = decl.a.s;
+			var declaration = decl.a.e_;
 			return '@keyframes ' + (name + (' {\n' + (declaration + '\n}')));
 		case 7:
 			return 'TODO';
@@ -6320,10 +6320,10 @@ var $rtfeldman$elm_css$Css$Structure$Output$prettyPrintDeclaration = function (d
 	}
 };
 var $rtfeldman$elm_css$Css$Structure$Output$prettyPrint = function (_v0) {
-	var charset = _v0.cW;
+	var charset = _v0.cY;
 	var imports = _v0.dl;
 	var namespaces = _v0.dx;
-	var declarations = _v0.e0;
+	var declarations = _v0.e$;
 	return A2(
 		$elm$core$String$join,
 		'\n\n',
@@ -6734,7 +6734,7 @@ var $rtfeldman$elm_css$Css$Structure$concatMapLastStyleBlock = F2(
 var $elm$core$String$cons = _String_cons;
 var $rtfeldman$elm_css$ElmCssVendor$Murmur3$HashData = F4(
 	function (shift, seed, hash, charsProcessed) {
-		return {aV: charsProcessed, a$: hash, dY: seed, a6: shift};
+		return {aV: charsProcessed, a$: hash, dX: seed, a6: shift};
 	});
 var $rtfeldman$elm_css$ElmCssVendor$Murmur3$c1 = 3432918353;
 var $rtfeldman$elm_css$ElmCssVendor$Murmur3$c2 = 461845907;
@@ -6753,13 +6753,13 @@ var $rtfeldman$elm_css$ElmCssVendor$Murmur3$rotlBy = F2(
 	});
 var $elm$core$Bitwise$xor = _Bitwise_xor;
 var $rtfeldman$elm_css$ElmCssVendor$Murmur3$finalize = function (data) {
-	var acc = (!(!data.a$)) ? (data.dY ^ A2(
+	var acc = (!(!data.a$)) ? (data.dX ^ A2(
 		$rtfeldman$elm_css$ElmCssVendor$Murmur3$multiplyBy,
 		$rtfeldman$elm_css$ElmCssVendor$Murmur3$c2,
 		A2(
 			$rtfeldman$elm_css$ElmCssVendor$Murmur3$rotlBy,
 			15,
-			A2($rtfeldman$elm_css$ElmCssVendor$Murmur3$multiplyBy, $rtfeldman$elm_css$ElmCssVendor$Murmur3$c1, data.a$)))) : data.dY;
+			A2($rtfeldman$elm_css$ElmCssVendor$Murmur3$multiplyBy, $rtfeldman$elm_css$ElmCssVendor$Murmur3$c1, data.a$)))) : data.dX;
 	var h0 = acc ^ data.aV;
 	var h1 = A2($rtfeldman$elm_css$ElmCssVendor$Murmur3$multiplyBy, 2246822507, h0 ^ (h0 >>> 16));
 	var h2 = A2($rtfeldman$elm_css$ElmCssVendor$Murmur3$multiplyBy, 3266489909, h1 ^ (h1 >>> 13));
@@ -6790,11 +6790,11 @@ var $rtfeldman$elm_css$ElmCssVendor$Murmur3$hashFold = F2(
 			return {
 				aV: data.aV + 1,
 				a$: 0,
-				dY: A2($rtfeldman$elm_css$ElmCssVendor$Murmur3$mix, data.dY, res),
+				dX: A2($rtfeldman$elm_css$ElmCssVendor$Murmur3$mix, data.dX, res),
 				a6: 0
 			};
 		} else {
-			return {aV: data.aV + 1, a$: res, dY: data.dY, a6: data.a6 + 8};
+			return {aV: data.aV + 1, a$: res, dX: data.dX, a6: data.a6 + 8};
 		}
 	});
 var $rtfeldman$elm_css$ElmCssVendor$Murmur3$hashString = F2(
@@ -7413,7 +7413,7 @@ var $rtfeldman$elm_css$Css$Preprocess$Resolve$applyStyles = F2(
 						_List_fromArray(
 							[
 								$rtfeldman$elm_css$Css$Structure$Keyframes(
-								{e$: str, fz: name})
+								{e_: str, s: name})
 							]));
 				case 4:
 					var _v12 = styles.a;
@@ -7548,13 +7548,13 @@ var $rtfeldman$elm_css$Css$Preprocess$Resolve$toDeclarations = function (snippet
 	}
 };
 var $rtfeldman$elm_css$Css$Preprocess$Resolve$toStructure = function (_v0) {
-	var charset = _v0.cW;
+	var charset = _v0.cY;
 	var imports = _v0.dl;
 	var namespaces = _v0.dx;
-	var snippets = _v0.d2;
+	var snippets = _v0.d1;
 	var declarations = $rtfeldman$elm_css$Css$Preprocess$Resolve$extract(
 		A2($elm$core$List$concatMap, $rtfeldman$elm_css$Css$Preprocess$unwrapSnippet, snippets));
-	return {cW: charset, e0: declarations, dl: imports, dx: namespaces};
+	return {cY: charset, e$: declarations, dl: imports, dx: namespaces};
 };
 var $rtfeldman$elm_css$Css$Preprocess$Resolve$compileHelp = function (sheet) {
 	return $rtfeldman$elm_css$Css$Structure$Output$prettyPrint(
@@ -7568,7 +7568,7 @@ var $rtfeldman$elm_css$Css$Preprocess$Resolve$compile = function (styles) {
 		A2($elm$core$List$map, $rtfeldman$elm_css$Css$Preprocess$Resolve$compileHelp, styles));
 };
 var $rtfeldman$elm_css$Css$Preprocess$stylesheet = function (snippets) {
-	return {cW: $elm$core$Maybe$Nothing, dl: _List_Nil, dx: _List_Nil, d2: snippets};
+	return {cY: $elm$core$Maybe$Nothing, dl: _List_Nil, dx: _List_Nil, d1: snippets};
 };
 var $rtfeldman$elm_css$VirtualDom$Styled$Unstyled = function (a) {
 	return {$: 4, a: a};
@@ -7658,13 +7658,13 @@ var $rtfeldman$elm_css$Css$Internal$IncompatibleUnits = 0;
 var $rtfeldman$elm_css$Css$Internal$lengthConverter = F3(
 	function (units, unitLabel, numericValue) {
 		return {
-			cG: 0,
-			cU: 0,
+			cI: 0,
+			cW: 0,
 			aY: 0,
 			F: 0,
 			bl: 0,
 			a0: 0,
-			ap: 0,
+			aq: 0,
 			a1: 0,
 			a2: 0,
 			aH: 0,
@@ -7673,8 +7673,8 @@ var $rtfeldman$elm_css$Css$Internal$lengthConverter = F3(
 			ar: numericValue,
 			ba: 0,
 			bd: unitLabel,
-			bs: units,
-			b$: _Utils_ap(
+			br: units,
+			b0: _Utils_ap(
 				$elm$core$String$fromFloat(numericValue),
 				unitLabel)
 		};
@@ -7696,12 +7696,12 @@ var $rtfeldman$elm_css$Css$alignSelf = function (fn) {
 };
 var $rtfeldman$elm_css$Css$Global$article = $rtfeldman$elm_css$Css$Global$typeSelector('article');
 var $rtfeldman$elm_css$Css$backgroundColor = function (c) {
-	return A2($rtfeldman$elm_css$Css$property, 'background-color', c.b$);
+	return A2($rtfeldman$elm_css$Css$property, 'background-color', c.b0);
 };
 var $rtfeldman$elm_css$Css$border3 = $rtfeldman$elm_css$Css$prop3('border');
 var $rtfeldman$elm_css$Css$prop1 = F2(
 	function (key, arg) {
-		return A2($rtfeldman$elm_css$Css$property, key, arg.b$);
+		return A2($rtfeldman$elm_css$Css$property, key, arg.b0);
 	});
 var $rtfeldman$elm_css$Css$borderRadius = $rtfeldman$elm_css$Css$prop1('border-radius');
 var $rtfeldman$elm_css$Css$center = $rtfeldman$elm_css$Css$prop1('center');
@@ -7877,12 +7877,12 @@ var $rtfeldman$elm_css$Css$withPrecedingHash = function (str) {
 };
 var $rtfeldman$elm_css$Css$erroneousHex = function (str) {
 	return {
-		b3: 1,
-		b5: 0,
-		c0: 0,
+		b4: 1,
+		b6: 0,
+		c2: 0,
 		ce: 0,
-		cs: 0,
-		b$: $rtfeldman$elm_css$Css$withPrecedingHash(str)
+		cv: 0,
+		b0: $rtfeldman$elm_css$Css$withPrecedingHash(str)
 	};
 };
 var $elm$core$String$foldr = _String_foldr;
@@ -8135,12 +8135,12 @@ var $rtfeldman$elm_css$Css$validHex = F5(
 			var blue = _v6.a.a;
 			var alpha = _v6.b.a;
 			return {
-				b3: alpha / 255,
-				b5: blue,
-				c0: 0,
+				b4: alpha / 255,
+				b6: blue,
+				c2: 0,
 				ce: green,
-				cs: red,
-				b$: $rtfeldman$elm_css$Css$withPrecedingHash(str)
+				cv: red,
+				b0: $rtfeldman$elm_css$Css$withPrecedingHash(str)
 			};
 		} else {
 			return $rtfeldman$elm_css$Css$erroneousHex(str);
@@ -8242,7 +8242,7 @@ var $rtfeldman$elm_css$Css$hex = function (str) {
 	return $rtfeldman$elm_css$Css$erroneousHex(str);
 };
 var $rtfeldman$elm_css$Css$Global$html = $rtfeldman$elm_css$Css$Global$typeSelector('html');
-var $rtfeldman$elm_css$Css$inlineBlock = {q: 0, b$: 'inline-block'};
+var $rtfeldman$elm_css$Css$inlineBlock = {p: 0, b0: 'inline-block'};
 var $rtfeldman$elm_css$Css$justifyContent = function (fn) {
 	return A3(
 		$rtfeldman$elm_css$Css$Internal$getOverloadedProperty,
@@ -8257,10 +8257,10 @@ var $rtfeldman$elm_css$Css$marginRight = $rtfeldman$elm_css$Css$prop1('margin-ri
 var $rtfeldman$elm_css$Css$maxWidth = $rtfeldman$elm_css$Css$prop1('max-width');
 var $rtfeldman$elm_css$Css$Media$feature = F2(
 	function (key, _v0) {
-		var value = _v0.b$;
+		var value = _v0.b0;
 		return {
 			c7: key,
-			b$: $elm$core$Maybe$Just(value)
+			b0: $elm$core$Maybe$Just(value)
 		};
 	});
 var $rtfeldman$elm_css$Css$Media$minWidth = function (value) {
@@ -8271,12 +8271,12 @@ var $rtfeldman$elm_css$Css$num = function (val) {
 	return {
 		aI: 0,
 		ac: 0,
-		bn: 0,
+		bm: 0,
 		bM: 0,
 		ar: val,
 		bd: '',
-		bs: 0,
-		b$: $elm$core$String$fromFloat(val)
+		br: 0,
+		b0: $elm$core$String$fromFloat(val)
 	};
 };
 var $rtfeldman$elm_css$Css$Structure$OnlyQuery = F2(
@@ -8293,7 +8293,7 @@ var $rtfeldman$elm_css$Css$px = A2($rtfeldman$elm_css$Css$Internal$lengthConvert
 var $rtfeldman$elm_css$Css$right = $rtfeldman$elm_css$Css$prop1('right');
 var $rtfeldman$elm_css$Css$Structure$Screen = 1;
 var $rtfeldman$elm_css$Css$Media$screen = 1;
-var $rtfeldman$elm_css$Css$solid = {I: 0, aO: 0, b$: 'solid'};
+var $rtfeldman$elm_css$Css$solid = {I: 0, aO: 0, b0: 'solid'};
 var $rtfeldman$elm_css$Css$spaceBetween = $rtfeldman$elm_css$Css$prop1('space-between');
 var $rtfeldman$elm_css$Css$Global$span = $rtfeldman$elm_css$Css$Global$typeSelector('span');
 var $rtfeldman$elm_css$Css$textAlign = function (fn) {
@@ -8312,8 +8312,8 @@ var $rtfeldman$elm_css$Css$Preprocess$WithMedia = F2(
 	});
 var $rtfeldman$elm_css$Css$Media$withMedia = $rtfeldman$elm_css$Css$Preprocess$WithMedia;
 var $rtfeldman$elm_css$Css$stringsToValue = function (list) {
-	return $elm$core$List$isEmpty(list) ? {b$: 'none'} : {
-		b$: A2(
+	return $elm$core$List$isEmpty(list) ? {b0: 'none'} : {
+		b0: A2(
 			$elm$core$String$join,
 			', ',
 			A2(
@@ -8329,9 +8329,9 @@ var $rtfeldman$elm_css$Css$fontFamilies = A2(
 	$rtfeldman$elm_css$Css$prop1('font-family'),
 	$rtfeldman$elm_css$Css$stringsToValue);
 var $rtfeldman$elm_css$Css$fontSize = $rtfeldman$elm_css$Css$prop1('font-size');
-var $rtfeldman$elm_css$Css$monospace = {aE: 0, b$: 'monospace'};
-var $rtfeldman$elm_css$Css$sansSerif = {aE: 0, b$: 'sans-serif'};
-var $rtfeldman$elm_css$Css$serif = {aE: 0, b$: 'serif'};
+var $rtfeldman$elm_css$Css$monospace = {aE: 0, b0: 'monospace'};
+var $rtfeldman$elm_css$Css$sansSerif = {aE: 0, b0: 'sans-serif'};
+var $rtfeldman$elm_css$Css$serif = {aE: 0, b0: 'serif'};
 var $author$project$Styles$typographyTemplates = function () {
 	var serifFam = $rtfeldman$elm_css$Css$fontFamilies(
 		_List_fromArray(
@@ -8339,7 +8339,7 @@ var $author$project$Styles$typographyTemplates = function () {
 				'Crimson Pro',
 				'Times New Roman',
 				function ($) {
-				return $.b$;
+				return $.b0;
 			}($rtfeldman$elm_css$Css$serif)
 			]));
 	var sansFamHeader = $rtfeldman$elm_css$Css$fontFamilies(
@@ -8349,7 +8349,7 @@ var $author$project$Styles$typographyTemplates = function () {
 				'Arial',
 				'Helvetica',
 				function ($) {
-				return $.b$;
+				return $.b0;
 			}($rtfeldman$elm_css$Css$sansSerif)
 			]));
 	var sansFam = $rtfeldman$elm_css$Css$fontFamilies(
@@ -8359,11 +8359,11 @@ var $author$project$Styles$typographyTemplates = function () {
 				'Arial',
 				'Helvetica',
 				function ($) {
-				return $.b$;
+				return $.b0;
 			}($rtfeldman$elm_css$Css$sansSerif)
 			]));
 	return {
-		c2: _List_fromArray(
+		c4: _List_fromArray(
 			[
 				$rtfeldman$elm_css$Css$fontSize(
 				$rtfeldman$elm_css$Css$px(18)),
@@ -8381,7 +8381,7 @@ var $author$project$Styles$typographyTemplates = function () {
 						'mononoki',
 						'JetBrains Mono',
 						function ($) {
-						return $.b$;
+						return $.b0;
 					}($rtfeldman$elm_css$Css$monospace)
 					])),
 				$rtfeldman$elm_css$Css$fontSize(
@@ -8397,7 +8397,7 @@ var $author$project$Styles$typographyTemplates = function () {
 				$rtfeldman$elm_css$Css$lineHeight(
 				$rtfeldman$elm_css$Css$rem(1.4))
 			]),
-		ct: _List_fromArray(
+		cw: _List_fromArray(
 			[
 				$rtfeldman$elm_css$Css$fontSize(
 				$rtfeldman$elm_css$Css$rem(1.1)),
@@ -8405,7 +8405,7 @@ var $author$project$Styles$typographyTemplates = function () {
 				$rtfeldman$elm_css$Css$lineHeight(
 				$rtfeldman$elm_css$Css$rem(1.4))
 			]),
-		dU: _List_fromArray(
+		dT: _List_fromArray(
 			[
 				$rtfeldman$elm_css$Css$fontSize(
 				$rtfeldman$elm_css$Css$rem(1.2)),
@@ -8421,7 +8421,7 @@ var $author$project$Styles$typographyTemplates = function () {
 				$rtfeldman$elm_css$Css$lineHeight(
 				$rtfeldman$elm_css$Css$rem(1.4))
 			]),
-		dV: _List_fromArray(
+		dU: _List_fromArray(
 			[
 				$rtfeldman$elm_css$Css$fontSize(
 				$rtfeldman$elm_css$Css$rem(2.3)),
@@ -8429,7 +8429,7 @@ var $author$project$Styles$typographyTemplates = function () {
 				$rtfeldman$elm_css$Css$lineHeight(
 				$rtfeldman$elm_css$Css$rem(1.4))
 			]),
-		d_: _List_fromArray(
+		dZ: _List_fromArray(
 			[
 				$rtfeldman$elm_css$Css$lineHeight(
 				$rtfeldman$elm_css$Css$rem(1.4)),
@@ -8437,7 +8437,7 @@ var $author$project$Styles$typographyTemplates = function () {
 				$rtfeldman$elm_css$Css$rem(1)),
 				serifFam
 			]),
-		d$: _List_fromArray(
+		d_: _List_fromArray(
 			[
 				$rtfeldman$elm_css$Css$lineHeight(
 				$rtfeldman$elm_css$Css$rem(1.4)),
@@ -8453,7 +8453,7 @@ var $author$project$Styles$withTypography = F2(
 			typeStyle($author$project$Styles$typographyTemplates),
 			attrs);
 	});
-var $rtfeldman$elm_css$Css$wrap = {bj: 0, bF: 0, b$: 'wrap'};
+var $rtfeldman$elm_css$Css$wrap = {bj: 0, bF: 0, b0: 'wrap'};
 var $author$project$Styles$layouts = function () {
 	var wideScreen = $rtfeldman$elm_css$Css$Media$withMedia(
 		_List_fromArray(
@@ -8473,7 +8473,7 @@ var $author$project$Styles$layouts = function () {
 			A2(
 				$author$project$Styles$withTypography,
 				function ($) {
-					return $.c2;
+					return $.c4;
 				},
 				_List_fromArray(
 					[
@@ -8537,7 +8537,7 @@ var $author$project$Styles$layouts = function () {
 							A2(
 								$author$project$Styles$withTypography,
 								function ($) {
-									return $.ct;
+									return $.cw;
 								},
 								_List_fromArray(
 									[
@@ -8585,7 +8585,7 @@ var $author$project$Styles$layouts = function () {
 				A2(
 					$author$project$Styles$withTypography,
 					function ($) {
-						return $.d_;
+						return $.dZ;
 					},
 					_List_fromArray(
 						[
@@ -8626,91 +8626,7 @@ var $author$project$Styles$layouts = function () {
 				$author$project$Styles$getHeaderMargins(4)))
 		]);
 }();
-var $rtfeldman$elm_css$Css$Global$code = $rtfeldman$elm_css$Css$Global$typeSelector('code');
-var $elm$core$String$endsWith = _String_endsWith;
-var $rtfeldman$elm_css$Css$makeImportant = function (str) {
-	return A2(
-		$elm$core$String$endsWith,
-		' !important',
-		$elm$core$String$toLower(str)) ? str : (str + ' !important');
-};
-var $rtfeldman$elm_css$Css$Preprocess$ExtendSelector = F2(
-	function (a, b) {
-		return {$: 1, a: a, b: b};
-	});
-var $rtfeldman$elm_css$Css$Preprocess$mapAllProperties = F2(
-	function (update, styles) {
-		if (!styles.b) {
-			return styles;
-		} else {
-			if (!styles.b.b) {
-				var only = styles.a;
-				return _List_fromArray(
-					[
-						A2($rtfeldman$elm_css$Css$Preprocess$mapProperties, update, only)
-					]);
-			} else {
-				var first = styles.a;
-				var rest = styles.b;
-				return A2(
-					$elm$core$List$cons,
-					first,
-					A2($rtfeldman$elm_css$Css$Preprocess$mapAllProperties, update, rest));
-			}
-		}
-	});
-var $rtfeldman$elm_css$Css$Preprocess$mapProperties = F2(
-	function (update, style) {
-		switch (style.$) {
-			case 0:
-				var property = style.a;
-				return $rtfeldman$elm_css$Css$Preprocess$AppendProperty(
-					update(property));
-			case 1:
-				var selector = style.a;
-				var styles = style.b;
-				return A2(
-					$rtfeldman$elm_css$Css$Preprocess$ExtendSelector,
-					selector,
-					A2($rtfeldman$elm_css$Css$Preprocess$mapAllProperties, update, styles));
-			case 2:
-				return style;
-			case 3:
-				return style;
-			case 4:
-				return style;
-			case 5:
-				return style;
-			default:
-				var otherStyles = style.a;
-				return $rtfeldman$elm_css$Css$Preprocess$ApplyStyles(
-					A2(
-						$elm$core$List$map,
-						$rtfeldman$elm_css$Css$Preprocess$mapProperties(update),
-						otherStyles));
-		}
-	});
-var $rtfeldman$elm_css$Css$important = $rtfeldman$elm_css$Css$Preprocess$mapProperties($rtfeldman$elm_css$Css$makeImportant);
-var $rtfeldman$elm_css$Css$overflowX = $rtfeldman$elm_css$Css$prop1('overflow-x');
-var $rtfeldman$elm_css$Css$Global$pre = $rtfeldman$elm_css$Css$Global$typeSelector('pre');
-var $rtfeldman$elm_css$Css$scroll = {bh: 0, cR: 0, dm: 0, a5: 0, fV: 0, b$: 'scroll'};
-var $author$project$Styles$resets = _List_fromArray(
-	[
-		$rtfeldman$elm_css$Css$Global$pre(
-		_List_fromArray(
-			[
-				$rtfeldman$elm_css$Css$Global$descendants(
-				_List_fromArray(
-					[
-						$rtfeldman$elm_css$Css$Global$code(
-						_List_fromArray(
-							[
-								$rtfeldman$elm_css$Css$important(
-								$rtfeldman$elm_css$Css$overflowX($rtfeldman$elm_css$Css$scroll))
-							]))
-					]))
-			]))
-	]);
+var $author$project$Styles$resets = _List_Nil;
 var $rtfeldman$elm_css$VirtualDom$Styled$accumulateStyles = F2(
 	function (_v0, styles) {
 		var newStyles = _v0.b;
@@ -9192,7 +9108,8 @@ var $rtfeldman$elm_css$VirtualDom$Styled$toUnstyled = function (vdom) {
 	}
 };
 var $rtfeldman$elm_css$Html$Styled$toUnstyled = $rtfeldman$elm_css$VirtualDom$Styled$toUnstyled;
-var $rtfeldman$elm_css$Css$auto = {ew: 0, bD: 0, aY: 0, bI: 0, fs: 0, a0: 0, ap: 0, ac: 0, a5: 0, X: 0, bY: 0, bb: 0, P: 0, b$: 'auto'};
+var $rtfeldman$elm_css$Css$auto = {ev: 0, bC: 0, aY: 0, bI: 0, fs: 0, a0: 0, aq: 0, ac: 0, a5: 0, X: 0, bZ: 0, bb: 0, P: 0, b0: 'auto'};
+var $rtfeldman$elm_css$Css$Global$code = $rtfeldman$elm_css$Css$Global$typeSelector('code');
 var $rtfeldman$elm_css$Css$Global$h1 = $rtfeldman$elm_css$Css$Global$typeSelector('h1');
 var $rtfeldman$elm_css$Css$Global$h2 = $rtfeldman$elm_css$Css$Global$typeSelector('h2');
 var $rtfeldman$elm_css$Css$Global$h3 = $rtfeldman$elm_css$Css$Global$typeSelector('h3');
@@ -9209,7 +9126,7 @@ var $rtfeldman$elm_css$Css$prop4 = F5(
 				$elm$core$String$join,
 				' ',
 				_List_fromArray(
-					[argA.b$, argB.b$, argC.b$, argD.b$])));
+					[argA.b0, argB.b0, argC.b0, argD.b0])));
 	});
 var $rtfeldman$elm_css$Css$margin4 = $rtfeldman$elm_css$Css$prop4('margin');
 var $rtfeldman$elm_css$Css$Global$p = $rtfeldman$elm_css$Css$Global$typeSelector('p');
@@ -9222,28 +9139,28 @@ var $author$project$Styles$typography = _List_fromArray(
 		A2(
 			$author$project$Styles$withTypography,
 			function ($) {
-				return $.dV;
+				return $.dU;
 			},
 			$author$project$Styles$getHeaderMargins(1))),
 		$rtfeldman$elm_css$Css$Global$h2(
 		A2(
 			$author$project$Styles$withTypography,
 			function ($) {
-				return $.d$;
+				return $.d_;
 			},
 			$author$project$Styles$getHeaderMargins(2))),
 		$rtfeldman$elm_css$Css$Global$h3(
 		A2(
 			$author$project$Styles$withTypography,
 			function ($) {
-				return $.dU;
+				return $.dT;
 			},
 			$author$project$Styles$getHeaderMargins(3))),
 		$rtfeldman$elm_css$Css$Global$h4(
 		A2(
 			$author$project$Styles$withTypography,
 			function ($) {
-				return $.ct;
+				return $.cw;
 			},
 			$author$project$Styles$getHeaderMargins(4))),
 		A2(
@@ -9358,7 +9275,7 @@ var $author$project$Posts$main = function () {
 			A2(
 				$elm$core$List$sortBy,
 				function ($) {
-					return $.e_;
+					return $.eZ;
 				},
 				posts));
 	};
@@ -9409,49 +9326,49 @@ var $author$project$Posts$main = function () {
 		});
 }();
 var $author$project$Tag$main = $author$project$Posts$main;
-var $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost = function (a) {
+var $author$project$Mark$Internal$Outcome$Almost = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure = function (a) {
+var $author$project$Mark$Internal$Outcome$Failure = function (a) {
 	return {$: 2, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Outcome$Success = function (a) {
+var $author$project$Mark$Internal$Outcome$Success = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$DocumentMismatch = {$: 0};
-var $mdgriffith$elm_markup$Mark$Internal$Error$Global = function (a) {
+var $author$project$Mark$Internal$Error$DocumentMismatch = {$: 0};
+var $author$project$Mark$Internal$Error$Global = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Format$text = function (str) {
-	return {cS: false, c0: $elm$core$Maybe$Nothing, gd: str, ed: false};
+var $author$project$Mark$Internal$Format$text = function (str) {
+	return {cU: false, c2: $elm$core$Maybe$Nothing, gd: str, ec: false};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Format$yellow = function (txt) {
+var $author$project$Mark$Internal$Format$yellow = function (txt) {
 	return _Utils_update(
 		txt,
 		{
-			c0: $elm$core$Maybe$Just('yellow')
+			c2: $elm$core$Maybe$Just('yellow')
 		});
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$documentMismatch = $mdgriffith$elm_markup$Mark$Internal$Error$Global(
+var $author$project$Mark$Internal$Error$documentMismatch = $author$project$Mark$Internal$Error$Global(
 	{
-		aq: _List_fromArray(
+		fv: _List_fromArray(
 			[
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Your '),
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('document')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text(' and your '),
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Parsed')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text(' structure don\'t match for some reason.\n\n'),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('This usually occurs because you\'ve stored the '),
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Parsed')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text(' data somewhere and then made a breaking change to your document.')
+				$author$project$Mark$Internal$Format$text('Your '),
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('document')),
+				$author$project$Mark$Internal$Format$text(' and your '),
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('Parsed')),
+				$author$project$Mark$Internal$Format$text(' structure don\'t match for some reason.\n\n'),
+				$author$project$Mark$Internal$Format$text('This usually occurs because you\'ve stored the '),
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('Parsed')),
+				$author$project$Mark$Internal$Format$text(' data somewhere and then made a breaking change to your document.')
 			]),
-		dI: $mdgriffith$elm_markup$Mark$Internal$Error$DocumentMismatch,
+		af: $author$project$Mark$Internal$Error$DocumentMismatch,
 		bc: 'DOCUMENT MISMATCH'
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$errorsToList = function (_v0) {
+var $author$project$Mark$Internal$Description$errorsToList = function (_v0) {
 	var fst = _v0.a;
 	var remain = _v0.b;
 	return A2($elm$core$List$cons, fst, remain);
@@ -9460,7 +9377,7 @@ var $elm$core$Tuple$pair = F2(
 	function (a, b) {
 		return _Utils_Tuple2(a, b);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$Rendered = function (a) {
+var $author$project$Mark$Internal$Error$Rendered = function (a) {
 	return {$: 0, a: a};
 };
 var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
@@ -9476,97 +9393,97 @@ var $elm$core$String$repeat = F2(
 	function (n, chunk) {
 		return A3($elm$core$String$repeatHelp, n, chunk, '');
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$addIndent = F2(
+var $author$project$Mark$Internal$Error$addIndent = F2(
 	function (x, str) {
 		return _Utils_ap(
 			A2($elm$core$String$repeat, x, ' '),
 			str);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$CompilerError = {$: 1};
-var $mdgriffith$elm_markup$Mark$Internal$Error$compilerError = $mdgriffith$elm_markup$Mark$Internal$Error$Global(
+var $author$project$Mark$Internal$Error$CompilerError = {$: 1};
+var $author$project$Mark$Internal$Error$compilerError = $author$project$Mark$Internal$Error$Global(
 	{
-		aq: _List_fromArray(
+		fv: _List_fromArray(
 			[
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Oh boy, this looks like a  '),
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('compiler error')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('\n\n'),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('If you have time, could you file an '),
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('issue')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text(' on the elm-markup respository(https://github.com/mdgriffith/elm-markup) describing how you got here?')
+				$author$project$Mark$Internal$Format$text('Oh boy, this looks like a  '),
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('compiler error')),
+				$author$project$Mark$Internal$Format$text('\n\n'),
+				$author$project$Mark$Internal$Format$text('If you have time, could you file an '),
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('issue')),
+				$author$project$Mark$Internal$Format$text(' on the elm-markup respository(https://github.com/mdgriffith/elm-markup) describing how you got here?')
 			]),
-		dI: $mdgriffith$elm_markup$Mark$Internal$Error$CompilerError,
+		af: $author$project$Mark$Internal$Error$CompilerError,
 		bc: 'COMPILER ERROR'
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Format$red = function (txt) {
+var $author$project$Mark$Internal$Format$red = function (txt) {
 	return _Utils_update(
 		txt,
 		{
-			c0: $elm$core$Maybe$Just('red')
+			c2: $elm$core$Maybe$Just('red')
 		});
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$highlightLine = function (_v0) {
+var $author$project$Mark$Internal$Error$highlightLine = function (_v0) {
 	var index = _v0.a;
 	var line = _v0.b;
 	return _List_fromArray(
 		[
-			$mdgriffith$elm_markup$Mark$Internal$Format$text(
+			$author$project$Mark$Internal$Format$text(
 			$elm$core$String$fromInt(index)),
-			$mdgriffith$elm_markup$Mark$Internal$Format$red(
-			$mdgriffith$elm_markup$Mark$Internal$Format$text('>')),
-			$mdgriffith$elm_markup$Mark$Internal$Format$text(line + '\n')
+			$author$project$Mark$Internal$Format$red(
+			$author$project$Mark$Internal$Format$text('>')),
+			$author$project$Mark$Internal$Format$text(line + '\n')
 		]);
 };
 var $elm$core$String$lines = _String_lines;
-var $mdgriffith$elm_markup$Mark$Internal$Error$highlight = F2(
+var $author$project$Mark$Internal$Error$highlight = F2(
 	function (range, source) {
-		if (_Utils_eq(range.cx.bm, range.c4.bm)) {
-			var lineStart = range.cx.b - (range.cx.b6 - 1);
+		if (_Utils_eq(range.bY.cl, range.bE.cl)) {
+			var lineStart = range.bY.cp - (range.bY.b7 - 1);
 			var line = A2(
 				$elm$core$Maybe$withDefault,
 				'',
 				$elm$core$List$head(
 					$elm$core$String$lines(
-						A3($elm$core$String$slice, lineStart, range.c4.b + 20, source))));
+						A3($elm$core$String$slice, lineStart, range.bE.cp + 20, source))));
 			var lineNumber = _Utils_ap(
-				$elm$core$String$fromInt(range.cx.bm),
+				$elm$core$String$fromInt(range.bY.cl),
 				A2($elm$core$String$startsWith, '|', line) ? '' : '|');
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(lineNumber + (line + '\n')),
-					$mdgriffith$elm_markup$Mark$Internal$Format$red(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(
+					$author$project$Mark$Internal$Format$text(lineNumber + (line + '\n')),
+					$author$project$Mark$Internal$Format$red(
+					$author$project$Mark$Internal$Format$text(
 						A2(
 							$elm$core$String$repeat,
-							(range.cx.b6 - 1) + $elm$core$String$length(lineNumber),
-							' ') + (A2($elm$core$String$repeat, range.c4.b6 - range.cx.b6, '^') + '\n')))
+							(range.bY.b7 - 1) + $elm$core$String$length(lineNumber),
+							' ') + (A2($elm$core$String$repeat, range.bE.b7 - range.bY.b7, '^') + '\n')))
 				]);
 		} else {
-			var snippet = A3($elm$core$String$slice, range.cx.b, range.c4.b, source);
-			var indented = A3($elm$core$String$slice, (range.cx.b + 1) - range.cx.b6, range.cx.b, source);
+			var snippet = A3($elm$core$String$slice, range.bY.cp, range.bE.cp, source);
+			var indented = A3($elm$core$String$slice, (range.bY.cp + 1) - range.bY.b7, range.bY.cp, source);
 			var lines = A2(
 				$elm$core$List$indexedMap,
 				F2(
 					function (i, str) {
-						return _Utils_Tuple2((i + range.cx.bm) - 1, str);
+						return _Utils_Tuple2((i + range.bY.cl) - 1, str);
 					}),
 				$elm$core$String$lines(
 					_Utils_ap(indented, snippet)));
-			return A2($elm$core$List$concatMap, $mdgriffith$elm_markup$Mark$Internal$Error$highlightLine, lines);
+			return A2($elm$core$List$concatMap, $author$project$Mark$Internal$Error$highlightLine, lines);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Format$underline = function (txt) {
+var $author$project$Mark$Internal$Format$underline = function (txt) {
 	return _Utils_update(
 		txt,
-		{ed: true});
+		{ec: true});
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$hint = function (str) {
+var $author$project$Mark$Internal$Error$hint = function (str) {
 	return _List_fromArray(
 		[
-			$mdgriffith$elm_markup$Mark$Internal$Format$underline(
-			$mdgriffith$elm_markup$Mark$Internal$Format$text('Hint')),
-			$mdgriffith$elm_markup$Mark$Internal$Format$text(': ' + str)
+			$author$project$Mark$Internal$Format$underline(
+			$author$project$Mark$Internal$Format$text('Hint')),
+			$author$project$Mark$Internal$Format$text(': ' + str)
 		]);
 };
 var $elm$core$List$member = F2(
@@ -9578,286 +9495,286 @@ var $elm$core$List$member = F2(
 			},
 			xs);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$DocumentDoesntAllow = F2(
+var $author$project$Mark$Internal$Error$DocumentDoesntAllow = F2(
 	function (a, b) {
 		return {$: 4, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$EditingError = function (a) {
+var $author$project$Mark$Internal$Error$EditingError = function (a) {
 	return {$: 16, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$indent = $mdgriffith$elm_markup$Mark$Internal$Format$text(
+var $author$project$Mark$Internal$Error$indent = $author$project$Mark$Internal$Format$text(
 	A2($elm$core$String$repeat, 4, ' '));
-var $mdgriffith$elm_markup$Mark$Internal$Error$documentDoesntAllow = F2(
+var $author$project$Mark$Internal$Error$documentDoesntAllow = F2(
 	function (_new, expectations) {
-		return $mdgriffith$elm_markup$Mark$Internal$Error$Global(
+		return $author$project$Mark$Internal$Error$Global(
 			{
-				aq: _Utils_ap(
+				fv: _Utils_ap(
 					_List_fromArray(
 						[
-							$mdgriffith$elm_markup$Mark$Internal$Format$text('You tried to insert a\n\n'),
-							$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-							$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-							$mdgriffith$elm_markup$Mark$Internal$Format$text(_new)),
-							$mdgriffith$elm_markup$Mark$Internal$Format$text('\n\n'),
-							$mdgriffith$elm_markup$Mark$Internal$Format$text('but the block at the provided '),
-							$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-							$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.Id')),
-							$mdgriffith$elm_markup$Mark$Internal$Format$text(' is expecting\n\n')
+							$author$project$Mark$Internal$Format$text('You tried to insert a\n\n'),
+							$author$project$Mark$Internal$Error$indent,
+							$author$project$Mark$Internal$Format$yellow(
+							$author$project$Mark$Internal$Format$text(_new)),
+							$author$project$Mark$Internal$Format$text('\n\n'),
+							$author$project$Mark$Internal$Format$text('but the block at the provided '),
+							$author$project$Mark$Internal$Format$yellow(
+							$author$project$Mark$Internal$Format$text('Mark.Edit.Id')),
+							$author$project$Mark$Internal$Format$text(' is expecting\n\n')
 						]),
 					A2(
 						$elm$core$List$concatMap,
 						function (exp) {
 							return _List_fromArray(
 								[
-									$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-									$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-									$mdgriffith$elm_markup$Mark$Internal$Format$text(exp)),
-									$mdgriffith$elm_markup$Mark$Internal$Format$text('\n')
+									$author$project$Mark$Internal$Error$indent,
+									$author$project$Mark$Internal$Format$yellow(
+									$author$project$Mark$Internal$Format$text(exp)),
+									$author$project$Mark$Internal$Format$text('\n')
 								]);
 						},
 						expectations)),
-				dI: $mdgriffith$elm_markup$Mark$Internal$Error$EditingError(
-					A2($mdgriffith$elm_markup$Mark$Internal$Error$DocumentDoesntAllow, _new, expectations)),
+				af: $author$project$Mark$Internal$Error$EditingError(
+					A2($author$project$Mark$Internal$Error$DocumentDoesntAllow, _new, expectations)),
 				bc: 'DOCUMENT DOESN\'T ALLOW'
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$IdNotFound = {$: 0};
-var $mdgriffith$elm_markup$Mark$Internal$Error$idNotFound = $mdgriffith$elm_markup$Mark$Internal$Error$Global(
+var $author$project$Mark$Internal$Error$IdNotFound = {$: 0};
+var $author$project$Mark$Internal$Error$idNotFound = $author$project$Mark$Internal$Error$Global(
 	{
-		aq: _List_fromArray(
+		fv: _List_fromArray(
 			[
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('The '),
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.Id')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text(' that you provided doesn\'t match any blocks in the document.')
+				$author$project$Mark$Internal$Format$text('The '),
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('Mark.Edit.Id')),
+				$author$project$Mark$Internal$Format$text(' that you provided doesn\'t match any blocks in the document.')
 			]),
-		dI: $mdgriffith$elm_markup$Mark$Internal$Error$EditingError($mdgriffith$elm_markup$Mark$Internal$Error$IdNotFound),
+		af: $author$project$Mark$Internal$Error$EditingError($author$project$Mark$Internal$Error$IdNotFound),
 		bc: 'ID NOT FOUND'
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$InvalidInsert = {$: 2};
-var $mdgriffith$elm_markup$Mark$Internal$Error$invalidDelete = $mdgriffith$elm_markup$Mark$Internal$Error$Global(
+var $author$project$Mark$Internal$Error$InvalidInsert = {$: 2};
+var $author$project$Mark$Internal$Error$invalidDelete = $author$project$Mark$Internal$Error$Global(
 	{
-		aq: _List_fromArray(
+		fv: _List_fromArray(
 			[
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.deleteAt')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text(' is only valid for elements within a '),
-				$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.manyOf'))
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('Mark.Edit.deleteAt')),
+				$author$project$Mark$Internal$Format$text(' is only valid for elements within a '),
+				$author$project$Mark$Internal$Error$indent,
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('Mark.manyOf'))
 			]),
-		dI: $mdgriffith$elm_markup$Mark$Internal$Error$EditingError($mdgriffith$elm_markup$Mark$Internal$Error$InvalidInsert),
+		af: $author$project$Mark$Internal$Error$EditingError($author$project$Mark$Internal$Error$InvalidInsert),
 		bc: 'INVALID DELETE'
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$invalidInsert = $mdgriffith$elm_markup$Mark$Internal$Error$Global(
+var $author$project$Mark$Internal$Error$invalidInsert = $author$project$Mark$Internal$Error$Global(
 	{
-		aq: _List_fromArray(
+		fv: _List_fromArray(
 			[
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.insertAt')),
-				$mdgriffith$elm_markup$Mark$Internal$Format$text(' is only valid for elements within a '),
-				$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-				$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-				$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.manyOf'))
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('Mark.Edit.insertAt')),
+				$author$project$Mark$Internal$Format$text(' is only valid for elements within a '),
+				$author$project$Mark$Internal$Error$indent,
+				$author$project$Mark$Internal$Format$yellow(
+				$author$project$Mark$Internal$Format$text('Mark.manyOf'))
 			]),
-		dI: $mdgriffith$elm_markup$Mark$Internal$Error$EditingError($mdgriffith$elm_markup$Mark$Internal$Error$InvalidInsert),
+		af: $author$project$Mark$Internal$Error$EditingError($author$project$Mark$Internal$Error$InvalidInsert),
 		bc: 'INVALID INSERT'
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$InvalidTextEdit = {$: 1};
-var $mdgriffith$elm_markup$Mark$Internal$Error$invalidTextEdit = $mdgriffith$elm_markup$Mark$Internal$Error$Global(
+var $author$project$Mark$Internal$Error$InvalidTextEdit = {$: 1};
+var $author$project$Mark$Internal$Error$invalidTextEdit = $author$project$Mark$Internal$Error$Global(
 	{
-		aq: _Utils_ap(
+		fv: _Utils_ap(
 			_List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Text edits such as\n\n'),
-					$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.insertText\n')),
-					$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.deleteText\n')),
-					$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.restyle\n')),
-					$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.addStyles\n')),
-					$mdgriffith$elm_markup$Mark$Internal$Error$indent,
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.Edit.removeStyles\n\n')),
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('only work on '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.text')),
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(' or '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Mark.textWith')),
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(' blocks.\n\n')
+					$author$project$Mark$Internal$Format$text('Text edits such as\n\n'),
+					$author$project$Mark$Internal$Error$indent,
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Mark.Edit.insertText\n')),
+					$author$project$Mark$Internal$Error$indent,
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Mark.Edit.deleteText\n')),
+					$author$project$Mark$Internal$Error$indent,
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Mark.Edit.restyle\n')),
+					$author$project$Mark$Internal$Error$indent,
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Mark.Edit.addStyles\n')),
+					$author$project$Mark$Internal$Error$indent,
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Mark.Edit.removeStyles\n\n')),
+					$author$project$Mark$Internal$Format$text('only work on '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Mark.text')),
+					$author$project$Mark$Internal$Format$text(' or '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Mark.textWith')),
+					$author$project$Mark$Internal$Format$text(' blocks.\n\n')
 				]),
-			$mdgriffith$elm_markup$Mark$Internal$Error$hint('If you\'re trying to update a simple Mark.string, you probably want to use `Mark.Edit.replace` instead.')),
-		dI: $mdgriffith$elm_markup$Mark$Internal$Error$EditingError($mdgriffith$elm_markup$Mark$Internal$Error$InvalidTextEdit),
+			$author$project$Mark$Internal$Error$hint('If you\'re trying to update a simple Mark.string, you probably want to use `Mark.Edit.replace` instead.')),
+		af: $author$project$Mark$Internal$Error$EditingError($author$project$Mark$Internal$Error$InvalidTextEdit),
 		bc: 'INVALID TEXT EDIT'
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$renderEditError = function (editErr) {
+var $author$project$Mark$Internal$Error$renderEditError = function (editErr) {
 	switch (editErr.$) {
 		case 0:
-			return $mdgriffith$elm_markup$Mark$Internal$Error$idNotFound;
+			return $author$project$Mark$Internal$Error$idNotFound;
 		case 1:
-			return $mdgriffith$elm_markup$Mark$Internal$Error$invalidTextEdit;
+			return $author$project$Mark$Internal$Error$invalidTextEdit;
 		case 2:
-			return $mdgriffith$elm_markup$Mark$Internal$Error$invalidInsert;
+			return $author$project$Mark$Internal$Error$invalidInsert;
 		case 3:
-			return $mdgriffith$elm_markup$Mark$Internal$Error$invalidDelete;
+			return $author$project$Mark$Internal$Error$invalidDelete;
 		default:
 			var _new = editErr.a;
 			var exp = editErr.b;
-			return A2($mdgriffith$elm_markup$Mark$Internal$Error$documentDoesntAllow, _new, exp);
+			return A2($author$project$Mark$Internal$Error$documentDoesntAllow, _new, exp);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$ParsingIssue = function (a) {
+var $author$project$Mark$Internal$Error$ParsingIssue = function (a) {
 	return {$: 2, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$renderParsingProblem = function (prob) {
+var $author$project$Mark$Internal$Error$renderParsingProblem = function (prob) {
 	switch (prob.$) {
 		case 0:
 			var i = prob.a;
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(
+					$author$project$Mark$Internal$Format$text(
 					'I was expecting an indent of ' + ($elm$core$String$fromInt(i) + ' spaces'))
 				]);
 		case 1:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('InlineStart')
+					$author$project$Mark$Internal$Format$text('InlineStart')
 				]);
 		case 2:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting the end of an inline: '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('}'))
+					$author$project$Mark$Internal$Format$text('I was expecting the end of an inline: '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('}'))
 				]);
 		case 3:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting the start of a block: '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('|>'))
+					$author$project$Mark$Internal$Format$text('I was expecting the start of a block: '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('|>'))
 				]);
 		case 4:
 			var str = prob.a;
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting \"' + (str + '\"'))
+					$author$project$Mark$Internal$Format$text('I was expecting \"' + (str + '\"'))
 				]);
 		case 5:
 			var name = prob.a;
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting a block named '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(name))
+					$author$project$Mark$Internal$Format$text('I was expecting a block named '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text(name))
 				]);
 		case 6:
 			var name = prob.a;
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting an inline named '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(name))
+					$author$project$Mark$Internal$Format$text('I was expecting an inline named '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text(name))
 				]);
 		case 7:
 			var name = prob.a;
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting a field named '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text(name))
+					$author$project$Mark$Internal$Format$text('I was expecting a field named '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text(name))
 				]);
 		case 8:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expectng a backslash')
+					$author$project$Mark$Internal$Format$text('I was expectng a backslash')
 				]);
 		case 9:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting an escaped character')
+					$author$project$Mark$Internal$Format$text('I was expecting an escaped character')
 				]);
 		case 10:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting a newline')
+					$author$project$Mark$Internal$Format$text('I was expecting a newline')
 				]);
 		case 11:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting a space')
+					$author$project$Mark$Internal$Format$text('I was expecting a space')
 				]);
 		case 12:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting the end of a document.')
+					$author$project$Mark$Internal$Format$text('I was expecting the end of a document.')
 				]);
 		case 13:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting an '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Int'))
+					$author$project$Mark$Internal$Format$text('I was expecting an '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Int'))
 				]);
 		case 14:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I was expecting a '),
-					$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('Float'))
+					$author$project$Mark$Internal$Format$text('I was expecting a '),
+					$author$project$Mark$Internal$Format$yellow(
+					$author$project$Mark$Internal$Format$text('Float'))
 				]);
 		default:
 			return _List_fromArray(
 				[
-					$mdgriffith$elm_markup$Mark$Internal$Format$text('I ran into an invalid number.')
+					$author$project$Mark$Internal$Format$text('I ran into an invalid number.')
 				]);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$renderParserIssue = function (deadends) {
+var $author$project$Mark$Internal$Error$renderParserIssue = function (deadends) {
 	return A2(
 		$elm$core$List$concatMap,
 		function (dead) {
 			return _Utils_ap(
-				$mdgriffith$elm_markup$Mark$Internal$Error$renderParsingProblem(dead.dI),
+				$author$project$Mark$Internal$Error$renderParsingProblem(dead.af),
 				_List_fromArray(
 					[
-						$mdgriffith$elm_markup$Mark$Internal$Format$text('\n')
+						$author$project$Mark$Internal$Format$text('\n')
 					]));
 		},
 		deadends);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$renderParsingErrors = F2(
+var $author$project$Mark$Internal$Error$renderParsingErrors = F2(
 	function (source, issues) {
-		return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+		return $author$project$Mark$Internal$Error$Rendered(
 			{
-				aq: $elm$core$List$concat(
+				fv: $elm$core$List$concat(
 					_List_fromArray(
 						[
 							_List_fromArray(
 							[
-								$mdgriffith$elm_markup$Mark$Internal$Format$text('\n')
+								$author$project$Mark$Internal$Format$text('\n')
 							]),
-							$mdgriffith$elm_markup$Mark$Internal$Error$renderParserIssue(issues)
+							$author$project$Mark$Internal$Error$renderParserIssue(issues)
 						])),
-				dI: $mdgriffith$elm_markup$Mark$Internal$Error$ParsingIssue(issues),
+				af: $author$project$Mark$Internal$Error$ParsingIssue(issues),
 				bR: function () {
 					if (!issues.b) {
 						return {
-							c4: {b6: 0, bm: 0, b: 0},
-							cx: {b6: 0, bm: 0, b: 0}
+							bE: {b7: 0, cl: 0, cp: 0},
+							bY: {b7: 0, cl: 0, cp: 0}
 						};
 					} else {
 						var first = issues.a;
 						return {
-							c4: {b6: first.c$, bm: first.dT, b: 0},
-							cx: {b6: first.c$, bm: first.dT, b: 0}
+							bE: {b7: first.c1, cl: first.dS, cp: 0},
+							bY: {b7: first.c1, cl: first.dS, cp: 0}
 						};
 					}
 				}(),
@@ -9871,7 +9788,7 @@ var $elm$core$Basics$min = F2(
 	function (x, y) {
 		return (_Utils_cmp(x, y) < 0) ? x : y;
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$similarity = F2(
+var $author$project$Mark$Internal$Error$similarity = F2(
 	function (source, target) {
 		var lenSimilarity = 0 - A2(
 			$elm$core$Basics$min,
@@ -9894,10 +9811,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Error$similarity = F2(
 				$elm$core$String$toList(source),
 				$elm$core$String$toList(target)));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$styleChars = function (styles) {
-	var strike = styles.d4;
+var $author$project$Mark$Internal$Error$styleChars = function (styles) {
+	var strike = styles.d3;
 	var italic = styles.dq;
-	var isBold = styles.cS;
+	var isBold = styles.cU;
 	var _v0 = _Utils_Tuple3(italic, isBold, strike);
 	if (_v0.a) {
 		if (_v0.b) {
@@ -9929,10 +9846,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Error$styleChars = function (styles) {
 		}
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$styleNames = function (styles) {
-	var strike = styles.d4;
+var $author$project$Mark$Internal$Error$styleNames = function (styles) {
+	var strike = styles.d3;
 	var italic = styles.dq;
-	var isBold = styles.cS;
+	var isBold = styles.cU;
 	var _v0 = _Utils_Tuple3(italic, isBold, strike);
 	if (_v0.a) {
 		if (_v0.b) {
@@ -9965,268 +9882,268 @@ var $mdgriffith$elm_markup$Mark$Internal$Error$styleNames = function (styles) {
 	}
 };
 var $elm$core$String$toUpper = _String_toUpper;
-var $mdgriffith$elm_markup$Mark$Internal$Error$render = F2(
+var $author$project$Mark$Internal$Error$render = F2(
 	function (source, current) {
-		var _v0 = current.dI;
+		var _v0 = current.af;
 		switch (_v0.$) {
 			case 1:
-				return $mdgriffith$elm_markup$Mark$Internal$Error$compilerError;
+				return $author$project$Mark$Internal$Error$compilerError;
 			case 0:
-				return $mdgriffith$elm_markup$Mark$Internal$Error$documentMismatch;
+				return $author$project$Mark$Internal$Error$documentMismatch;
 			case 16:
 				var editErr = _v0.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Error$renderEditError(editErr);
+				return $author$project$Mark$Internal$Error$renderEditError(editErr);
 			case 2:
 				var issues = _v0.a;
-				return A2($mdgriffith$elm_markup$Mark$Internal$Error$renderParsingErrors, source, issues);
+				return A2($author$project$Mark$Internal$Error$renderParsingErrors, source, issues);
 			case 3:
 				var expecting = _v0.a;
-				var target = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				var target = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('I don\'t recognize this block name.\n\n')
+										$author$project$Mark$Internal$Format$text('I don\'t recognize this block name.\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source),
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source),
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('Do you mean one of these instead?\n\n'),
-										$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-										$mdgriffith$elm_markup$Mark$Internal$Format$text(
+										$author$project$Mark$Internal$Format$text('Do you mean one of these instead?\n\n'),
+										$author$project$Mark$Internal$Format$yellow(
+										$author$project$Mark$Internal$Format$text(
 											A2(
 												$elm$core$String$join,
 												'\n',
 												A2(
 													$elm$core$List$map,
-													$mdgriffith$elm_markup$Mark$Internal$Error$addIndent(4),
+													$author$project$Mark$Internal$Error$addIndent(4),
 													A2(
 														$elm$core$List$sortBy,
 														function (exp) {
-															return 0 - A2($mdgriffith$elm_markup$Mark$Internal$Error$similarity, target, exp);
+															return 0 - A2($author$project$Mark$Internal$Error$similarity, target, exp);
 														},
 														expecting)))))
 									])
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'UNKNOWN BLOCK'
 					});
 			case 4:
 				var expecting = _v0.a;
-				var target = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				var target = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('I ran into an unexpected inline name.\n\n')
+										$author$project$Mark$Internal$Format$text('I ran into an unexpected inline name.\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source),
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source),
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('But I was expecting one of these instead:\n\n'),
-										$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-										$mdgriffith$elm_markup$Mark$Internal$Format$text(
+										$author$project$Mark$Internal$Format$text('But I was expecting one of these instead:\n\n'),
+										$author$project$Mark$Internal$Format$yellow(
+										$author$project$Mark$Internal$Format$text(
 											A2(
 												$elm$core$String$join,
 												'\n',
 												A2(
 													$elm$core$List$map,
-													$mdgriffith$elm_markup$Mark$Internal$Error$addIndent(4),
+													$author$project$Mark$Internal$Error$addIndent(4),
 													A2(
 														$elm$core$List$sortBy,
 														function (exp) {
-															return 0 - A2($mdgriffith$elm_markup$Mark$Internal$Error$similarity, target, exp);
+															return 0 - A2($author$project$Mark$Internal$Error$similarity, target, exp);
 														},
 														expecting)))))
 									])
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'UNKNOWN INLINE'
 					});
 			case 5:
 				var expecting = _v0.a;
-				var target = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				var target = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('I wasn\'t able to match this.\n\n')
+										$author$project$Mark$Internal$Format$text('I wasn\'t able to match this.\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source),
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source),
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('to one of the following:\n\n'),
-										$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-										$mdgriffith$elm_markup$Mark$Internal$Format$text(
+										$author$project$Mark$Internal$Format$text('to one of the following:\n\n'),
+										$author$project$Mark$Internal$Format$yellow(
+										$author$project$Mark$Internal$Format$text(
 											A2(
 												$elm$core$String$join,
 												'\n',
 												A2(
 													$elm$core$List$map,
-													$mdgriffith$elm_markup$Mark$Internal$Error$addIndent(4),
+													$author$project$Mark$Internal$Error$addIndent(4),
 													expecting))))
 									])
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'NO MATCH'
 					});
 			case 9:
 				var indentation = _v0.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: _Utils_ap(
+						fv: _Utils_ap(
 							_List_fromArray(
 								[
-									$mdgriffith$elm_markup$Mark$Internal$Format$text(
+									$author$project$Mark$Internal$Format$text(
 									'I was expecting ' + ($elm$core$String$fromInt(indentation) + ' spaces of indentation.\n\n'))
 								]),
 							_Utils_ap(
-								A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source),
-								$mdgriffith$elm_markup$Mark$Internal$Error$hint('All indentation in `elm-markup` is a multiple of 4.'))),
-						dI: current.dI,
-						bR: current.o,
+								A2($author$project$Mark$Internal$Error$highlight, current.n, source),
+								$author$project$Mark$Internal$Error$hint('All indentation in `elm-markup` is a multiple of 4.'))),
+						af: current.af,
+						bR: current.n,
 						bc: 'MISMATCHED INDENTATION'
 					});
 			case 10:
-				var line = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				var line = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('This line of text starts with extra space.\n\n')
+										$author$project$Mark$Internal$Format$text('This line of text starts with extra space.\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source),
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source),
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('Beyond the required indentation, text should start with non-whitespace characters.')
+										$author$project$Mark$Internal$Format$text('Beyond the required indentation, text should start with non-whitespace characters.')
 									])
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'TOO MUCH SPACE'
 					});
 			case 11:
 				var styles = _v0.a;
-				var line = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				var line = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: _Utils_ap(
+						fv: _Utils_ap(
 							$elm$core$List$concat(
 								_List_fromArray(
 									[
 										_List_fromArray(
 										[
-											$mdgriffith$elm_markup$Mark$Internal$Format$text(
-											$mdgriffith$elm_markup$Mark$Internal$Error$styleNames(styles) + (' still open.  Add ' + ($mdgriffith$elm_markup$Mark$Internal$Error$styleChars(styles) + ' to close it.\n\n')))
+											$author$project$Mark$Internal$Format$text(
+											$author$project$Mark$Internal$Error$styleNames(styles) + (' still open.  Add ' + ($author$project$Mark$Internal$Error$styleChars(styles) + ' to close it.\n\n')))
 										])
 									])),
 							_Utils_ap(
-								A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source),
-								$mdgriffith$elm_markup$Mark$Internal$Error$hint('`*` is used for bold and `/` is used for italic.'))),
-						dI: current.dI,
-						bR: current.o,
+								A2($author$project$Mark$Internal$Error$highlight, current.n, source),
+								$author$project$Mark$Internal$Error$hint('`*` is used for bold and `/` is used for italic.'))),
+						af: current.af,
+						bR: current.n,
 						bc: 'UNCLOSED STYLE'
 					});
 			case 8:
 				var msgUnexpectedField = _v0.a;
-				var target = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				var target = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('I ran into an unexpected field name for a '),
-										$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-										$mdgriffith$elm_markup$Mark$Internal$Format$text(msgUnexpectedField.fN)),
-										$mdgriffith$elm_markup$Mark$Internal$Format$text(' record\n\n')
+										$author$project$Mark$Internal$Format$text('I ran into an unexpected field name for a '),
+										$author$project$Mark$Internal$Format$yellow(
+										$author$project$Mark$Internal$Format$text(msgUnexpectedField.fN)),
+										$author$project$Mark$Internal$Format$text(' record\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source),
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source),
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('\nDo you mean one of these instead?\n\n'),
-										$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-										$mdgriffith$elm_markup$Mark$Internal$Format$text(
+										$author$project$Mark$Internal$Format$text('\nDo you mean one of these instead?\n\n'),
+										$author$project$Mark$Internal$Format$yellow(
+										$author$project$Mark$Internal$Format$text(
 											A2(
 												$elm$core$String$join,
 												'\n',
 												A2(
 													$elm$core$List$map,
-													$mdgriffith$elm_markup$Mark$Internal$Error$addIndent(4),
+													$author$project$Mark$Internal$Error$addIndent(4),
 													A2(
 														$elm$core$List$sortBy,
 														function (exp) {
-															return 0 - A2($mdgriffith$elm_markup$Mark$Internal$Error$similarity, target, exp);
+															return 0 - A2($author$project$Mark$Internal$Error$similarity, target, exp);
 														},
 														msgUnexpectedField.fG)))))
 									])
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'UNKNOWN FIELD'
 					});
 			case 12:
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('I was trying to parse a float, but this format looks off.\n\n')
+										$author$project$Mark$Internal$Format$text('I was trying to parse a float, but this format looks off.\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source)
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source)
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'BAD FLOAT'
 					});
 			case 13:
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('I was trying to parse an integer, but this format looks off.\n\n')
+										$author$project$Mark$Internal$Format$text('I was trying to parse an integer, but this format looks off.\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source)
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source)
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'BAD INT'
 					});
 			case 14:
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: $elm$core$List$concat(
+						fv: $elm$core$List$concat(
 							_List_fromArray(
 								[
 									_List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('I was trying to parse a boolean, but this format looks off.\n\n')
+										$author$project$Mark$Internal$Format$text('I was trying to parse a boolean, but this format looks off.\n\n')
 									]),
-									A2($mdgriffith$elm_markup$Mark$Internal$Error$highlight, current.o, source)
+									A2($author$project$Mark$Internal$Error$highlight, current.n, source)
 								])),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'BAD INT'
 					});
 			case 7:
@@ -10234,114 +10151,114 @@ var $mdgriffith$elm_markup$Mark$Internal$Error$render = F2(
 				var remaining = A2(
 					$elm$core$List$filter,
 					function (f) {
-						return !A2($elm$core$List$member, f, fields.g);
+						return !A2($elm$core$List$member, f, fields.f);
 					},
-					fields.c6);
-				var line = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+					fields.e5);
+				var line = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: function () {
+						fv: function () {
 							if (!remaining.b) {
 								return _List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('It looks like a field is missing.')
+										$author$project$Mark$Internal$Format$text('It looks like a field is missing.')
 									]);
 							} else {
 								if (!remaining.b.b) {
 									var single = remaining.a;
 									return _List_fromArray(
 										[
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('You need to add the '),
-											$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-											$mdgriffith$elm_markup$Mark$Internal$Format$text(single)),
-											$mdgriffith$elm_markup$Mark$Internal$Format$text(' field.')
+											$author$project$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
+											$author$project$Mark$Internal$Format$text('You need to add the '),
+											$author$project$Mark$Internal$Format$yellow(
+											$author$project$Mark$Internal$Format$text(single)),
+											$author$project$Mark$Internal$Format$text(' field.')
 										]);
 								} else {
 									var multiple = remaining;
 									return _List_fromArray(
 										[
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('You still need to add:\n'),
-											$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-											$mdgriffith$elm_markup$Mark$Internal$Format$text(
+											$author$project$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
+											$author$project$Mark$Internal$Format$text('You still need to add:\n'),
+											$author$project$Mark$Internal$Format$yellow(
+											$author$project$Mark$Internal$Format$text(
 												A2(
 													$elm$core$String$join,
 													'\n',
 													A2(
 														$elm$core$List$map,
-														$mdgriffith$elm_markup$Mark$Internal$Error$addIndent(4),
+														$author$project$Mark$Internal$Error$addIndent(4),
 														A2(
 															$elm$core$List$sortBy,
 															function (exp) {
-																return 0 - A2($mdgriffith$elm_markup$Mark$Internal$Error$similarity, line, exp);
+																return 0 - A2($author$project$Mark$Internal$Error$similarity, line, exp);
 															},
 															remaining)))))
 										]);
 								}
 							}
 						}(),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'MISSING FIELD'
 					});
 			case 6:
 				var remaining = _v0.a;
-				var line = A3($elm$core$String$slice, current.o.cx.b, current.o.c4.b, source);
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				var line = A3($elm$core$String$slice, current.n.bY.cp, current.n.bE.cp, source);
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: function () {
+						fv: function () {
 							if (!remaining.b) {
 								return _List_fromArray(
 									[
-										$mdgriffith$elm_markup$Mark$Internal$Format$text('It looks like a field is missing.')
+										$author$project$Mark$Internal$Format$text('It looks like a field is missing.')
 									]);
 							} else {
 								if (!remaining.b.b) {
 									var single = remaining.a;
 									return _List_fromArray(
 										[
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('You need to add the '),
-											$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-											$mdgriffith$elm_markup$Mark$Internal$Format$text(single)),
-											$mdgriffith$elm_markup$Mark$Internal$Format$text(' field.')
+											$author$project$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
+											$author$project$Mark$Internal$Format$text('You need to add the '),
+											$author$project$Mark$Internal$Format$yellow(
+											$author$project$Mark$Internal$Format$text(single)),
+											$author$project$Mark$Internal$Format$text(' field.')
 										]);
 								} else {
 									var multiple = remaining;
 									return _List_fromArray(
 										[
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
-											$mdgriffith$elm_markup$Mark$Internal$Format$text('You still need to add:\n'),
-											$mdgriffith$elm_markup$Mark$Internal$Format$yellow(
-											$mdgriffith$elm_markup$Mark$Internal$Format$text(
+											$author$project$Mark$Internal$Format$text('It looks like a field is missing.\n\n'),
+											$author$project$Mark$Internal$Format$text('You still need to add:\n'),
+											$author$project$Mark$Internal$Format$yellow(
+											$author$project$Mark$Internal$Format$text(
 												A2(
 													$elm$core$String$join,
 													'\n',
 													A2(
 														$elm$core$List$map,
-														$mdgriffith$elm_markup$Mark$Internal$Error$addIndent(4),
+														$author$project$Mark$Internal$Error$addIndent(4),
 														A2(
 															$elm$core$List$sortBy,
 															function (exp) {
-																return 0 - A2($mdgriffith$elm_markup$Mark$Internal$Error$similarity, line, exp);
+																return 0 - A2($author$project$Mark$Internal$Error$similarity, line, exp);
 															},
 															remaining)))))
 										]);
 								}
 							}
 						}(),
-						dI: current.dI,
-						bR: current.o,
+						af: current.af,
+						bR: current.n,
 						bc: 'MISSING FIELD'
 					});
 			default:
 				var custom = _v0.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Error$Rendered(
+				return $author$project$Mark$Internal$Error$Rendered(
 					{
-						aq: A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$Internal$Format$text, custom.aq),
-						dI: current.dI,
-						bR: current.o,
+						fv: A2($elm$core$List$map, $author$project$Mark$Internal$Format$text, custom.fv),
+						af: current.af,
+						bR: current.n,
 						bc: $elm$core$String$toUpper(custom.bc)
 					});
 		}
@@ -10376,7 +10293,7 @@ var $elm$parser$Parser$Advanced$run = F2(
 	function (_v0, src) {
 		var parse = _v0;
 		var _v1 = parse(
-			{c$: 1, f: _List_Nil, h: 1, b: 0, dT: 1, a: src});
+			{c1: 1, e: _List_Nil, ci: 1, cp: 0, dS: 1, a: src});
 		if (!_v1.$) {
 			var value = _v1.b;
 			return $elm$core$Result$Ok(value);
@@ -10386,10 +10303,10 @@ var $elm$parser$Parser$Advanced$run = F2(
 				A2($elm$parser$Parser$Advanced$bagToList, bag, _List_Nil));
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$compile = F2(
+var $author$project$Mark$Internal$Description$compile = F2(
 	function (_v0, source) {
 		var blocks = _v0;
-		var _v1 = A2($elm$parser$Parser$Advanced$run, blocks.n, source);
+		var _v1 = A2($elm$parser$Parser$Advanced$run, blocks.m, source);
 		if (!_v1.$) {
 			var parsed = _v1.a;
 			var parsedDetails = parsed;
@@ -10398,56 +10315,56 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$compile = F2(
 				$elm$core$Result$Ok,
 				$elm$core$Tuple$pair(parsed),
 				function () {
-					var _v2 = parsedDetails.e5;
+					var _v2 = parsedDetails.e4;
 					if (!_v2.b) {
-						var _v3 = blocks.l(parsed);
+						var _v3 = blocks.j(parsed);
 						switch (_v3.$) {
 							case 0:
 								var rendered = _v3.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(rendered);
+								return $author$project$Mark$Internal$Outcome$Success(rendered);
 							case 1:
 								if (_v3.a.$ === 1) {
 									var _v4 = _v3.a;
 									var errors = _v4.a;
 									var rendered = _v4.b;
-									return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
+									return $author$project$Mark$Internal$Outcome$Almost(
 										{
-											e5: A2(
+											e4: A2(
 												$elm$core$List$map,
-												$mdgriffith$elm_markup$Mark$Internal$Error$render(source),
-												$mdgriffith$elm_markup$Mark$Internal$Description$errorsToList(errors)),
+												$author$project$Mark$Internal$Error$render(source),
+												$author$project$Mark$Internal$Description$errorsToList(errors)),
 											fP: rendered
 										});
 								} else {
 									var errors = _v3.a.a;
-									return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(
+									return $author$project$Mark$Internal$Outcome$Failure(
 										A2(
 											$elm$core$List$map,
-											$mdgriffith$elm_markup$Mark$Internal$Error$render(source),
-											$mdgriffith$elm_markup$Mark$Internal$Description$errorsToList(errors)));
+											$author$project$Mark$Internal$Error$render(source),
+											$author$project$Mark$Internal$Description$errorsToList(errors)));
 								}
 							default:
 								var _v5 = _v3.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(
+								return $author$project$Mark$Internal$Outcome$Failure(
 									_List_fromArray(
-										[$mdgriffith$elm_markup$Mark$Internal$Error$documentMismatch]));
+										[$author$project$Mark$Internal$Error$documentMismatch]));
 						}
 					} else {
-						var _v6 = blocks.l(parsed);
+						var _v6 = blocks.j(parsed);
 						switch (_v6.$) {
 							case 0:
 								var rendered = _v6.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-									{e5: parsedDetails.e5, fP: rendered});
+								return $author$project$Mark$Internal$Outcome$Almost(
+									{e4: parsedDetails.e4, fP: rendered});
 							case 1:
 								if (!_v6.a.$) {
 									var _v7 = _v6.a.a;
 									var err = _v7.a;
 									var remainError = _v7.b;
-									return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(
+									return $author$project$Mark$Internal$Outcome$Failure(
 										A2(
 											$elm$core$List$map,
-											$mdgriffith$elm_markup$Mark$Internal$Error$render(source),
+											$author$project$Mark$Internal$Error$render(source),
 											A2($elm$core$List$cons, err, remainError)));
 								} else {
 									var _v8 = _v6.a;
@@ -10455,33 +10372,33 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$compile = F2(
 									var err = _v9.a;
 									var remainError = _v9.b;
 									var result = _v8.b;
-									return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
+									return $author$project$Mark$Internal$Outcome$Almost(
 										{
-											e5: A2(
+											e4: A2(
 												$elm$core$List$map,
-												$mdgriffith$elm_markup$Mark$Internal$Error$render(source),
+												$author$project$Mark$Internal$Error$render(source),
 												A2($elm$core$List$cons, err, remainError)),
 											fP: result
 										});
 								}
 							default:
 								var noMatch = _v6.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(
-									A2($elm$core$List$cons, $mdgriffith$elm_markup$Mark$Internal$Error$documentMismatch, parsedDetails.e5));
+								return $author$project$Mark$Internal$Outcome$Failure(
+									A2($elm$core$List$cons, $author$project$Mark$Internal$Error$documentMismatch, parsedDetails.e4));
 						}
 					}
 				}());
 		} else {
 			var deadEnds = _v1.a;
 			return $elm$core$Result$Err(
-				$mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(
+				$author$project$Mark$Internal$Outcome$Failure(
 					_List_fromArray(
 						[
-							A2($mdgriffith$elm_markup$Mark$Internal$Error$renderParsingErrors, source, deadEnds)
+							A2($author$project$Mark$Internal$Error$renderParsingErrors, source, deadEnds)
 						])));
 		}
 	});
-var $mdgriffith$elm_markup$Mark$flattenErrors = function (result) {
+var $author$project$Mark$flattenErrors = function (result) {
 	if (!result.$) {
 		var _v1 = result.a;
 		var parsed = _v1.a;
@@ -10492,70 +10409,70 @@ var $mdgriffith$elm_markup$Mark$flattenErrors = function (result) {
 		return outcome;
 	}
 };
-var $mdgriffith$elm_markup$Mark$Almost = function (a) {
+var $author$project$Mark$Almost = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Failure = function (a) {
+var $author$project$Mark$Failure = function (a) {
 	return {$: 2, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Success = function (a) {
+var $author$project$Mark$Success = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$rewrapOutcome = function (outcome) {
+var $author$project$Mark$rewrapOutcome = function (outcome) {
 	switch (outcome.$) {
 		case 0:
 			var s = outcome.a;
-			return $mdgriffith$elm_markup$Mark$Success(s);
+			return $author$project$Mark$Success(s);
 		case 1:
 			var x = outcome.a;
-			return $mdgriffith$elm_markup$Mark$Almost(x);
+			return $author$project$Mark$Almost(x);
 		default:
 			var f = outcome.a;
-			return $mdgriffith$elm_markup$Mark$Failure(f);
+			return $author$project$Mark$Failure(f);
 	}
 };
-var $mdgriffith$elm_markup$Mark$compile = F2(
+var $author$project$Mark$compile = F2(
 	function (doc, source) {
-		return $mdgriffith$elm_markup$Mark$rewrapOutcome(
-			$mdgriffith$elm_markup$Mark$flattenErrors(
-				A2($mdgriffith$elm_markup$Mark$Internal$Description$compile, doc, source)));
+		return $author$project$Mark$rewrapOutcome(
+			$author$project$Mark$flattenErrors(
+				A2($author$project$Mark$Internal$Description$compile, doc, source)));
 	});
 var $elm$html$Html$article = _VirtualDom_node('article');
 var $elm$html$Html$code = _VirtualDom_node('code');
-var $mdgriffith$elm_markup$Mark$Field = F2(
+var $author$project$Mark$Field = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$MissingFields = function (a) {
+var $author$project$Mark$Internal$Error$MissingFields = function (a) {
 	return {$: 6, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$ProtoRecord = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Description$Uncertain = function (a) {
+var $author$project$Mark$Internal$Description$ProtoRecord = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Description$Uncertain = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation = function (fromBlock) {
-	var expect = fromBlock.b9;
+var $author$project$Mark$Internal$Description$getBlockExpectation = function (fromBlock) {
+	var expect = fromBlock.l;
 	return expect;
 };
-var $mdgriffith$elm_markup$Mark$fieldExpectation = function (_v0) {
+var $author$project$Mark$fieldExpectation = function (_v0) {
 	var name = _v0.a;
 	var fieldBlock = _v0.b;
 	return _Utils_Tuple2(
 		name,
-		$mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(fieldBlock));
+		$author$project$Mark$Internal$Description$getBlockExpectation(fieldBlock));
 };
-var $mdgriffith$elm_markup$Mark$fieldName = function (_v0) {
+var $author$project$Mark$fieldName = function (_v0) {
 	var name = _v0.a;
 	return name;
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation = function (a) {
+var $author$project$Mark$Internal$Error$ExpectingIndentation = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Found = F2(
+var $author$project$Mark$Internal$Description$Found = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$InRecordField = function (a) {
+var $author$project$Mark$Internal$Error$InRecordField = function (a) {
 	return {$: 3, a: a};
 };
 var $elm$parser$Parser$Advanced$Token = F2(
@@ -10576,9 +10493,9 @@ var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 			if (_Utils_eq(newOffset, -1)) {
 				return A3(
 					$elm$parser$Parser$Advanced$Good,
-					_Utils_cmp(s0.b, offset) < 0,
+					_Utils_cmp(s0.cp, offset) < 0,
 					0,
-					{c$: col, f: s0.f, h: s0.h, b: offset, dT: row, a: s0.a});
+					{c1: col, e: s0.e, ci: s0.ci, cp: offset, dS: row, a: s0.a});
 			} else {
 				if (_Utils_eq(newOffset, -2)) {
 					var $temp$isGood = isGood,
@@ -10610,7 +10527,7 @@ var $elm$parser$Parser$Advanced$chompWhileHelp = F5(
 	});
 var $elm$parser$Parser$Advanced$chompWhile = function (isGood) {
 	return function (s) {
-		return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.b, s.dT, s.c$, s);
+		return A5($elm$parser$Parser$Advanced$chompWhileHelp, isGood, s.cp, s.dS, s.c1, s);
 	};
 };
 var $elm$core$Basics$always = F2(
@@ -10659,11 +10576,11 @@ var $elm$parser$Parser$Advanced$ignorer = F2(
 	});
 var $elm$parser$Parser$Advanced$Located = F3(
 	function (row, col, context) {
-		return {c$: col, f: context, dT: row};
+		return {c1: col, e: context, dS: row};
 	});
 var $elm$parser$Parser$Advanced$changeContext = F2(
 	function (newContext, s) {
-		return {c$: s.c$, f: newContext, h: s.h, b: s.b, dT: s.dT, a: s.a};
+		return {c1: s.c1, e: newContext, ci: s.ci, cp: s.cp, dS: s.dS, a: s.a};
 	});
 var $elm$parser$Parser$Advanced$inContext = F2(
 	function (context, _v0) {
@@ -10674,8 +10591,8 @@ var $elm$parser$Parser$Advanced$inContext = F2(
 					$elm$parser$Parser$Advanced$changeContext,
 					A2(
 						$elm$core$List$cons,
-						A3($elm$parser$Parser$Advanced$Located, s0.dT, s0.c$, context),
-						s0.f),
+						A3($elm$parser$Parser$Advanced$Located, s0.dS, s0.c1, context),
+						s0.e),
 					s0));
 			if (!_v1.$) {
 				var p = _v1.a;
@@ -10685,7 +10602,7 @@ var $elm$parser$Parser$Advanced$inContext = F2(
 					$elm$parser$Parser$Advanced$Good,
 					p,
 					a,
-					A2($elm$parser$Parser$Advanced$changeContext, s0.f, s1));
+					A2($elm$parser$Parser$Advanced$changeContext, s0.e, s1));
 			} else {
 				var step = _v1;
 				return step;
@@ -10770,14 +10687,14 @@ var $elm$parser$Parser$Advanced$AddRight = F2(
 	});
 var $elm$parser$Parser$Advanced$DeadEnd = F4(
 	function (row, col, problem, contextStack) {
-		return {c$: col, eX: contextStack, dI: problem, dT: row};
+		return {c1: col, eW: contextStack, af: problem, dS: row};
 	});
 var $elm$parser$Parser$Advanced$fromState = F2(
 	function (s, x) {
 		return A2(
 			$elm$parser$Parser$Advanced$AddRight,
 			$elm$parser$Parser$Advanced$Empty,
-			A4($elm$parser$Parser$Advanced$DeadEnd, s.dT, s.c$, x, s.f));
+			A4($elm$parser$Parser$Advanced$DeadEnd, s.dS, s.c1, x, s.e));
 	});
 var $elm$parser$Parser$Advanced$isSubString = _Parser_isSubString;
 var $elm$parser$Parser$Advanced$token = function (_v0) {
@@ -10785,7 +10702,7 @@ var $elm$parser$Parser$Advanced$token = function (_v0) {
 	var expecting = _v0.b;
 	var progress = !$elm$core$String$isEmpty(str);
 	return function (s) {
-		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.b, s.dT, s.c$, s.a);
+		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, str, s.cp, s.dS, s.c1, s.a);
 		var newOffset = _v1.a;
 		var newRow = _v1.b;
 		var newCol = _v1.c;
@@ -10796,7 +10713,7 @@ var $elm$parser$Parser$Advanced$token = function (_v0) {
 			$elm$parser$Parser$Advanced$Good,
 			progress,
 			0,
-			{c$: newCol, f: s.f, h: s.h, b: newOffset, dT: newRow, a: s.a});
+			{c1: newCol, e: s.e, ci: s.ci, cp: newOffset, dS: newRow, a: s.a});
 	};
 };
 var $elm$parser$Parser$Advanced$andThen = F2(
@@ -10829,14 +10746,14 @@ var $elm$parser$Parser$Advanced$andThen = F2(
 		};
 	});
 var $elm$parser$Parser$Advanced$getIndent = function (s) {
-	return A3($elm$parser$Parser$Advanced$Good, false, s.h, s);
+	return A3($elm$parser$Parser$Advanced$Good, false, s.ci, s);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$withIndent = function (fn) {
+var $author$project$Mark$Internal$Parser$withIndent = function (fn) {
 	return A2($elm$parser$Parser$Advanced$andThen, fn, $elm$parser$Parser$Advanced$getIndent);
 };
 var $elm$parser$Parser$Advanced$changeIndent = F2(
 	function (newIndent, s) {
-		return {c$: s.c$, f: s.f, h: newIndent, b: s.b, dT: s.dT, a: s.a};
+		return {c1: s.c1, e: s.e, ci: newIndent, cp: s.cp, dS: s.dS, a: s.a};
 	});
 var $elm$parser$Parser$Advanced$withIndent = F2(
 	function (newIndent, _v0) {
@@ -10852,7 +10769,7 @@ var $elm$parser$Parser$Advanced$withIndent = F2(
 					$elm$parser$Parser$Advanced$Good,
 					p,
 					a,
-					A2($elm$parser$Parser$Advanced$changeIndent, s0.h, s1));
+					A2($elm$parser$Parser$Advanced$changeIndent, s0.ci, s1));
 			} else {
 				var p = _v1.a;
 				var x = _v1.b;
@@ -10861,16 +10778,16 @@ var $elm$parser$Parser$Advanced$withIndent = F2(
 		};
 	});
 var $elm$parser$Parser$Advanced$getOffset = function (s) {
-	return A3($elm$parser$Parser$Advanced$Good, false, s.b, s);
+	return A3($elm$parser$Parser$Advanced$Good, false, s.cp, s);
 };
 var $elm$parser$Parser$Advanced$getPosition = function (s) {
 	return A3(
 		$elm$parser$Parser$Advanced$Good,
 		false,
-		_Utils_Tuple2(s.dT, s.c$),
+		_Utils_Tuple2(s.dS, s.c1),
 		s);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$getPosition = A2(
+var $author$project$Mark$Internal$Parser$getPosition = A2(
 	$elm$parser$Parser$Advanced$keeper,
 	A2(
 		$elm$parser$Parser$Advanced$keeper,
@@ -10879,11 +10796,11 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$getPosition = A2(
 				function (offset, _v0) {
 					var row = _v0.a;
 					var col = _v0.b;
-					return {b6: col, bm: row, b: offset};
+					return {b7: col, cl: row, cp: offset};
 				})),
 		$elm$parser$Parser$Advanced$getOffset),
 	$elm$parser$Parser$Advanced$getPosition);
-var $mdgriffith$elm_markup$Mark$Internal$Parser$withRange = function (parser) {
+var $author$project$Mark$Internal$Parser$withRange = function (parser) {
 	return A2(
 		$elm$parser$Parser$Advanced$keeper,
 		A2(
@@ -10894,16 +10811,16 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$withRange = function (parser) {
 					F3(
 						function (start, val, end) {
 							return _Utils_Tuple2(
-								{c4: end, cx: start},
+								{bE: end, bY: start},
 								val);
 						})),
-				$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition),
+				$author$project$Mark$Internal$Parser$getPosition),
 			parser),
-		$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition);
+		$author$project$Mark$Internal$Parser$getPosition);
 };
-var $mdgriffith$elm_markup$Mark$fieldContentParser = F2(
+var $author$project$Mark$fieldContentParser = F2(
 	function (name, parser) {
-		return $mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+		return $author$project$Mark$Internal$Parser$withIndent(
 			function (indentation) {
 				return A2(
 					$elm$parser$Parser$Advanced$map,
@@ -10912,9 +10829,9 @@ var $mdgriffith$elm_markup$Mark$fieldContentParser = F2(
 						var description = _v0.b;
 						return _Utils_Tuple2(
 							name,
-							A2($mdgriffith$elm_markup$Mark$Internal$Description$Found, pos, description));
+							A2($author$project$Mark$Internal$Description$Found, pos, description));
 					},
-					$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
+					$author$project$Mark$Internal$Parser$withRange(
 						A2(
 							$elm$parser$Parser$Advanced$keeper,
 							$elm$parser$Parser$Advanced$succeed($elm$core$Basics$identity),
@@ -10926,7 +10843,7 @@ var $mdgriffith$elm_markup$Mark$fieldContentParser = F2(
 										indentation + 4,
 										A2(
 											$elm$parser$Parser$Advanced$inContext,
-											$mdgriffith$elm_markup$Mark$Internal$Error$InRecordField(name),
+											$author$project$Mark$Internal$Error$InRecordField(name),
 											parser)),
 										A2(
 										$elm$parser$Parser$Advanced$keeper,
@@ -10943,28 +10860,28 @@ var $mdgriffith$elm_markup$Mark$fieldContentParser = F2(
 												A2(
 													$elm$parser$Parser$Advanced$Token,
 													A2($elm$core$String$repeat, indentation + 4, ' '),
-													$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(indentation)))),
+													$author$project$Mark$Internal$Error$ExpectingIndentation(indentation)))),
 										A2(
 											$elm$parser$Parser$Advanced$withIndent,
 											indentation + 4,
 											A2(
 												$elm$parser$Parser$Advanced$inContext,
-												$mdgriffith$elm_markup$Mark$Internal$Error$InRecordField(name),
+												$author$project$Mark$Internal$Error$InRecordField(name),
 												parser)))
 									])))));
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$ExpectingBlockName = function (a) {
+var $author$project$Mark$Internal$Error$ExpectingBlockName = function (a) {
 	return {$: 5, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$getParser = F3(
+var $author$project$Mark$Internal$Description$getParser = F3(
 	function (context, seed, _v0) {
 		var details = _v0;
-		var _v1 = details.i;
+		var _v1 = details.g;
 		switch (_v1.$) {
 			case 1:
 				var name = _v1.a;
-				var _v2 = A2(details.n, context, seed);
+				var _v2 = A2(details.m, context, seed);
 				var newSeed = _v2.a;
 				var blockParser = _v2.b;
 				return _Utils_Tuple2(
@@ -10980,51 +10897,51 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$getParser = F3(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										'|>',
-										$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingBlockName(name)))),
+										$author$project$Mark$Internal$Error$ExpectingBlockName(name)))),
 							$elm$parser$Parser$Advanced$chompWhile(
 								function (c) {
 									return c === ' ';
 								})),
 						blockParser));
 			case 0:
-				return A2(details.n, context, seed);
+				return A2(details.m, context, seed);
 			case 2:
 				var name = _v1.a;
-				var _v3 = A2(details.n, context, seed);
+				var _v3 = A2(details.m, context, seed);
 				var newSeed = _v3.a;
 				var blockParser = _v3.b;
 				return _Utils_Tuple2(newSeed, blockParser);
 			default:
 				var name = _v1.a;
-				var _v4 = A2(details.n, context, seed);
+				var _v4 = A2(details.m, context, seed);
 				var newSeed = _v4.a;
 				var blockParser = _v4.b;
 				return _Utils_Tuple2(newSeed, blockParser);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$fieldParser = F3(
+var $author$project$Mark$fieldParser = F3(
 	function (_v0, context, seed) {
 		var name = _v0.a;
 		var myBlock = _v0.b;
-		var _v1 = A3($mdgriffith$elm_markup$Mark$Internal$Description$getParser, context, seed, myBlock);
+		var _v1 = A3($author$project$Mark$Internal$Description$getParser, context, seed, myBlock);
 		var newSeed = _v1.a;
 		var blockParser = _v1.b;
 		return _Utils_Tuple2(
 			newSeed,
 			_Utils_Tuple2(
 				name,
-				A2($mdgriffith$elm_markup$Mark$fieldContentParser, name, blockParser)));
+				A2($author$project$Mark$fieldContentParser, name, blockParser)));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$renderBlock = function (fromBlock) {
-	var converter = fromBlock.l;
+var $author$project$Mark$Internal$Description$renderBlock = function (fromBlock) {
+	var converter = fromBlock.j;
 	return converter;
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$uncertain = function (err) {
-	return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-		$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(
+var $author$project$Mark$Internal$Description$uncertain = function (err) {
+	return $author$project$Mark$Internal$Outcome$Almost(
+		$author$project$Mark$Internal$Description$Uncertain(
 			_Utils_Tuple2(err, _List_Nil)));
 };
-var $mdgriffith$elm_markup$Mark$matchField = F4(
+var $author$project$Mark$matchField = F4(
 	function (targetName, targetBlock, _v0, existing) {
 		var name = _v0.a;
 		var foundDescription = _v0.b;
@@ -11036,68 +10953,68 @@ var $mdgriffith$elm_markup$Mark$matchField = F4(
 					var rng = foundDescription.a;
 					var description = foundDescription.b;
 					return $elm$core$Maybe$Just(
-						A2($mdgriffith$elm_markup$Mark$Internal$Description$renderBlock, targetBlock, description));
+						A2($author$project$Mark$Internal$Description$renderBlock, targetBlock, description));
 				} else {
 					var unexpected = foundDescription.a;
 					return $elm$core$Maybe$Just(
-						$mdgriffith$elm_markup$Mark$Internal$Description$uncertain(unexpected));
+						$author$project$Mark$Internal$Description$uncertain(unexpected));
 				}
 			} else {
 				return existing;
 			}
 		}
 	});
-var $mdgriffith$elm_markup$Mark$getField = F2(
+var $author$project$Mark$getField = F2(
 	function (_v0, fields) {
 		var name = _v0.a;
 		var fieldBlock = _v0.b;
 		return A3(
 			$elm$core$List$foldl,
-			A2($mdgriffith$elm_markup$Mark$matchField, name, fieldBlock),
+			A2($author$project$Mark$matchField, name, fieldBlock),
 			$elm$core$Maybe$Nothing,
 			fields);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$Recovered = F2(
+var $author$project$Mark$Internal$Description$Recovered = F2(
 	function (a, b) {
 		return {$: 1, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered = F2(
+var $author$project$Mark$Internal$Description$mapSuccessAndRecovered = F2(
 	function (fn, outcome) {
 		switch (outcome.$) {
 			case 0:
 				var s = outcome.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+				return $author$project$Mark$Internal$Outcome$Success(
 					fn(s));
 			case 1:
 				if (!outcome.a.$) {
 					var u = outcome.a.a;
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-						$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(u));
+					return $author$project$Mark$Internal$Outcome$Almost(
+						$author$project$Mark$Internal$Description$Uncertain(u));
 				} else {
 					var _v1 = outcome.a;
 					var e = _v1.a;
 					var a = _v1.b;
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
+					return $author$project$Mark$Internal$Outcome$Almost(
 						A2(
-							$mdgriffith$elm_markup$Mark$Internal$Description$Recovered,
+							$author$project$Mark$Internal$Description$Recovered,
 							e,
 							fn(a)));
 				}
 			default:
 				var f = outcome.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(f);
+				return $author$project$Mark$Internal$Outcome$Failure(f);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$field = F3(
+var $author$project$Mark$field = F3(
 	function (name, value, _v0) {
 		var details = _v0;
-		var newField = A2($mdgriffith$elm_markup$Mark$Field, name, value);
+		var newField = A2($author$project$Mark$Field, name, value);
 		return {
-			ah: details.ah,
-			aj: A2(
+			ai: details.ai,
+			ak: A2(
 				$elm$core$List$cons,
-				$mdgriffith$elm_markup$Mark$fieldExpectation(newField),
-				details.aj),
+				$author$project$Mark$fieldExpectation(newField),
+				details.ak),
 			aD: F2(
 				function (desc, ann) {
 					var _v1 = A2(details.aD, desc, ann);
@@ -11107,11 +11024,11 @@ var $mdgriffith$elm_markup$Mark$field = F3(
 							var pos = _v2.a;
 							var fieldDescriptions = _v2.b;
 							var rendered = _v2.c;
-							var _v3 = A2($mdgriffith$elm_markup$Mark$getField, newField, fieldDescriptions);
+							var _v3 = A2($author$project$Mark$getField, newField, fieldDescriptions);
 							if (!_v3.$) {
 								var outcome = _v3.a;
 								return A2(
-									$mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered,
+									$author$project$Mark$Internal$Description$mapSuccessAndRecovered,
 									function (myField) {
 										return _Utils_Tuple3(
 											pos,
@@ -11120,19 +11037,19 @@ var $mdgriffith$elm_markup$Mark$field = F3(
 									},
 									outcome);
 							} else {
-								return $mdgriffith$elm_markup$Mark$Internal$Description$uncertain(
+								return $author$project$Mark$Internal$Description$uncertain(
 									{
-										dI: $mdgriffith$elm_markup$Mark$Internal$Error$MissingFields(
+										af: $author$project$Mark$Internal$Error$MissingFields(
 											_List_fromArray(
 												[
-													$mdgriffith$elm_markup$Mark$fieldName(newField)
+													$author$project$Mark$fieldName(newField)
 												])),
-										o: pos
+										n: pos
 									});
 							}
 						case 2:
 							var fail = _v1.a;
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(fail);
+							return $author$project$Mark$Internal$Outcome$Failure(fail);
 						default:
 							if (_v1.a.$ === 1) {
 								var _v4 = _v1.a;
@@ -11141,11 +11058,11 @@ var $mdgriffith$elm_markup$Mark$field = F3(
 								var pos = _v5.a;
 								var fieldDescriptions = _v5.b;
 								var rendered = _v5.c;
-								var _v6 = A2($mdgriffith$elm_markup$Mark$getField, newField, fieldDescriptions);
+								var _v6 = A2($author$project$Mark$getField, newField, fieldDescriptions);
 								if (!_v6.$) {
 									var outcome = _v6.a;
 									return A2(
-										$mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered,
+										$author$project$Mark$Internal$Description$mapSuccessAndRecovered,
 										function (myField) {
 											return _Utils_Tuple3(
 												pos,
@@ -11154,76 +11071,76 @@ var $mdgriffith$elm_markup$Mark$field = F3(
 										},
 										outcome);
 								} else {
-									return $mdgriffith$elm_markup$Mark$Internal$Description$uncertain(
+									return $author$project$Mark$Internal$Description$uncertain(
 										{
-											dI: $mdgriffith$elm_markup$Mark$Internal$Error$MissingFields(
+											af: $author$project$Mark$Internal$Error$MissingFields(
 												_List_fromArray(
 													[
-														$mdgriffith$elm_markup$Mark$fieldName(newField)
+														$author$project$Mark$fieldName(newField)
 													])),
-											o: pos
+											n: pos
 										});
 								}
 							} else {
 								var e = _v1.a.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-									$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(e));
+								return $author$project$Mark$Internal$Outcome$Almost(
+									$author$project$Mark$Internal$Description$Uncertain(e));
 							}
 					}
 				}),
-			ak: A2(
+			al: A2(
 				$elm$core$List$cons,
-				$mdgriffith$elm_markup$Mark$fieldParser(newField),
-				details.ak),
-			fz: details.fz
+				$author$project$Mark$fieldParser(newField),
+				details.al),
+			s: details.s
 		};
 	});
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $mdgriffith$elm_markup$Mark$Internal$Description$EmptyAnnotation = {$: 0};
-var $mdgriffith$elm_markup$Mark$Internal$Description$Named = function (a) {
+var $author$project$Mark$Internal$Description$EmptyAnnotation = {$: 0};
+var $author$project$Mark$Internal$Description$Named = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$NoMatch = 0;
-var $mdgriffith$elm_markup$Mark$record = F2(
+var $author$project$Mark$Internal$Error$NoMatch = 0;
+var $author$project$Mark$record = F2(
 	function (name, view) {
 		return {
-			ah: $mdgriffith$elm_markup$Mark$Internal$Description$Named(name),
-			aj: _List_Nil,
+			ai: $author$project$Mark$Internal$Description$Named(name),
+			ak: _List_Nil,
 			aD: F2(
 				function (desc, ann) {
 					if (desc.$ === 1) {
 						var details = desc.a;
-						if (_Utils_eq(details.fz, name) && _Utils_eq(ann, $mdgriffith$elm_markup$Mark$Internal$Description$EmptyAnnotation)) {
-							var _v1 = details.g;
+						if (_Utils_eq(details.s, name) && _Utils_eq(ann, $author$project$Mark$Internal$Description$EmptyAnnotation)) {
+							var _v1 = details.f;
 							if (!_v1.$) {
 								var pos = _v1.a;
 								var fieldDescriptions = _v1.b;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+								return $author$project$Mark$Internal$Outcome$Success(
 									_Utils_Tuple3(pos, fieldDescriptions, view));
 							} else {
 								var unexpected = _v1.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Description$uncertain(unexpected);
+								return $author$project$Mark$Internal$Description$uncertain(unexpected);
 							}
 						} else {
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+							return $author$project$Mark$Internal$Outcome$Failure(0);
 						}
 					} else {
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+						return $author$project$Mark$Internal$Outcome$Failure(0);
 					}
 				}),
-			ak: _List_Nil,
-			fz: name
+			al: _List_Nil,
+			s: name
 		};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$Block = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Description$DescribeString = F3(
+var $author$project$Mark$Internal$Description$Block = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Description$DescribeString = F3(
 	function (a, b, c) {
 		return {$: 10, a: a, b: b, c: c};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectString = function (a) {
+var $author$project$Mark$Internal$Description$ExpectString = function (a) {
 	return {$: 9, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Value = {$: 0};
+var $author$project$Mark$Internal$Description$Value = {$: 0};
 var $elm$parser$Parser$Advanced$mapChompedString = F2(
 	function (func, _v0) {
 		var parse = _v0;
@@ -11242,7 +11159,7 @@ var $elm$parser$Parser$Advanced$mapChompedString = F2(
 					p,
 					A2(
 						func,
-						A3($elm$core$String$slice, s0.b, s1.b, s0.a),
+						A3($elm$core$String$slice, s0.cp, s1.cp, s0.a),
 						a),
 					s1);
 			}
@@ -11254,11 +11171,11 @@ var $elm$parser$Parser$Advanced$getChompedString = function (parser) {
 var $elm$parser$Parser$Advanced$Done = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$End = {$: 12};
+var $author$project$Mark$Internal$Error$End = {$: 12};
 var $elm$parser$Parser$Advanced$Loop = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$Newline = {$: 10};
+var $author$project$Mark$Internal$Error$Newline = {$: 10};
 var $elm$parser$Parser$Advanced$backtrackable = function (_v0) {
 	var parse = _v0;
 	return function (s0) {
@@ -11277,15 +11194,15 @@ var $elm$parser$Parser$Advanced$end = function (x) {
 	return function (s) {
 		return _Utils_eq(
 			$elm$core$String$length(s.a),
-			s.b) ? A3($elm$parser$Parser$Advanced$Good, false, 0, s) : A2(
+			s.cp) ? A3($elm$parser$Parser$Advanced$Good, false, 0, s) : A2(
 			$elm$parser$Parser$Advanced$Bad,
 			false,
 			A2($elm$parser$Parser$Advanced$fromState, s, x));
 	};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$newline = $elm$parser$Parser$Advanced$token(
-	A2($elm$parser$Parser$Advanced$Token, '\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline));
-var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedString = F2(
+var $author$project$Mark$Internal$Parser$newline = $elm$parser$Parser$Advanced$token(
+	A2($elm$parser$Parser$Advanced$Token, '\n', $author$project$Mark$Internal$Error$Newline));
+var $author$project$Mark$Internal$Parser$indentedString = F2(
 	function (indentation, found) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
@@ -11294,7 +11211,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedString = F2(
 					$elm$parser$Parser$Advanced$ignorer,
 					$elm$parser$Parser$Advanced$succeed(
 						$elm$parser$Parser$Advanced$Done(found)),
-					$elm$parser$Parser$Advanced$end($mdgriffith$elm_markup$Mark$Internal$Error$End)),
+					$elm$parser$Parser$Advanced$end($author$project$Mark$Internal$Error$End)),
 					A2(
 					$elm$parser$Parser$Advanced$keeper,
 					A2(
@@ -11304,7 +11221,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedString = F2(
 								return $elm$parser$Parser$Advanced$Loop(
 									extra ? (found + '\n\n') : (found + '\n'));
 							}),
-						$mdgriffith$elm_markup$Mark$Internal$Parser$newline),
+						$author$project$Mark$Internal$Parser$newline),
 					$elm$parser$Parser$Advanced$oneOf(
 						_List_fromArray(
 							[
@@ -11320,7 +11237,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedString = F2(
 											}))),
 								$elm$parser$Parser$Advanced$backtrackable(
 									$elm$parser$Parser$Advanced$token(
-										A2($elm$parser$Parser$Advanced$Token, '\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline)))),
+										A2($elm$parser$Parser$Advanced$Token, '\n', $author$project$Mark$Internal$Error$Newline)))),
 								$elm$parser$Parser$Advanced$succeed(false)
 							]))),
 					(found === '') ? A2(
@@ -11347,7 +11264,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedString = F2(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								A2($elm$core$String$repeat, indentation, ' '),
-								$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(indentation)))),
+								$author$project$Mark$Internal$Error$ExpectingIndentation(indentation)))),
 					$elm$parser$Parser$Advanced$getChompedString(
 						$elm$parser$Parser$Advanced$chompWhile(
 							function (c) {
@@ -11396,9 +11313,9 @@ var $elm$parser$Parser$Advanced$loop = F2(
 			return A4($elm$parser$Parser$Advanced$loopHelp, false, state, callback, s);
 		};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Id$Id = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Id$Seed = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Id$step = function (_v0) {
+var $author$project$Mark$Internal$Id$Id = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Id$Seed = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Id$step = function (_v0) {
 	var seed = _v0;
 	if (!seed.b) {
 		return _Utils_Tuple2(
@@ -11415,23 +11332,23 @@ var $mdgriffith$elm_markup$Mark$Internal$Id$step = function (_v0) {
 	}
 };
 var $elm$core$String$trim = _String_trim;
-var $mdgriffith$elm_markup$Mark$string = {
-	l: function (desc) {
+var $author$project$Mark$string = {
+	j: function (desc) {
 		if (desc.$ === 10) {
 			var id = desc.a;
 			var range = desc.b;
 			var str = desc.c;
-			return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+			return $author$project$Mark$Internal$Outcome$Success(
 				$elm$core$String$trim(str));
 		} else {
-			return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+			return $author$project$Mark$Internal$Outcome$Failure(0);
 		}
 	},
-	b9: $mdgriffith$elm_markup$Mark$Internal$Description$ExpectString('REPLACE'),
-	i: $mdgriffith$elm_markup$Mark$Internal$Description$Value,
-	n: F2(
+	l: $author$project$Mark$Internal$Description$ExpectString('REPLACE'),
+	g: $author$project$Mark$Internal$Description$Value,
+	m: F2(
 		function (context, seed) {
-			var _v1 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+			var _v1 = $author$project$Mark$Internal$Id$step(seed);
 			var id = _v1.a;
 			var newSeed = _v1.b;
 			return _Utils_Tuple2(
@@ -11449,33 +11366,33 @@ var $mdgriffith$elm_markup$Mark$string = {
 											F3(
 												function (start, str, end) {
 													return A3(
-														$mdgriffith$elm_markup$Mark$Internal$Description$DescribeString,
+														$author$project$Mark$Internal$Description$DescribeString,
 														id,
-														{c4: end, cx: start},
+														{bE: end, bY: start},
 														$elm$core$String$trim(str));
 												})),
-										$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition),
+										$author$project$Mark$Internal$Parser$getPosition),
 									$elm$parser$Parser$Advanced$getChompedString(
 										$elm$parser$Parser$Advanced$chompWhile(
 											function (c) {
 												return (c !== '\n') && ((c !== ',') && (c !== '}'));
 											}))),
-								$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition);
+								$author$project$Mark$Internal$Parser$getPosition);
 						case 0:
 							return A2(
 								$elm$parser$Parser$Advanced$map,
 								function (_v3) {
 									var pos = _v3.a;
 									var str = _v3.b;
-									return A3($mdgriffith$elm_markup$Mark$Internal$Description$DescribeString, id, pos, str);
+									return A3($author$project$Mark$Internal$Description$DescribeString, id, pos, str);
 								},
-								$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
-									$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+								$author$project$Mark$Internal$Parser$withRange(
+									$author$project$Mark$Internal$Parser$withIndent(
 										function (indentation) {
 											return A2(
 												$elm$parser$Parser$Advanced$loop,
 												'',
-												$mdgriffith$elm_markup$Mark$Internal$Parser$indentedString(indentation));
+												$author$project$Mark$Internal$Parser$indentedString(indentation));
 										})));
 						default:
 							return A2(
@@ -11483,46 +11400,46 @@ var $mdgriffith$elm_markup$Mark$string = {
 								function (_v4) {
 									var pos = _v4.a;
 									var str = _v4.b;
-									return A3($mdgriffith$elm_markup$Mark$Internal$Description$DescribeString, id, pos, str);
+									return A3($author$project$Mark$Internal$Description$DescribeString, id, pos, str);
 								},
-								$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
-									$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+								$author$project$Mark$Internal$Parser$withRange(
+									$author$project$Mark$Internal$Parser$withIndent(
 										function (indentation) {
 											return A2(
 												$elm$parser$Parser$Advanced$loop,
 												'',
-												$mdgriffith$elm_markup$Mark$Internal$Parser$indentedString(indentation));
+												$author$project$Mark$Internal$Parser$indentedString(indentation));
 										})));
 					}
 				}());
 		})
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$BlockRecord = 1;
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectRecord = F2(
+var $author$project$Mark$Internal$Parser$BlockRecord = 1;
+var $author$project$Mark$Internal$Description$ExpectRecord = F2(
 	function (a, b) {
 		return {$: 1, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$ParseBlock = 0;
-var $mdgriffith$elm_markup$Mark$Internal$Error$Expecting = function (a) {
+var $author$project$Mark$Internal$Description$ParseBlock = 0;
+var $author$project$Mark$Internal$Error$Expecting = function (a) {
 	return {$: 4, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Record = function (a) {
+var $author$project$Mark$Internal$Description$Record = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Unexpected = function (a) {
+var $author$project$Mark$Internal$Description$Unexpected = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$backtrackCharacters = F2(
+var $author$project$Mark$Internal$Parser$backtrackCharacters = F2(
 	function (chars, range) {
 		return {
-			c4: range.c4,
-			cx: {b6: range.cx.b6 - chars, bm: range.cx.bm, b: range.cx.b - chars}
+			bE: range.bE,
+			bY: {b7: range.bY.b7 - chars, cl: range.bY.cl, cp: range.bY.cp - chars}
 		};
 	});
 var $elm$parser$Parser$Advanced$chompIf = F2(
 	function (isGood, expecting) {
 		return function (s) {
-			var newOffset = A3($elm$parser$Parser$Advanced$isSubChar, isGood, s.b, s.a);
+			var newOffset = A3($elm$parser$Parser$Advanced$isSubChar, isGood, s.cp, s.a);
 			return _Utils_eq(newOffset, -1) ? A2(
 				$elm$parser$Parser$Advanced$Bad,
 				false,
@@ -11530,11 +11447,11 @@ var $elm$parser$Parser$Advanced$chompIf = F2(
 				$elm$parser$Parser$Advanced$Good,
 				true,
 				0,
-				{c$: 1, f: s.f, h: s.h, b: s.b + 1, dT: s.dT + 1, a: s.a}) : A3(
+				{c1: 1, e: s.e, ci: s.ci, cp: s.cp + 1, dS: s.dS + 1, a: s.a}) : A3(
 				$elm$parser$Parser$Advanced$Good,
 				true,
 				0,
-				{c$: s.c$ + 1, f: s.f, h: s.h, b: newOffset, dT: s.dT, a: s.a}));
+				{c1: s.c1 + 1, e: s.e, ci: s.ci, cp: newOffset, dS: s.dS, a: s.a}));
 		};
 	});
 var $elm$parser$Parser$Advanced$keyword = function (_v0) {
@@ -11542,7 +11459,7 @@ var $elm$parser$Parser$Advanced$keyword = function (_v0) {
 	var expecting = _v0.b;
 	var progress = !$elm$core$String$isEmpty(kwd);
 	return function (s) {
-		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, kwd, s.b, s.dT, s.c$, s.a);
+		var _v1 = A5($elm$parser$Parser$Advanced$isSubString, kwd, s.cp, s.dS, s.c1, s.a);
 		var newOffset = _v1.a;
 		var newRow = _v1.b;
 		var newCol = _v1.c;
@@ -11559,19 +11476,19 @@ var $elm$parser$Parser$Advanced$keyword = function (_v0) {
 			$elm$parser$Parser$Advanced$Good,
 			progress,
 			0,
-			{c$: newCol, f: s.f, h: s.h, b: newOffset, dT: newRow, a: s.a});
+			{c1: newCol, e: s.e, ci: s.ci, cp: newOffset, dS: newRow, a: s.a});
 	};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndent = function (a) {
+var $author$project$Mark$Internal$Error$ExpectingIndent = function (a) {
 	return {$: 9, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$UnexpectedField = function (a) {
+var $author$project$Mark$Internal$Error$UnexpectedField = function (a) {
 	return {$: 8, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$ExpectingFieldName = function (a) {
+var $author$project$Mark$Internal$Error$ExpectingFieldName = function (a) {
 	return {$: 7, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$parseField = function (_v0) {
+var $author$project$Mark$Internal$Parser$parseField = function (_v0) {
 	var name = _v0.a;
 	var contentParser = _v0.b;
 	return A2(
@@ -11589,7 +11506,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseField = function (_v0) {
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								name,
-								$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingFieldName(name)))),
+								$author$project$Mark$Internal$Error$ExpectingFieldName(name)))),
 					$elm$parser$Parser$Advanced$chompWhile(
 						function (c) {
 							return c === ' ';
@@ -11599,7 +11516,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseField = function (_v0) {
 					function (c) {
 						return c === '=';
 					},
-					$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('='))),
+					$author$project$Mark$Internal$Error$Expecting('='))),
 			$elm$parser$Parser$Advanced$chompWhile(
 				function (c) {
 					return c === ' ';
@@ -11609,23 +11526,23 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseField = function (_v0) {
 var $elm$parser$Parser$Advanced$getSource = function (s) {
 	return A3($elm$parser$Parser$Advanced$Good, false, s.a, s);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$sliceRange = F2(
+var $author$project$Mark$Internal$Parser$sliceRange = F2(
 	function (range, source) {
-		if (_Utils_eq(range.cx.bm, range.c4.bm)) {
-			var lineStart = range.cx.b - (range.cx.b6 - 1);
+		if (_Utils_eq(range.bY.cl, range.bE.cl)) {
+			var lineStart = range.bY.cp - (range.bY.b7 - 1);
 			return A2(
 				$elm$core$Maybe$withDefault,
 				'',
 				$elm$core$List$head(
 					$elm$core$String$lines(
-						A3($elm$core$String$slice, lineStart, range.c4.b + 20, source))));
+						A3($elm$core$String$slice, lineStart, range.bE.cp + 20, source))));
 		} else {
-			var snippet = A3($elm$core$String$slice, range.cx.b, range.c4.b, source);
-			var indented = A3($elm$core$String$slice, (range.cx.b + 1) - range.cx.b6, range.cx.b, source);
+			var snippet = A3($elm$core$String$slice, range.bY.cp, range.bE.cp, source);
+			var indented = A3($elm$core$String$slice, (range.bY.cp + 1) - range.bY.b7, range.bY.cp, source);
 			return _Utils_ap(indented, snippet);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$getRangeAndSource = function (parser) {
+var $author$project$Mark$Internal$Parser$getRangeAndSource = function (parser) {
 	return A2(
 		$elm$parser$Parser$Advanced$keeper,
 		A2(
@@ -11637,37 +11554,37 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$getRangeAndSource = function (pa
 					$elm$parser$Parser$Advanced$succeed(
 						F4(
 							function (src, start, result, end) {
-								var range = {c4: end, cx: start};
+								var range = {bE: end, bY: start};
 								return {
-									o: range,
-									f3: A2($mdgriffith$elm_markup$Mark$Internal$Parser$sliceRange, range, src),
-									b$: result
+									n: range,
+									f3: A2($author$project$Mark$Internal$Parser$sliceRange, range, src),
+									b0: result
 								};
 							})),
 					$elm$parser$Parser$Advanced$getSource),
-				$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition),
+				$author$project$Mark$Internal$Parser$getPosition),
 			parser),
-		$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition);
+		$author$project$Mark$Internal$Parser$getPosition);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$unexpectedField = F2(
+var $author$project$Mark$Internal$Parser$unexpectedField = F2(
 	function (recordName, options) {
-		return $mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+		return $author$project$Mark$Internal$Parser$withIndent(
 			function (indentation) {
 				return A2(
 					$elm$parser$Parser$Advanced$map,
 					function (_v0) {
-						var range = _v0.o;
-						var value = _v0.b$;
+						var range = _v0.n;
+						var value = _v0.b0;
 						return _Utils_Tuple2(
 							value,
-							$mdgriffith$elm_markup$Mark$Internal$Description$Unexpected(
+							$author$project$Mark$Internal$Description$Unexpected(
 								{
-									dI: $mdgriffith$elm_markup$Mark$Internal$Error$UnexpectedField(
-										{g: value, fG: options, fN: recordName}),
-									o: range
+									af: $author$project$Mark$Internal$Error$UnexpectedField(
+										{f: value, fG: options, fN: recordName}),
+									n: range
 								}));
 					},
-					$mdgriffith$elm_markup$Mark$Internal$Parser$getRangeAndSource(
+					$author$project$Mark$Internal$Parser$getRangeAndSource(
 						A2(
 							$elm$parser$Parser$Advanced$keeper,
 							$elm$parser$Parser$Advanced$succeed($elm$core$Basics$identity),
@@ -11690,7 +11607,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$unexpectedField = F2(
 											function (c) {
 												return c === '=';
 											},
-											$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('='))),
+											$author$project$Mark$Internal$Error$Expecting('='))),
 									$elm$parser$Parser$Advanced$chompWhile(
 										function (c) {
 											return c === ' ';
@@ -11705,7 +11622,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$unexpectedField = F2(
 											})))))));
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$captureField = F4(
+var $author$project$Mark$Internal$Parser$captureField = F4(
 	function (found, recordName, fields, fieldNames) {
 		return A2(
 			$elm$parser$Parser$Advanced$map,
@@ -11719,7 +11636,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$captureField = F4(
 					if (!fieldValue.$) {
 						return $elm$parser$Parser$Advanced$Loop(
 							{
-								g: $elm$core$Result$Ok(
+								f: $elm$core$Result$Ok(
 									A2(
 										$elm$core$List$cons,
 										_Utils_Tuple2(foundFieldname, fieldValue),
@@ -11736,10 +11653,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$captureField = F4(
 						var unexpected = fieldValue.a;
 						return $elm$parser$Parser$Advanced$Loop(
 							{
-								g: $elm$core$Result$Err(
+								f: $elm$core$Result$Err(
 									_Utils_Tuple2(
-										$elm$core$Maybe$Just(unexpected.o),
-										unexpected.dI)),
+										$elm$core$Maybe$Just(unexpected.n),
+										unexpected.af)),
 								C: A2(
 									$elm$core$List$filter,
 									function (_v4) {
@@ -11758,32 +11675,32 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$captureField = F4(
 						A2(
 							$elm$core$Basics$composeL,
 							$elm$parser$Parser$Advanced$map($elm$core$Maybe$Just),
-							$mdgriffith$elm_markup$Mark$Internal$Parser$parseField),
+							$author$project$Mark$Internal$Parser$parseField),
 						fields.C),
 					_List_fromArray(
 						[
 							A2(
 							$elm$parser$Parser$Advanced$map,
 							$elm$core$Maybe$Just,
-							A2($mdgriffith$elm_markup$Mark$Internal$Parser$unexpectedField, recordName, fieldNames))
+							A2($author$project$Mark$Internal$Parser$unexpectedField, recordName, fieldNames))
 						]))));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$EmptyLine = {$: 2};
-var $mdgriffith$elm_markup$Mark$Internal$Parser$Indented = function (a) {
+var $author$project$Mark$Internal$Parser$EmptyLine = {$: 2};
+var $author$project$Mark$Internal$Parser$Indented = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$Space = {$: 11};
-var $mdgriffith$elm_markup$Mark$Internal$Parser$WeirdIndent = function (a) {
+var $author$project$Mark$Internal$Error$Space = {$: 11};
+var $author$project$Mark$Internal$Parser$WeirdIndent = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$newlineWith = function (x) {
+var $author$project$Mark$Internal$Parser$newlineWith = function (x) {
 	return $elm$parser$Parser$Advanced$token(
 		A2(
 			$elm$parser$Parser$Advanced$Token,
 			'\n',
-			$mdgriffith$elm_markup$Mark$Internal$Error$Expecting(x)));
+			$author$project$Mark$Internal$Error$Expecting(x)));
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip = F2(
+var $author$project$Mark$Internal$Parser$indentOrSkip = F2(
 	function (indentation, successParser) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
@@ -11797,14 +11714,14 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip = F2(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								A2($elm$core$String$repeat, indentation, ' '),
-								$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(indentation)))),
+								$author$project$Mark$Internal$Error$ExpectingIndentation(indentation)))),
 					$elm$parser$Parser$Advanced$oneOf(
 						_List_fromArray(
 							[
 								A2(
 								$elm$parser$Parser$Advanced$map,
-								$elm$core$Basics$always($mdgriffith$elm_markup$Mark$Internal$Parser$EmptyLine),
-								$mdgriffith$elm_markup$Mark$Internal$Parser$newline),
+								$elm$core$Basics$always($author$project$Mark$Internal$Parser$EmptyLine),
+								$author$project$Mark$Internal$Parser$newline),
 								A2(
 								$elm$parser$Parser$Advanced$keeper,
 								A2(
@@ -11814,15 +11731,15 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip = F2(
 										$elm$parser$Parser$Advanced$succeed(
 											F2(
 												function (foundIndent, content) {
-													return (content !== '') ? $mdgriffith$elm_markup$Mark$Internal$Parser$WeirdIndent(
-														$elm$core$String$length(foundIndent)) : $mdgriffith$elm_markup$Mark$Internal$Parser$EmptyLine;
+													return (content !== '') ? $author$project$Mark$Internal$Parser$WeirdIndent(
+														$elm$core$String$length(foundIndent)) : $author$project$Mark$Internal$Parser$EmptyLine;
 												})),
 										A2(
 											$elm$parser$Parser$Advanced$chompIf,
 											function (c) {
 												return c === ' ';
 											},
-											$mdgriffith$elm_markup$Mark$Internal$Error$Space)),
+											$author$project$Mark$Internal$Error$Space)),
 									$elm$parser$Parser$Advanced$getChompedString(
 										$elm$parser$Parser$Advanced$chompWhile(
 											function (c) {
@@ -11835,10 +11752,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip = F2(
 											function (c) {
 												return c !== '\n';
 											})),
-									$mdgriffith$elm_markup$Mark$Internal$Parser$newlineWith('indentOrSkip one'))),
+									$author$project$Mark$Internal$Parser$newlineWith('indentOrSkip one'))),
 								A2(
 								$elm$parser$Parser$Advanced$keeper,
-								$elm$parser$Parser$Advanced$succeed($mdgriffith$elm_markup$Mark$Internal$Parser$Indented),
+								$elm$parser$Parser$Advanced$succeed($author$project$Mark$Internal$Parser$Indented),
 								A2(
 									$elm$parser$Parser$Advanced$ignorer,
 									successParser,
@@ -11854,8 +11771,8 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip = F2(
 						$elm$parser$Parser$Advanced$succeed(
 							F2(
 								function (foundIndent, hasContent) {
-									return hasContent ? $mdgriffith$elm_markup$Mark$Internal$Parser$WeirdIndent(
-										$elm$core$String$length(foundIndent)) : $mdgriffith$elm_markup$Mark$Internal$Parser$EmptyLine;
+									return hasContent ? $author$project$Mark$Internal$Parser$WeirdIndent(
+										$elm$core$String$length(foundIndent)) : $author$project$Mark$Internal$Parser$EmptyLine;
 								})),
 						$elm$parser$Parser$Advanced$getChompedString(
 							$elm$parser$Parser$Advanced$chompWhile(
@@ -11868,7 +11785,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip = F2(
 								A2(
 								$elm$parser$Parser$Advanced$map,
 								$elm$core$Basics$always(false),
-								$mdgriffith$elm_markup$Mark$Internal$Parser$newline),
+								$author$project$Mark$Internal$Parser$newline),
 								A2(
 								$elm$parser$Parser$Advanced$ignorer,
 								A2(
@@ -11879,11 +11796,11 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip = F2(
 											function (c) {
 												return c !== '\n';
 											}))),
-								$mdgriffith$elm_markup$Mark$Internal$Parser$newline)
+								$author$project$Mark$Internal$Parser$newline)
 							])))
 				]));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$indentationBetween = F2(
+var $author$project$Mark$Internal$Parser$indentationBetween = F2(
 	function (lower, higher) {
 		var top = A2($elm$core$Basics$max, lower, higher);
 		var bottom = A2($elm$core$Basics$min, lower, higher);
@@ -11898,11 +11815,11 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentationBetween = F2(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								A2($elm$core$String$repeat, numSpaces, ' '),
-								$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(numSpaces))));
+								$author$project$Mark$Internal$Error$ExpectingIndentation(numSpaces))));
 				},
 				A2($elm$core$List$range, bottom, top)));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove = F2(
+var $author$project$Mark$Internal$Parser$raggedIndentedStringAbove = F2(
 	function (indentation, found) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
@@ -11917,7 +11834,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove = F2(
 									extra ? (found + '\n\n') : (found + '\n'));
 							}),
 						$elm$parser$Parser$Advanced$token(
-							A2($elm$parser$Parser$Advanced$Token, '\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline))),
+							A2($elm$parser$Parser$Advanced$Token, '\n', $author$project$Mark$Internal$Error$Newline))),
 					$elm$parser$Parser$Advanced$oneOf(
 						_List_fromArray(
 							[
@@ -11933,7 +11850,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove = F2(
 											}))),
 								$elm$parser$Parser$Advanced$backtrackable(
 									$elm$parser$Parser$Advanced$token(
-										A2($elm$parser$Parser$Advanced$Token, '\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline)))),
+										A2($elm$parser$Parser$Advanced$Token, '\n', $author$project$Mark$Internal$Error$Newline)))),
 								$elm$parser$Parser$Advanced$succeed(false)
 							]))),
 					A2(
@@ -11951,7 +11868,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove = F2(
 												str)));
 								})),
 						$elm$parser$Parser$Advanced$oneOf(
-							A2($mdgriffith$elm_markup$Mark$Internal$Parser$indentationBetween, indentation + 1, indentation + 4))),
+							A2($author$project$Mark$Internal$Parser$indentationBetween, indentation + 1, indentation + 4))),
 					$elm$parser$Parser$Advanced$getChompedString(
 						$elm$parser$Parser$Advanced$chompWhile(
 							function (c) {
@@ -11961,23 +11878,23 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove = F2(
 					$elm$parser$Parser$Advanced$Done(found))
 				]));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$parseFields = F3(
+var $author$project$Mark$Internal$Parser$parseFields = F3(
 	function (recordName, fieldNames, fields) {
 		var _v0 = fields.C;
 		if (!_v0.b) {
-			return $mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+			return $author$project$Mark$Internal$Parser$withIndent(
 				function (indentation) {
 					return A2(
 						$elm$parser$Parser$Advanced$keeper,
 						$elm$parser$Parser$Advanced$succeed(
 							function (remaining) {
-								return ($elm$core$String$trim(remaining) === '') ? $elm$parser$Parser$Advanced$Done(fields.g) : $elm$parser$Parser$Advanced$Done(
+								return ($elm$core$String$trim(remaining) === '') ? $elm$parser$Parser$Advanced$Done(fields.f) : $elm$parser$Parser$Advanced$Done(
 									$elm$core$Result$Err(
 										_Utils_Tuple2(
 											$elm$core$Maybe$Nothing,
-											$mdgriffith$elm_markup$Mark$Internal$Error$UnexpectedField(
+											$author$project$Mark$Internal$Error$UnexpectedField(
 												{
-													g: $elm$core$String$trim(remaining),
+													f: $elm$core$String$trim(remaining),
 													fG: fieldNames,
 													fN: recordName
 												}))));
@@ -11994,7 +11911,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseFields = F3(
 											A2(
 												$elm$parser$Parser$Advanced$Token,
 												A2($elm$core$String$repeat, indentation, ' '),
-												$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(indentation)))),
+												$author$project$Mark$Internal$Error$ExpectingIndentation(indentation)))),
 									$elm$parser$Parser$Advanced$getChompedString(
 										$elm$parser$Parser$Advanced$chompWhile(
 											function (c) {
@@ -12004,10 +11921,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseFields = F3(
 								])));
 				});
 		} else {
-			var _v1 = fields.g;
+			var _v1 = fields.f;
 			if (!_v1.$) {
 				var found = _v1.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+				return $author$project$Mark$Internal$Parser$withIndent(
 					function (indentation) {
 						return $elm$parser$Parser$Advanced$oneOf(
 							_List_fromArray(
@@ -12025,44 +11942,44 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseFields = F3(
 												var i = indentedField.a;
 												return $elm$parser$Parser$Advanced$Loop(
 													{
-														g: $elm$core$Result$Err(
+														f: $elm$core$Result$Err(
 															_Utils_Tuple2(
 																$elm$core$Maybe$Nothing,
-																$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndent(indentation))),
+																$author$project$Mark$Internal$Error$ExpectingIndent(indentation))),
 														C: fields.C
 													});
 										}
 									},
 									A2(
-										$mdgriffith$elm_markup$Mark$Internal$Parser$indentOrSkip,
+										$author$project$Mark$Internal$Parser$indentOrSkip,
 										indentation,
-										A4($mdgriffith$elm_markup$Mark$Internal$Parser$captureField, found, recordName, fields, fieldNames))),
+										A4($author$project$Mark$Internal$Parser$captureField, found, recordName, fields, fieldNames))),
 									$elm$parser$Parser$Advanced$succeed(
 									$elm$parser$Parser$Advanced$Done(
 										$elm$core$Result$Err(
 											_Utils_Tuple2(
 												$elm$core$Maybe$Nothing,
-												$mdgriffith$elm_markup$Mark$Internal$Error$MissingFields(
+												$author$project$Mark$Internal$Error$MissingFields(
 													A2($elm$core$List$map, $elm$core$Tuple$first, fields.C))))))
 								]));
 					});
 			} else {
 				var unexpected = _v1.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+				return $author$project$Mark$Internal$Parser$withIndent(
 					function (indentation) {
 						return A2(
 							$elm$parser$Parser$Advanced$ignorer,
 							$elm$parser$Parser$Advanced$succeed(
-								$elm$parser$Parser$Advanced$Done(fields.g)),
+								$elm$parser$Parser$Advanced$Done(fields.f)),
 							A2(
 								$elm$parser$Parser$Advanced$loop,
 								'',
-								$mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove(indentation - 4)));
+								$author$project$Mark$Internal$Parser$raggedIndentedStringAbove(indentation - 4)));
 					});
 			}
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$parseInlineFields = F3(
+var $author$project$Mark$Internal$Parser$parseInlineFields = F3(
 	function (recordName, fieldNames, fields) {
 		var hasMore = function () {
 			var _v2 = fields.C;
@@ -12083,13 +12000,13 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseInlineFields = F3(
 				$elm$parser$Parser$Advanced$keeper,
 				$elm$parser$Parser$Advanced$succeed(
 					function (remaining) {
-						return ($elm$core$String$trim(remaining) === '') ? $elm$parser$Parser$Advanced$Done(fields.g) : $elm$parser$Parser$Advanced$Done(
+						return ($elm$core$String$trim(remaining) === '') ? $elm$parser$Parser$Advanced$Done(fields.f) : $elm$parser$Parser$Advanced$Done(
 							$elm$core$Result$Err(
 								_Utils_Tuple2(
 									$elm$core$Maybe$Nothing,
-									$mdgriffith$elm_markup$Mark$Internal$Error$UnexpectedField(
+									$author$project$Mark$Internal$Error$UnexpectedField(
 										{
-											g: $elm$core$String$trim(remaining),
+											f: $elm$core$String$trim(remaining),
 											fG: fieldNames,
 											fN: recordName
 										}))));
@@ -12105,7 +12022,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseInlineFields = F3(
 							$elm$parser$Parser$Advanced$succeed('')
 						])));
 		} else {
-			var _v1 = fields.g;
+			var _v1 = fields.f;
 			if (!_v1.$) {
 				var found = _v1.a;
 				return $elm$parser$Parser$Advanced$oneOf(
@@ -12124,7 +12041,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseInlineFields = F3(
 								$elm$parser$Parser$Advanced$ignorer,
 								A2(
 									$elm$parser$Parser$Advanced$ignorer,
-									A4($mdgriffith$elm_markup$Mark$Internal$Parser$captureField, found, recordName, fields, fieldNames),
+									A4($author$project$Mark$Internal$Parser$captureField, found, recordName, fields, fieldNames),
 									$elm$parser$Parser$Advanced$chompWhile(
 										function (c) {
 											return c === ' ';
@@ -12133,13 +12050,13 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseInlineFields = F3(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										',',
-										$mdgriffith$elm_markup$Mark$Internal$Error$Expecting(','))) : $elm$parser$Parser$Advanced$succeed(0))),
+										$author$project$Mark$Internal$Error$Expecting(','))) : $elm$parser$Parser$Advanced$succeed(0))),
 							$elm$parser$Parser$Advanced$succeed(
 							$elm$parser$Parser$Advanced$Done(
 								$elm$core$Result$Err(
 									_Utils_Tuple2(
 										$elm$core$Maybe$Nothing,
-										$mdgriffith$elm_markup$Mark$Internal$Error$MissingFields(
+										$author$project$Mark$Internal$Error$MissingFields(
 											A2($elm$core$List$map, $elm$core$Tuple$first, fields.C))))))
 						]));
 			} else {
@@ -12147,7 +12064,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$parseInlineFields = F3(
 				return A2(
 					$elm$parser$Parser$Advanced$ignorer,
 					$elm$parser$Parser$Advanced$succeed(
-						$elm$parser$Parser$Advanced$Done(fields.g)),
+						$elm$parser$Parser$Advanced$Done(fields.f)),
 					$elm$parser$Parser$Advanced$chompWhile(
 						function (c) {
 							return c !== '}';
@@ -12159,7 +12076,7 @@ var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$withRangeResult = function (parser) {
+var $author$project$Mark$Internal$Parser$withRangeResult = function (parser) {
 	return A2(
 		$elm$parser$Parser$Advanced$keeper,
 		A2(
@@ -12173,21 +12090,21 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$withRangeResult = function (pars
 								var val = result.a;
 								return $elm$core$Result$Ok(
 									{
-										o: {c4: end, cx: start},
-										b$: val
+										n: {bE: end, bY: start},
+										b0: val
 									});
 							} else {
 								var err = result.a;
-								var range = {c4: end, cx: start};
+								var range = {bE: end, bY: start};
 								return $elm$core$Result$Err(
-									{b8: err, o: range});
+									{b9: err, n: range});
 							}
 						})),
-				$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition),
+				$author$project$Mark$Internal$Parser$getPosition),
 			parser),
-		$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition);
+		$author$project$Mark$Internal$Parser$getPosition);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$record = F5(
+var $author$project$Mark$Internal$Parser$record = F5(
 	function (recordType, id, recordName, expectations, fields) {
 		return A2(
 			$elm$parser$Parser$Advanced$keeper,
@@ -12195,36 +12112,36 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$record = F5(
 				function (result) {
 					if (!result.$) {
 						var details = result.a;
-						return $mdgriffith$elm_markup$Mark$Internal$Description$Record(
+						return $author$project$Mark$Internal$Description$Record(
 							{
 								aC: expectations,
-								g: A2(
-									$mdgriffith$elm_markup$Mark$Internal$Description$Found,
-									A2($mdgriffith$elm_markup$Mark$Internal$Parser$backtrackCharacters, 2, details.o),
-									details.b$),
+								f: A2(
+									$author$project$Mark$Internal$Description$Found,
+									A2($author$project$Mark$Internal$Parser$backtrackCharacters, 2, details.n),
+									details.b0),
 								R: id,
-								fz: recordName
+								s: recordName
 							});
 					} else {
 						var err = result.a;
-						return $mdgriffith$elm_markup$Mark$Internal$Description$Record(
+						return $author$project$Mark$Internal$Description$Record(
 							{
 								aC: expectations,
-								g: $mdgriffith$elm_markup$Mark$Internal$Description$Unexpected(
+								f: $author$project$Mark$Internal$Description$Unexpected(
 									{
-										dI: err.b8.b,
-										o: A2(
+										af: err.b9.b,
+										n: A2(
 											$elm$core$Maybe$withDefault,
-											A2($mdgriffith$elm_markup$Mark$Internal$Parser$backtrackCharacters, 2, err.o),
-											err.b8.a)
+											A2($author$project$Mark$Internal$Parser$backtrackCharacters, 2, err.n),
+											err.b9.a)
 									}),
 								R: id,
-								fz: recordName
+								s: recordName
 							});
 					}
 				}),
-			$mdgriffith$elm_markup$Mark$Internal$Parser$withRangeResult(
-				$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+			$author$project$Mark$Internal$Parser$withRangeResult(
+				$author$project$Mark$Internal$Parser$withIndent(
 					function (indentation) {
 						return A2(
 							$elm$parser$Parser$Advanced$keeper,
@@ -12237,7 +12154,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$record = F5(
 										A2(
 											$elm$parser$Parser$Advanced$Token,
 											recordName,
-											$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingBlockName(recordName)))),
+											$author$project$Mark$Internal$Error$ExpectingBlockName(recordName)))),
 								$elm$parser$Parser$Advanced$chompWhile(
 									function (c) {
 										return c === ' ';
@@ -12255,14 +12172,14 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$record = F5(
 												function (c) {
 													return c === '|';
 												},
-												$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('bar'));
+												$author$project$Mark$Internal$Error$Expecting('bar'));
 										} else {
 											return A2(
 												$elm$parser$Parser$Advanced$chompIf,
 												function (c) {
 													return c === '\n';
 												},
-												$mdgriffith$elm_markup$Mark$Internal$Error$Newline);
+												$author$project$Mark$Internal$Error$Newline);
 										}
 									}()),
 								function () {
@@ -12270,11 +12187,11 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$record = F5(
 										return A2(
 											$elm$parser$Parser$Advanced$loop,
 											{
-												g: $elm$core$Result$Ok(_List_Nil),
+												f: $elm$core$Result$Ok(_List_Nil),
 												C: fields
 											},
 											A2(
-												$mdgriffith$elm_markup$Mark$Internal$Parser$parseInlineFields,
+												$author$project$Mark$Internal$Parser$parseInlineFields,
 												recordName,
 												A2($elm$core$List$map, $elm$core$Tuple$first, fields)));
 									} else {
@@ -12284,11 +12201,11 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$record = F5(
 											A2(
 												$elm$parser$Parser$Advanced$loop,
 												{
-													g: $elm$core$Result$Ok(_List_Nil),
+													f: $elm$core$Result$Ok(_List_Nil),
 													C: fields
 												},
 												A2(
-													$mdgriffith$elm_markup$Mark$Internal$Parser$parseFields,
+													$author$project$Mark$Internal$Parser$parseFields,
 													recordName,
 													A2($elm$core$List$map, $elm$core$Tuple$first, fields))));
 									}
@@ -12303,7 +12220,7 @@ var $elm$core$Tuple$mapSecond = F2(
 			x,
 			func(y));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Id$threadThrough = F2(
+var $author$project$Mark$Internal$Id$threadThrough = F2(
 	function (current, _v0) {
 		var seed = _v0.a;
 		var past = _v0.b;
@@ -12314,38 +12231,38 @@ var $mdgriffith$elm_markup$Mark$Internal$Id$threadThrough = F2(
 			newSeed,
 			A2($elm$core$List$cons, result, past));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Id$thread = F2(
+var $author$project$Mark$Internal$Id$thread = F2(
 	function (seed, steps) {
 		return A2(
 			$elm$core$Tuple$mapSecond,
 			$elm$core$List$reverse,
 			A3(
 				$elm$core$List$foldl,
-				$mdgriffith$elm_markup$Mark$Internal$Id$threadThrough,
+				$author$project$Mark$Internal$Id$threadThrough,
 				_Utils_Tuple2(seed, _List_Nil),
 				steps));
 	});
-var $mdgriffith$elm_markup$Mark$toBlock = function (_v0) {
+var $author$project$Mark$toBlock = function (_v0) {
 	var details = _v0;
-	var expectations = A2($mdgriffith$elm_markup$Mark$Internal$Description$ExpectRecord, details.fz, details.aj);
+	var expectations = A2($author$project$Mark$Internal$Description$ExpectRecord, details.s, details.ak);
 	return {
-		l: function (desc) {
-			var _v1 = A2(details.aD, desc, $mdgriffith$elm_markup$Mark$Internal$Description$EmptyAnnotation);
+		j: function (desc) {
+			var _v1 = A2(details.aD, desc, $author$project$Mark$Internal$Description$EmptyAnnotation);
 			switch (_v1.$) {
 				case 0:
 					var _v2 = _v1.a;
 					var pos = _v2.a;
 					var fieldDescriptions = _v2.b;
 					var rendered = _v2.c;
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(rendered);
+					return $author$project$Mark$Internal$Outcome$Success(rendered);
 				case 2:
 					var fail = _v1.a;
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(fail);
+					return $author$project$Mark$Internal$Outcome$Failure(fail);
 				default:
 					if (!_v1.a.$) {
 						var e = _v1.a.a;
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-							$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(e));
+						return $author$project$Mark$Internal$Outcome$Almost(
+							$author$project$Mark$Internal$Description$Uncertain(e));
 					} else {
 						var _v3 = _v1.a;
 						var e = _v3.a;
@@ -12353,20 +12270,20 @@ var $mdgriffith$elm_markup$Mark$toBlock = function (_v0) {
 						var pos = _v4.a;
 						var fieldDescriptions = _v4.b;
 						var rendered = _v4.c;
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-							A2($mdgriffith$elm_markup$Mark$Internal$Description$Recovered, e, rendered));
+						return $author$project$Mark$Internal$Outcome$Almost(
+							A2($author$project$Mark$Internal$Description$Recovered, e, rendered));
 					}
 			}
 		},
-		b9: expectations,
-		i: details.ah,
-		n: F2(
+		l: expectations,
+		g: details.ai,
+		m: F2(
 			function (context, seed) {
-				var _v5 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+				var _v5 = $author$project$Mark$Internal$Id$step(seed);
 				var parentId = _v5.a;
 				var parentSeed = _v5.b;
 				var _v6 = A2(
-					$mdgriffith$elm_markup$Mark$Internal$Id$thread,
+					$author$project$Mark$Internal$Id$thread,
 					parentSeed,
 					A3(
 						$elm$core$List$foldl,
@@ -12378,26 +12295,26 @@ var $mdgriffith$elm_markup$Mark$toBlock = function (_v0) {
 									ls);
 							}),
 						_List_Nil,
-						details.ak));
+						details.al));
 				var newSeed = _v6.a;
 				var fields = _v6.b;
 				return _Utils_Tuple2(
 					newSeed,
-					A5($mdgriffith$elm_markup$Mark$Internal$Parser$record, 1, parentId, details.fz, expectations, fields));
+					A5($author$project$Mark$Internal$Parser$record, 1, parentId, details.s, expectations, fields));
 			})
 	};
 };
-var $author$project$ElmMarkup$code = $mdgriffith$elm_markup$Mark$toBlock(
+var $author$project$ElmMarkup$code = $author$project$Mark$toBlock(
 	A3(
-		$mdgriffith$elm_markup$Mark$field,
+		$author$project$Mark$field,
 		'code',
-		$mdgriffith$elm_markup$Mark$string,
+		$author$project$Mark$string,
 		A3(
-			$mdgriffith$elm_markup$Mark$field,
+			$author$project$Mark$field,
 			'lang',
-			$mdgriffith$elm_markup$Mark$string,
+			$author$project$Mark$string,
 			A2(
-				$mdgriffith$elm_markup$Mark$record,
+				$author$project$Mark$record,
 				'Code',
 				F2(
 					function (lang, str) {
@@ -12418,16 +12335,16 @@ var $author$project$ElmMarkup$code = $mdgriffith$elm_markup$Mark$toBlock(
 										]))
 								]));
 					})))));
-var $mdgriffith$elm_markup$Mark$Internal$Description$Document = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Description$Parsed = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Description$ParseInline = 1;
-var $mdgriffith$elm_markup$Mark$Internal$Error$BlockStart = {$: 3};
-var $mdgriffith$elm_markup$Mark$Internal$Error$UnknownBlock = function (a) {
+var $author$project$Mark$Internal$Description$Document = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Description$Parsed = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Description$ParseInline = 1;
+var $author$project$Mark$Internal$Error$BlockStart = {$: 3};
+var $author$project$Mark$Internal$Error$UnknownBlock = function (a) {
 	return {$: 3, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$word = $elm$parser$Parser$Advanced$getChompedString(
+var $author$project$Mark$Internal$Parser$word = $elm$parser$Parser$Advanced$getChompedString(
 	$elm$parser$Parser$Advanced$chompWhile($elm$core$Char$isAlphaNum));
-var $mdgriffith$elm_markup$Mark$Internal$Parser$failableBlocks = function (blocks) {
+var $author$project$Mark$Internal$Parser$failableBlocks = function (blocks) {
 	return A2(
 		$elm$parser$Parser$Advanced$keeper,
 		A2(
@@ -12436,7 +12353,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$failableBlocks = function (block
 				$elm$parser$Parser$Advanced$ignorer,
 				$elm$parser$Parser$Advanced$succeed($elm$core$Basics$identity),
 				$elm$parser$Parser$Advanced$token(
-					A2($elm$parser$Parser$Advanced$Token, '|>', $mdgriffith$elm_markup$Mark$Internal$Error$BlockStart))),
+					A2($elm$parser$Parser$Advanced$Token, '|>', $author$project$Mark$Internal$Error$BlockStart))),
 			$elm$parser$Parser$Advanced$chompWhile(
 				function (c) {
 					return c === ' ';
@@ -12446,10 +12363,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$failableBlocks = function (block
 				A2(
 					$elm$core$List$map,
 					$elm$parser$Parser$Advanced$map($elm$core$Result$Ok),
-					blocks.cp),
+					blocks.cs),
 				_List_fromArray(
 					[
-						$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+						$author$project$Mark$Internal$Parser$withIndent(
 						function (indentation) {
 							return A2(
 								$elm$parser$Parser$Advanced$ignorer,
@@ -12461,59 +12378,59 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$failableBlocks = function (block
 											$elm$parser$Parser$Advanced$ignorer,
 											$elm$parser$Parser$Advanced$succeed(
 												$elm$core$Result$Err(
-													$mdgriffith$elm_markup$Mark$Internal$Error$UnknownBlock(blocks.cl))),
-											$mdgriffith$elm_markup$Mark$Internal$Parser$word),
+													$author$project$Mark$Internal$Error$UnknownBlock(blocks.cn))),
+											$author$project$Mark$Internal$Parser$word),
 										$elm$parser$Parser$Advanced$chompWhile(
 											function (c) {
 												return c === ' ';
 											})),
-									$mdgriffith$elm_markup$Mark$Internal$Parser$newline),
+									$author$project$Mark$Internal$Parser$newline),
 								A2(
 									$elm$parser$Parser$Advanced$loop,
 									'',
-									$mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove(indentation)));
+									$author$project$Mark$Internal$Parser$raggedIndentedStringAbove(indentation)));
 						})
 					]))));
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$getFailableBlock = F3(
+var $author$project$Mark$Internal$Parser$getFailableBlock = F3(
 	function (context, seed, _v0) {
 		var details = _v0;
-		var _v1 = details.i;
+		var _v1 = details.g;
 		switch (_v1.$) {
 			case 1:
 				var name = _v1.a;
-				var _v2 = A2(details.n, context, seed);
+				var _v2 = A2(details.m, context, seed);
 				var newSeed = _v2.a;
 				var blockParser = _v2.b;
 				return _Utils_Tuple2(
 					newSeed,
-					$mdgriffith$elm_markup$Mark$Internal$Parser$failableBlocks(
+					$author$project$Mark$Internal$Parser$failableBlocks(
 						{
-							cl: _List_fromArray(
+							cn: _List_fromArray(
 								[name]),
-							cp: _List_fromArray(
+							cs: _List_fromArray(
 								[blockParser])
 						}));
 			case 0:
 				return A2(
 					$elm$core$Tuple$mapSecond,
 					$elm$parser$Parser$Advanced$map($elm$core$Result$Ok),
-					A2(details.n, context, seed));
+					A2(details.m, context, seed));
 			case 2:
 				var name = _v1.a;
 				return A2(
 					$elm$core$Tuple$mapSecond,
 					$elm$parser$Parser$Advanced$map($elm$core$Result$Ok),
-					A2(details.n, 1, seed));
+					A2(details.m, 1, seed));
 			default:
 				var name = _v1.a;
 				return A2(
 					$elm$core$Tuple$mapSecond,
 					$elm$parser$Parser$Advanced$map($elm$core$Result$Ok),
-					A2(details.n, 1, seed));
+					A2(details.m, 1, seed));
 		}
 	});
-var $mdgriffith$elm_markup$Mark$unexpectedFromFound = function (found) {
+var $author$project$Mark$unexpectedFromFound = function (found) {
 	if (!found.$) {
 		return _List_Nil;
 	} else {
@@ -12522,19 +12439,19 @@ var $mdgriffith$elm_markup$Mark$unexpectedFromFound = function (found) {
 			[unexpected]);
 	}
 };
-var $mdgriffith$elm_markup$Mark$getUnexpecteds = function (description) {
+var $author$project$Mark$getUnexpecteds = function (description) {
 	switch (description.$) {
 		case 0:
 			var details = description.a;
-			return $mdgriffith$elm_markup$Mark$spelunkUnexpectedsFromFound(details.g);
+			return $author$project$Mark$spelunkUnexpectedsFromFound(details.f);
 		case 1:
 			var details = description.a;
-			var _v2 = details.g;
+			var _v2 = details.f;
 			if (!_v2.$) {
 				var fields = _v2.b;
 				return A2(
 					$elm$core$List$concatMap,
-					A2($elm$core$Basics$composeR, $elm$core$Tuple$second, $mdgriffith$elm_markup$Mark$spelunkUnexpectedsFromFound),
+					A2($elm$core$Basics$composeR, $elm$core$Tuple$second, $author$project$Mark$spelunkUnexpectedsFromFound),
 					fields);
 			} else {
 				var unexpected = _v2.a;
@@ -12543,27 +12460,27 @@ var $mdgriffith$elm_markup$Mark$getUnexpecteds = function (description) {
 			}
 		case 2:
 			var one = description.a;
-			return $mdgriffith$elm_markup$Mark$spelunkUnexpectedsFromFound(one.cY);
+			return $author$project$Mark$spelunkUnexpectedsFromFound(one.c_);
 		case 3:
 			var many = description.a;
-			return A2($elm$core$List$concatMap, $mdgriffith$elm_markup$Mark$spelunkUnexpectedsFromFound, many.eR);
+			return A2($elm$core$List$concatMap, $author$project$Mark$spelunkUnexpectedsFromFound, many.eQ);
 		case 4:
 			var details = description.a;
 			return _Utils_ap(
-				$mdgriffith$elm_markup$Mark$getUnexpecteds(details.cc.g),
-				$mdgriffith$elm_markup$Mark$getUnexpecteds(details.cu.g));
+				$author$project$Mark$getUnexpecteds(details.cc.f),
+				$author$project$Mark$getUnexpecteds(details.cx.f));
 		case 5:
 			var details = description.a;
 			return _List_Nil;
 		case 6:
 			var details = description.a;
-			return $mdgriffith$elm_markup$Mark$unexpectedFromFound(details.g);
+			return $author$project$Mark$unexpectedFromFound(details.f);
 		case 7:
 			var details = description.a;
-			return $mdgriffith$elm_markup$Mark$unexpectedFromFound(details.g);
+			return $author$project$Mark$unexpectedFromFound(details.f);
 		case 8:
 			var details = description.a;
-			return $mdgriffith$elm_markup$Mark$unexpectedFromFound(details.g);
+			return $author$project$Mark$unexpectedFromFound(details.f);
 		case 9:
 			var details = description.a;
 			return _List_Nil;
@@ -12575,68 +12492,68 @@ var $mdgriffith$elm_markup$Mark$getUnexpecteds = function (description) {
 			return _List_Nil;
 	}
 };
-var $mdgriffith$elm_markup$Mark$spelunkUnexpectedsFromFound = function (found) {
+var $author$project$Mark$spelunkUnexpectedsFromFound = function (found) {
 	if (!found.$) {
 		var desc = found.b;
-		return $mdgriffith$elm_markup$Mark$getUnexpecteds(desc);
+		return $author$project$Mark$getUnexpecteds(desc);
 	} else {
 		var unexpected = found.a;
 		return _List_fromArray(
 			[unexpected]);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Id$initialSeed = _List_fromArray(
+var $author$project$Mark$Internal$Id$initialSeed = _List_fromArray(
 	[0]);
-var $mdgriffith$elm_markup$Mark$document = F2(
+var $author$project$Mark$document = F2(
 	function (view, child) {
-		var seed = $mdgriffith$elm_markup$Mark$Internal$Id$initialSeed;
-		var expectation = $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(child);
-		var _v0 = A3($mdgriffith$elm_markup$Mark$Internal$Parser$getFailableBlock, 0, seed, child);
+		var seed = $author$project$Mark$Internal$Id$initialSeed;
+		var expectation = $author$project$Mark$Internal$Description$getBlockExpectation(child);
+		var _v0 = A3($author$project$Mark$Internal$Parser$getFailableBlock, 0, seed, child);
 		var currentSeed = _v0.a;
 		var blockParser = _v0.b;
 		return {
-			l: function (_v1) {
+			j: function (_v1) {
 				var parsed = _v1;
-				var _v2 = parsed.g;
+				var _v2 = parsed.f;
 				if (!_v2.$) {
 					var range = _v2.a;
 					var childDesc = _v2.b;
-					var _v3 = A2($mdgriffith$elm_markup$Mark$Internal$Description$renderBlock, child, childDesc);
+					var _v3 = A2($author$project$Mark$Internal$Description$renderBlock, child, childDesc);
 					switch (_v3.$) {
 						case 0:
 							var renderedChild = _v3.a;
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+							return $author$project$Mark$Internal$Outcome$Success(
 								view(renderedChild));
 						case 2:
 							var err = _v3.a;
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(err);
+							return $author$project$Mark$Internal$Outcome$Failure(err);
 						default:
 							if (!_v3.a.$) {
 								var unexpected = _v3.a.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-									$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(unexpected));
+								return $author$project$Mark$Internal$Outcome$Almost(
+									$author$project$Mark$Internal$Description$Uncertain(unexpected));
 							} else {
 								var _v4 = _v3.a;
 								var errors = _v4.a;
 								var renderedChild = _v4.b;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
+								return $author$project$Mark$Internal$Outcome$Almost(
 									A2(
-										$mdgriffith$elm_markup$Mark$Internal$Description$Recovered,
+										$author$project$Mark$Internal$Description$Recovered,
 										errors,
 										view(renderedChild)));
 							}
 					}
 				} else {
 					var unexpected = _v2.a;
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-						$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(
+					return $author$project$Mark$Internal$Outcome$Almost(
+						$author$project$Mark$Internal$Description$Uncertain(
 							_Utils_Tuple2(unexpected, _List_Nil)));
 				}
 			},
-			b7: currentSeed,
-			b9: expectation,
-			ci: seed,
-			n: A2(
+			b8: currentSeed,
+			l: expectation,
+			cj: seed,
+			m: A2(
 				$elm$parser$Parser$Advanced$keeper,
 				A2(
 					$elm$parser$Parser$Advanced$keeper,
@@ -12648,30 +12565,30 @@ var $mdgriffith$elm_markup$Mark$document = F2(
 									if (!result.$) {
 										var details = result.a;
 										return {
-											b7: currentSeed,
-											e5: A2(
+											b8: currentSeed,
+											e4: A2(
 												$elm$core$List$map,
-												$mdgriffith$elm_markup$Mark$Internal$Error$render(source),
-												$mdgriffith$elm_markup$Mark$getUnexpecteds(details.b$)),
-											aC: $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(child),
-											g: A2($mdgriffith$elm_markup$Mark$Internal$Description$Found, details.o, details.b$),
-											ci: seed
+												$author$project$Mark$Internal$Error$render(source),
+												$author$project$Mark$getUnexpecteds(details.b0)),
+											aC: $author$project$Mark$Internal$Description$getBlockExpectation(child),
+											f: A2($author$project$Mark$Internal$Description$Found, details.n, details.b0),
+											cj: seed
 										};
 									} else {
 										var details = result.a;
 										return {
-											b7: currentSeed,
-											e5: _List_fromArray(
+											b8: currentSeed,
+											e4: _List_fromArray(
 												[
 													A2(
-													$mdgriffith$elm_markup$Mark$Internal$Error$render,
+													$author$project$Mark$Internal$Error$render,
 													source,
-													{dI: details.b8, o: details.o})
+													{af: details.b9, n: details.n})
 												]),
-											aC: $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(child),
-											g: $mdgriffith$elm_markup$Mark$Internal$Description$Unexpected(
-												{dI: details.b8, o: details.o}),
-											ci: seed
+											aC: $author$project$Mark$Internal$Description$getBlockExpectation(child),
+											f: $author$project$Mark$Internal$Description$Unexpected(
+												{af: details.b9, n: details.n}),
+											cj: seed
 										};
 									}
 								})),
@@ -12684,30 +12601,30 @@ var $mdgriffith$elm_markup$Mark$document = F2(
 					$elm$parser$Parser$Advanced$ignorer,
 					A2(
 						$elm$parser$Parser$Advanced$ignorer,
-						$mdgriffith$elm_markup$Mark$Internal$Parser$withRangeResult(
+						$author$project$Mark$Internal$Parser$withRangeResult(
 							A2($elm$parser$Parser$Advanced$withIndent, 0, blockParser)),
 						$elm$parser$Parser$Advanced$chompWhile(
 							function (c) {
 								return (c === ' ') || (c === '\n');
 							})),
-					$elm$parser$Parser$Advanced$end($mdgriffith$elm_markup$Mark$Internal$Error$End)))
+					$elm$parser$Parser$Advanced$end($author$project$Mark$Internal$Error$End)))
 		};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectStartsWith = F2(
+var $author$project$Mark$Internal$Description$ExpectStartsWith = F2(
 	function (a, b) {
 		return {$: 4, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$StartsWith = function (a) {
+var $author$project$Mark$Internal$Description$StartsWith = function (a) {
 	return {$: 4, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$skipBlankLineWith = function (x) {
+var $author$project$Mark$Internal$Parser$skipBlankLineWith = function (x) {
 	return A2(
 		$elm$parser$Parser$Advanced$ignorer,
 		A2(
 			$elm$parser$Parser$Advanced$ignorer,
 			$elm$parser$Parser$Advanced$succeed(x),
 			$elm$parser$Parser$Advanced$token(
-				A2($elm$parser$Parser$Advanced$Token, '\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline))),
+				A2($elm$parser$Parser$Advanced$Token, '\n', $author$project$Mark$Internal$Error$Newline))),
 		$elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
 				[
@@ -12723,21 +12640,21 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$skipBlankLineWith = function (x)
 								}))),
 					$elm$parser$Parser$Advanced$backtrackable(
 						$elm$parser$Parser$Advanced$token(
-							A2($elm$parser$Parser$Advanced$Token, '\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline)))),
+							A2($elm$parser$Parser$Advanced$Token, '\n', $author$project$Mark$Internal$Error$Newline)))),
 					$elm$parser$Parser$Advanced$succeed(0)
 				])));
 };
-var $mdgriffith$elm_markup$Mark$manyBlankLines = function (lineCount) {
+var $author$project$Mark$manyBlankLines = function (lineCount) {
 	return $elm$parser$Parser$Advanced$oneOf(
 		_List_fromArray(
 			[
-				$mdgriffith$elm_markup$Mark$Internal$Parser$skipBlankLineWith(
+				$author$project$Mark$Internal$Parser$skipBlankLineWith(
 				$elm$parser$Parser$Advanced$Loop(lineCount + 1)),
 				$elm$parser$Parser$Advanced$succeed(
 				$elm$parser$Parser$Advanced$Done(0))
 			]));
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$mergeErrors = F2(
+var $author$project$Mark$Internal$Description$mergeErrors = F2(
 	function (_v0, _v1) {
 		var h1 = _v0.a;
 		var r1 = _v0.b;
@@ -12749,7 +12666,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$mergeErrors = F2(
 				r1,
 				A2($elm$core$List$cons, h2, r2)));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$mergeWith = F3(
+var $author$project$Mark$Internal$Description$mergeWith = F3(
 	function (fn, one, two) {
 		var _v0 = _Utils_Tuple2(one, two);
 		_v0$3:
@@ -12762,7 +12679,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$mergeWith = F3(
 							case 0:
 								var renderedOne = _v0.a.a;
 								var renderedTwo = _v0.b.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+								return $author$project$Mark$Internal$Outcome$Success(
 									A2(fn, renderedOne, renderedTwo));
 							case 1:
 								if (!_v0.b.a.$) {
@@ -12783,10 +12700,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$mergeWith = F3(
 									var _v2 = _v0.b.a;
 									var secondErrs = _v2.a;
 									var snd = _v2.b;
-									return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
+									return $author$project$Mark$Internal$Outcome$Almost(
 										A2(
-											$mdgriffith$elm_markup$Mark$Internal$Description$Recovered,
-											A2($mdgriffith$elm_markup$Mark$Internal$Description$mergeErrors, firstErrs, secondErrs),
+											$author$project$Mark$Internal$Description$Recovered,
+											A2($author$project$Mark$Internal$Description$mergeErrors, firstErrs, secondErrs),
 											A2(fn, fst, snd)));
 								} else {
 									break _v0$3;
@@ -12796,8 +12713,8 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$mergeWith = F3(
 							}
 						} else {
 							var unexpected = _v0.a.a.a;
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-								$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(unexpected));
+							return $author$project$Mark$Internal$Outcome$Almost(
+								$author$project$Mark$Internal$Description$Uncertain(unexpected));
 						}
 					default:
 						if ((_v0.b.$ === 1) && (!_v0.b.a.$)) {
@@ -12807,41 +12724,41 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$mergeWith = F3(
 						}
 				}
 			}
-			return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+			return $author$project$Mark$Internal$Outcome$Failure(0);
 		}
 		var unexpected = _v0.b.a.a;
-		return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-			$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(unexpected));
+		return $author$project$Mark$Internal$Outcome$Almost(
+			$author$project$Mark$Internal$Description$Uncertain(unexpected));
 	});
-var $mdgriffith$elm_markup$Mark$startWith = F3(
+var $author$project$Mark$startWith = F3(
 	function (fn, startBlock, endBlock) {
 		return {
-			l: function (desc) {
+			j: function (desc) {
 				if (desc.$ === 4) {
 					var details = desc.a;
 					return A3(
-						$mdgriffith$elm_markup$Mark$Internal$Description$mergeWith,
+						$author$project$Mark$Internal$Description$mergeWith,
 						fn,
-						A2($mdgriffith$elm_markup$Mark$Internal$Description$renderBlock, startBlock, details.cc.g),
-						A2($mdgriffith$elm_markup$Mark$Internal$Description$renderBlock, endBlock, details.cu.g));
+						A2($author$project$Mark$Internal$Description$renderBlock, startBlock, details.cc.f),
+						A2($author$project$Mark$Internal$Description$renderBlock, endBlock, details.cx.f));
 				} else {
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+					return $author$project$Mark$Internal$Outcome$Failure(0);
 				}
 			},
-			b9: A2(
-				$mdgriffith$elm_markup$Mark$Internal$Description$ExpectStartsWith,
-				$mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(startBlock),
-				$mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(endBlock)),
-			i: $mdgriffith$elm_markup$Mark$Internal$Description$Value,
-			n: F2(
+			l: A2(
+				$author$project$Mark$Internal$Description$ExpectStartsWith,
+				$author$project$Mark$Internal$Description$getBlockExpectation(startBlock),
+				$author$project$Mark$Internal$Description$getBlockExpectation(endBlock)),
+			g: $author$project$Mark$Internal$Description$Value,
+			m: F2(
 				function (context, seed) {
-					var _v1 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+					var _v1 = $author$project$Mark$Internal$Id$step(seed);
 					var parentId = _v1.a;
 					var newSeed = _v1.b;
-					var _v2 = A3($mdgriffith$elm_markup$Mark$Internal$Description$getParser, 0, newSeed, startBlock);
+					var _v2 = A3($author$project$Mark$Internal$Description$getParser, 0, newSeed, startBlock);
 					var startSeed = _v2.a;
 					var startParser = _v2.b;
-					var _v3 = A3($mdgriffith$elm_markup$Mark$Internal$Description$getParser, 0, startSeed, endBlock);
+					var _v3 = A3($author$project$Mark$Internal$Description$getParser, 0, startSeed, endBlock);
 					var remainSeed = _v3.a;
 					var endParser = _v3.b;
 					return _Utils_Tuple2(
@@ -12854,21 +12771,21 @@ var $mdgriffith$elm_markup$Mark$startWith = F3(
 									var _v5 = _v4.b;
 									var begin = _v5.a;
 									var end = _v5.b;
-									return $mdgriffith$elm_markup$Mark$Internal$Description$StartsWith(
+									return $author$project$Mark$Internal$Description$StartsWith(
 										{
 											cc: {
-												aC: $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(startBlock),
-												g: begin
+												aC: $author$project$Mark$Internal$Description$getBlockExpectation(startBlock),
+												f: begin
 											},
 											R: parentId,
-											o: range,
-											cu: {
-												aC: $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(endBlock),
-												g: end
+											n: range,
+											cx: {
+												aC: $author$project$Mark$Internal$Description$getBlockExpectation(endBlock),
+												f: end
 											}
 										});
 								}),
-							$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
+							$author$project$Mark$Internal$Parser$withRange(
 								A2(
 									$elm$parser$Parser$Advanced$keeper,
 									A2(
@@ -12877,67 +12794,67 @@ var $mdgriffith$elm_markup$Mark$startWith = F3(
 										A2(
 											$elm$parser$Parser$Advanced$ignorer,
 											startParser,
-											A2($elm$parser$Parser$Advanced$loop, 0, $mdgriffith$elm_markup$Mark$manyBlankLines))),
+											A2($elm$parser$Parser$Advanced$loop, 0, $author$project$Mark$manyBlankLines))),
 									endParser))));
 				})
 		};
 	});
-var $mdgriffith$elm_markup$Mark$documentWith = F2(
+var $author$project$Mark$documentWith = F2(
 	function (renderer, _v0) {
-		var metadata = _v0.fv;
-		var body = _v0.eH;
+		var metadata = _v0.fw;
+		var body = _v0.eG;
 		return A2(
-			$mdgriffith$elm_markup$Mark$document,
+			$author$project$Mark$document,
 			$elm$core$Basics$identity,
-			A3($mdgriffith$elm_markup$Mark$startWith, renderer, metadata, body));
+			A3($author$project$Mark$startWith, renderer, metadata, body));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$DescribeBlock = function (a) {
+var $author$project$Mark$Internal$Description$DescribeBlock = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectBlock = F2(
+var $author$project$Mark$Internal$Description$ExpectBlock = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$InBlock = function (a) {
+var $author$project$Mark$Internal$Error$InBlock = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$block = F3(
+var $author$project$Mark$block = F3(
 	function (name, view, child) {
 		return {
-			l: function (desc) {
+			j: function (desc) {
 				if (!desc.$) {
 					var details = desc.a;
-					if (_Utils_eq(details.fz, name)) {
-						var _v1 = details.g;
+					if (_Utils_eq(details.s, name)) {
+						var _v1 = details.f;
 						if (!_v1.$) {
 							var range = _v1.a;
 							var found = _v1.b;
 							return A2(
-								$mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered,
+								$author$project$Mark$Internal$Description$mapSuccessAndRecovered,
 								view,
-								A2($mdgriffith$elm_markup$Mark$Internal$Description$renderBlock, child, found));
+								A2($author$project$Mark$Internal$Description$renderBlock, child, found));
 						} else {
 							var unexpected = _v1.a;
-							return $mdgriffith$elm_markup$Mark$Internal$Description$uncertain(unexpected);
+							return $author$project$Mark$Internal$Description$uncertain(unexpected);
 						}
 					} else {
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+						return $author$project$Mark$Internal$Outcome$Failure(0);
 					}
 				} else {
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+					return $author$project$Mark$Internal$Outcome$Failure(0);
 				}
 			},
-			b9: A2(
-				$mdgriffith$elm_markup$Mark$Internal$Description$ExpectBlock,
+			l: A2(
+				$author$project$Mark$Internal$Description$ExpectBlock,
 				name,
-				$mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(child)),
-			i: $mdgriffith$elm_markup$Mark$Internal$Description$Named(name),
-			n: F2(
+				$author$project$Mark$Internal$Description$getBlockExpectation(child)),
+			g: $author$project$Mark$Internal$Description$Named(name),
+			m: F2(
 				function (context, seed) {
-					var _v2 = A3($mdgriffith$elm_markup$Mark$Internal$Description$getParser, context, seed, child);
+					var _v2 = A3($author$project$Mark$Internal$Description$getParser, context, seed, child);
 					var newSeed = _v2.a;
 					var childParser = _v2.b;
-					var _v3 = $mdgriffith$elm_markup$Mark$Internal$Id$step(newSeed);
+					var _v3 = $author$project$Mark$Internal$Id$step(newSeed);
 					var parentId = _v3.a;
 					var finalSeed = _v3.b;
 					return _Utils_Tuple2(
@@ -12947,33 +12864,33 @@ var $mdgriffith$elm_markup$Mark$block = F3(
 							function (result) {
 								if (!result.$) {
 									var details = result.a;
-									return $mdgriffith$elm_markup$Mark$Internal$Description$DescribeBlock(
+									return $author$project$Mark$Internal$Description$DescribeBlock(
 										{
 											aC: A2(
-												$mdgriffith$elm_markup$Mark$Internal$Description$ExpectBlock,
+												$author$project$Mark$Internal$Description$ExpectBlock,
 												name,
-												$mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(child)),
-											g: A2($mdgriffith$elm_markup$Mark$Internal$Description$Found, details.o, details.b$),
+												$author$project$Mark$Internal$Description$getBlockExpectation(child)),
+											f: A2($author$project$Mark$Internal$Description$Found, details.n, details.b0),
 											R: parentId,
-											fz: name
+											s: name
 										});
 								} else {
 									var details = result.a;
-									return $mdgriffith$elm_markup$Mark$Internal$Description$DescribeBlock(
+									return $author$project$Mark$Internal$Description$DescribeBlock(
 										{
 											aC: A2(
-												$mdgriffith$elm_markup$Mark$Internal$Description$ExpectBlock,
+												$author$project$Mark$Internal$Description$ExpectBlock,
 												name,
-												$mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(child)),
-											g: $mdgriffith$elm_markup$Mark$Internal$Description$Unexpected(
-												{dI: details.b8, o: details.o}),
+												$author$project$Mark$Internal$Description$getBlockExpectation(child)),
+											f: $author$project$Mark$Internal$Description$Unexpected(
+												{af: details.b9, n: details.n}),
 											R: parentId,
-											fz: name
+											s: name
 										});
 								}
 							},
-							$mdgriffith$elm_markup$Mark$Internal$Parser$withRangeResult(
-								$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+							$author$project$Mark$Internal$Parser$withRangeResult(
+								$author$project$Mark$Internal$Parser$withIndent(
 									function (indentation) {
 										return A2(
 											$elm$parser$Parser$Advanced$keeper,
@@ -12988,12 +12905,12 @@ var $mdgriffith$elm_markup$Mark$block = F3(
 															A2(
 																$elm$parser$Parser$Advanced$Token,
 																name,
-																$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingBlockName(name)))),
+																$author$project$Mark$Internal$Error$ExpectingBlockName(name)))),
 													$elm$parser$Parser$Advanced$chompWhile(
 														function (c) {
 															return c === ' ';
 														})),
-												$mdgriffith$elm_markup$Mark$Internal$Parser$skipBlankLineWith(0)),
+												$author$project$Mark$Internal$Parser$skipBlankLineWith(0)),
 											$elm$parser$Parser$Advanced$oneOf(
 												_List_fromArray(
 													[
@@ -13012,25 +12929,25 @@ var $mdgriffith$elm_markup$Mark$block = F3(
 																				$elm$parser$Parser$Advanced$succeed(
 																					function (end) {
 																						return $elm$core$Result$Err(
-																							$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndent(indentation + 4));
+																							$author$project$Mark$Internal$Error$ExpectingIndent(indentation + 4));
 																					}),
 																				A2(
 																					$elm$parser$Parser$Advanced$chompIf,
 																					function (c) {
 																						return c === ' ';
 																					},
-																					$mdgriffith$elm_markup$Mark$Internal$Error$Space)),
+																					$author$project$Mark$Internal$Error$Space)),
 																			$elm$parser$Parser$Advanced$chompWhile(
 																				function (c) {
 																					return c === ' ';
 																				})),
 																		A2(
 																			$elm$parser$Parser$Advanced$ignorer,
-																			$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition,
+																			$author$project$Mark$Internal$Parser$getPosition,
 																			A2(
 																				$elm$parser$Parser$Advanced$loop,
 																				'',
-																				$mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove(indentation)))),
+																				$author$project$Mark$Internal$Parser$raggedIndentedStringAbove(indentation)))),
 																		A2(
 																		$elm$parser$Parser$Advanced$map,
 																		$elm$core$Result$Ok,
@@ -13039,7 +12956,7 @@ var $mdgriffith$elm_markup$Mark$block = F3(
 																			indentation + 4,
 																			A2(
 																				$elm$parser$Parser$Advanced$inContext,
-																				$mdgriffith$elm_markup$Mark$Internal$Error$InBlock(name),
+																				$author$project$Mark$Internal$Error$InBlock(name),
 																				childParser)))
 																	]));
 														},
@@ -13048,100 +12965,100 @@ var $mdgriffith$elm_markup$Mark$block = F3(
 															$elm$parser$Parser$Advanced$succeed($elm$core$Basics$identity),
 															A2(
 																$elm$parser$Parser$Advanced$ignorer,
-																$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition,
+																$author$project$Mark$Internal$Parser$getPosition,
 																$elm$parser$Parser$Advanced$token(
 																	A2(
 																		$elm$parser$Parser$Advanced$Token,
 																		A2($elm$core$String$repeat, indentation + 4, ' '),
-																		$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(indentation + 4)))))),
+																		$author$project$Mark$Internal$Error$ExpectingIndentation(indentation + 4)))))),
 														A2(
 														$elm$parser$Parser$Advanced$ignorer,
 														$elm$parser$Parser$Advanced$succeed(
 															$elm$core$Result$Err(
-																$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndent(indentation + 4))),
+																$author$project$Mark$Internal$Error$ExpectingIndent(indentation + 4))),
 														A2(
 															$elm$parser$Parser$Advanced$loop,
 															'',
-															$mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove(indentation)))
+															$author$project$Mark$Internal$Parser$raggedIndentedStringAbove(indentation)))
 													])));
 									}))));
 				})
 		};
 	});
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $mdgriffith$elm_markup$Mark$Internal$Description$AnnotationNamed = function (a) {
+var $author$project$Mark$Internal$Description$AnnotationNamed = function (a) {
 	return {$: 3, a: a};
 };
-var $mdgriffith$elm_markup$Mark$textToTuple = function (_v0) {
+var $author$project$Mark$textToTuple = function (_v0) {
 	var style = _v0.a;
 	var str = _v0.b;
 	return _Utils_Tuple2(style, str);
 };
-var $mdgriffith$elm_markup$Mark$selectedText = function (sel) {
+var $author$project$Mark$selectedText = function (sel) {
 	switch (sel.$) {
 		case 0:
 			return _List_Nil;
 		case 1:
 			var txts = sel.a;
-			return A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$textToTuple, txts);
+			return A2($elm$core$List$map, $author$project$Mark$textToTuple, txts);
 		default:
 			return _List_Nil;
 	}
 };
-var $mdgriffith$elm_markup$Mark$annotation = F2(
+var $author$project$Mark$annotation = F2(
 	function (name, view) {
 		return {
-			ah: $mdgriffith$elm_markup$Mark$Internal$Description$AnnotationNamed(name),
-			aj: _List_Nil,
+			ai: $author$project$Mark$Internal$Description$AnnotationNamed(name),
+			ak: _List_Nil,
 			aD: F2(
 				function (desc, selected) {
 					if (desc.$ === 1) {
 						var details = desc.a;
-						if (_Utils_eq(details.fz, name)) {
-							var _v1 = details.g;
+						if (_Utils_eq(details.s, name)) {
+							var _v1 = details.f;
 							if (!_v1.$) {
 								var pos = _v1.a;
 								var fieldDescriptions = _v1.b;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+								return $author$project$Mark$Internal$Outcome$Success(
 									_Utils_Tuple3(
 										pos,
 										fieldDescriptions,
 										view(
-											$mdgriffith$elm_markup$Mark$selectedText(selected))));
+											$author$project$Mark$selectedText(selected))));
 							} else {
 								var unexpected = _v1.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Description$uncertain(unexpected);
+								return $author$project$Mark$Internal$Description$uncertain(unexpected);
 							}
 						} else {
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+							return $author$project$Mark$Internal$Outcome$Failure(0);
 						}
 					} else {
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+						return $author$project$Mark$Internal$Outcome$Failure(0);
 					}
 				}),
-			ak: _List_Nil,
-			fz: name
+			al: _List_Nil,
+			s: name
 		};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$Balanced = function (a) {
+var $author$project$Mark$Internal$Parser$Balanced = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$Replacement = F2(
+var $author$project$Mark$Internal$Parser$Replacement = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$commonReplacements = _List_fromArray(
+var $author$project$Mark$commonReplacements = _List_fromArray(
 	[
-		A2($mdgriffith$elm_markup$Mark$Internal$Parser$Replacement, '...', '…'),
-		A2($mdgriffith$elm_markup$Mark$Internal$Parser$Replacement, '<>', '\u00A0'),
-		A2($mdgriffith$elm_markup$Mark$Internal$Parser$Replacement, '---', '—'),
-		A2($mdgriffith$elm_markup$Mark$Internal$Parser$Replacement, '--', '–'),
-		A2($mdgriffith$elm_markup$Mark$Internal$Parser$Replacement, '//', '/'),
-		A2($mdgriffith$elm_markup$Mark$Internal$Parser$Replacement, '\'', '’'),
-		$mdgriffith$elm_markup$Mark$Internal$Parser$Balanced(
+		A2($author$project$Mark$Internal$Parser$Replacement, '...', '…'),
+		A2($author$project$Mark$Internal$Parser$Replacement, '<>', '\u00A0'),
+		A2($author$project$Mark$Internal$Parser$Replacement, '---', '—'),
+		A2($author$project$Mark$Internal$Parser$Replacement, '--', '–'),
+		A2($author$project$Mark$Internal$Parser$Replacement, '//', '/'),
+		A2($author$project$Mark$Internal$Parser$Replacement, '\'', '’'),
+		$author$project$Mark$Internal$Parser$Balanced(
 		{
-			c4: _Utils_Tuple2('\"', '”'),
-			cx: _Utils_Tuple2('\"', '“')
+			bE: _Utils_Tuple2('\"', '”'),
+			bY: _Utils_Tuple2('\"', '“')
 		})
 	]);
 var $elm$html$Html$Attributes$classList = function (classes) {
@@ -13156,16 +13073,16 @@ var $elm$html$Html$Attributes$classList = function (classes) {
 };
 var $author$project$ElmMarkup$styledText = F2(
 	function (styles, string) {
-		return (styles.cS || (styles.dq || styles.d4)) ? A2(
+		return (styles.cU || (styles.dq || styles.d3)) ? A2(
 			$elm$html$Html$span,
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$classList(
 					_List_fromArray(
 						[
-							_Utils_Tuple2('bold', styles.cS),
+							_Utils_Tuple2('bold', styles.cU),
 							_Utils_Tuple2('italic', styles.dq),
-							_Utils_Tuple2('strike', styles.d4)
+							_Utils_Tuple2('strike', styles.d3)
 						]))
 				]),
 			_List_fromArray(
@@ -13173,41 +13090,41 @@ var $author$project$ElmMarkup$styledText = F2(
 					$elm$html$Html$text(string)
 				])) : $elm$html$Html$text(string);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectInlineBlock = function (a) {
+var $author$project$Mark$Internal$Description$ExpectInlineBlock = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectTextBlock = function (a) {
+var $author$project$Mark$Internal$Description$ExpectTextBlock = function (a) {
 	return {$: 8, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$SelectString = function (a) {
+var $author$project$Mark$Internal$Description$SelectString = function (a) {
 	return {$: 2, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$SelectText = function (a) {
+var $author$project$Mark$Internal$Description$SelectText = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$blockKindToSelection = function (kind) {
+var $author$project$Mark$Internal$Description$blockKindToSelection = function (kind) {
 	switch (kind.$) {
 		case 0:
-			return $mdgriffith$elm_markup$Mark$Internal$Description$EmptyAnnotation;
+			return $author$project$Mark$Internal$Description$EmptyAnnotation;
 		case 1:
 			var name = kind.a;
-			return $mdgriffith$elm_markup$Mark$Internal$Description$EmptyAnnotation;
+			return $author$project$Mark$Internal$Description$EmptyAnnotation;
 		case 2:
 			var name = kind.a;
-			return $mdgriffith$elm_markup$Mark$Internal$Description$SelectString('');
+			return $author$project$Mark$Internal$Description$SelectString('');
 		default:
 			var name = kind.a;
-			return $mdgriffith$elm_markup$Mark$Internal$Description$SelectText(_List_Nil);
+			return $author$project$Mark$Internal$Description$SelectText(_List_Nil);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$emptyStyles = {cS: false, dq: false, d4: false};
-var $mdgriffith$elm_markup$Mark$Internal$Parser$InlineRecord = 0;
-var $mdgriffith$elm_markup$Mark$recordToInlineBlock = F2(
+var $author$project$Mark$Internal$Description$emptyStyles = {cU: false, dq: false, d3: false};
+var $author$project$Mark$Internal$Parser$InlineRecord = 0;
+var $author$project$Mark$recordToInlineBlock = F2(
 	function (_v0, annotationType) {
 		var details = _v0;
-		var expectations = A2($mdgriffith$elm_markup$Mark$Internal$Description$ExpectRecord, details.fz, details.aj);
+		var expectations = A2($author$project$Mark$Internal$Description$ExpectRecord, details.s, details.ak);
 		return {
-			l: function (desc) {
+			j: function (desc) {
 				var _v1 = A2(details.aD, desc, annotationType);
 				switch (_v1.$) {
 					case 0:
@@ -13215,15 +13132,15 @@ var $mdgriffith$elm_markup$Mark$recordToInlineBlock = F2(
 						var pos = _v2.a;
 						var fieldDescriptions = _v2.b;
 						var rendered = _v2.c;
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(rendered);
+						return $author$project$Mark$Internal$Outcome$Success(rendered);
 					case 2:
 						var fail = _v1.a;
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(fail);
+						return $author$project$Mark$Internal$Outcome$Failure(fail);
 					default:
 						if (!_v1.a.$) {
 							var e = _v1.a.a;
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-								$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(e));
+							return $author$project$Mark$Internal$Outcome$Almost(
+								$author$project$Mark$Internal$Description$Uncertain(e));
 						} else {
 							var _v3 = _v1.a;
 							var e = _v3.a;
@@ -13231,20 +13148,20 @@ var $mdgriffith$elm_markup$Mark$recordToInlineBlock = F2(
 							var pos = _v4.a;
 							var fieldDescriptions = _v4.b;
 							var rendered = _v4.c;
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-								A2($mdgriffith$elm_markup$Mark$Internal$Description$Recovered, e, rendered));
+							return $author$project$Mark$Internal$Outcome$Almost(
+								A2($author$project$Mark$Internal$Description$Recovered, e, rendered));
 						}
 				}
 			},
-			b9: expectations,
-			i: details.ah,
-			n: F2(
+			l: expectations,
+			g: details.ai,
+			m: F2(
 				function (context, seed) {
-					var _v5 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+					var _v5 = $author$project$Mark$Internal$Id$step(seed);
 					var parentId = _v5.a;
 					var parentSeed = _v5.b;
 					var _v6 = A2(
-						$mdgriffith$elm_markup$Mark$Internal$Id$thread,
+						$author$project$Mark$Internal$Id$thread,
 						parentSeed,
 						A3(
 							$elm$core$List$foldl,
@@ -13256,30 +13173,30 @@ var $mdgriffith$elm_markup$Mark$recordToInlineBlock = F2(
 										ls);
 								}),
 							_List_Nil,
-							details.ak));
+							details.al));
 					var newSeed = _v6.a;
 					var fields = _v6.b;
 					return _Utils_Tuple2(
 						newSeed,
-						A5($mdgriffith$elm_markup$Mark$Internal$Parser$record, 0, parentId, details.fz, expectations, fields));
+						A5($author$project$Mark$Internal$Parser$record, 0, parentId, details.s, expectations, fields));
 				})
 		};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$UnknownInline = function (a) {
+var $author$project$Mark$Internal$Error$UnknownInline = function (a) {
 	return {$: 4, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Text = F2(
+var $author$project$Mark$Internal$Description$Text = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$startingCharacters = F2(
+var $author$project$Mark$Internal$Description$startingCharacters = F2(
 	function (one, two) {
-		var strikeOpening = ((!one.d4) && two.d4) ? '~' : '';
-		var strikeClosing = (one.d4 && (!two.d4)) ? '~' : '';
+		var strikeOpening = ((!one.d3) && two.d3) ? '~' : '';
+		var strikeClosing = (one.d3 && (!two.d3)) ? '~' : '';
 		var italicOpening = ((!one.dq) && two.dq) ? '/' : '';
 		var italicClosing = (one.dq && (!two.dq)) ? '/' : '';
-		var boldOpening = ((!one.cS) && two.cS) ? '*' : '';
-		var boldClosing = (one.cS && (!two.cS)) ? '*' : '';
+		var boldOpening = ((!one.cU) && two.cU) ? '*' : '';
+		var boldClosing = (one.cU && (!two.cU)) ? '*' : '';
 		return _Utils_ap(
 			boldClosing,
 			_Utils_ap(
@@ -13290,7 +13207,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$startingCharacters = F2(
 						strikeOpening,
 						_Utils_ap(italicOpening, boldOpening)))));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$gatherText = F2(
+var $author$project$Mark$Internal$Description$gatherText = F2(
 	function (_v0, _v1) {
 		var styles = _v0.a;
 		var txt = _v0.b;
@@ -13301,10 +13218,10 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$gatherText = F2(
 			_Utils_ap(
 				existingStr,
 				_Utils_ap(
-					A2($mdgriffith$elm_markup$Mark$Internal$Description$startingCharacters, existingStyles, styles),
+					A2($author$project$Mark$Internal$Description$startingCharacters, existingStyles, styles),
 					txt)));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$inlineExample = F2(
+var $author$project$Mark$Internal$Description$inlineExample = F2(
 	function (kind, _v0) {
 		var block = _v0;
 		var selection = function () {
@@ -13314,12 +13231,12 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$inlineExample = F2(
 				case 1:
 					var txts = kind.a;
 					var _v5 = A2(
-						$mdgriffith$elm_markup$Mark$Internal$Description$gatherText,
-						A2($mdgriffith$elm_markup$Mark$Internal$Description$Text, $mdgriffith$elm_markup$Mark$Internal$Description$emptyStyles, ''),
+						$author$project$Mark$Internal$Description$gatherText,
+						A2($author$project$Mark$Internal$Description$Text, $author$project$Mark$Internal$Description$emptyStyles, ''),
 						A3(
 							$elm$core$List$foldl,
-							$mdgriffith$elm_markup$Mark$Internal$Description$gatherText,
-							_Utils_Tuple2($mdgriffith$elm_markup$Mark$Internal$Description$emptyStyles, ''),
+							$author$project$Mark$Internal$Description$gatherText,
+							_Utils_Tuple2($author$project$Mark$Internal$Description$emptyStyles, ''),
 							txts));
 					var newStyles = _v5.a;
 					var renderedText = _v5.b;
@@ -13335,7 +13252,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$inlineExample = F2(
 			return name + (' = ' + 'value');
 		};
 		var containerAsString = function () {
-			var _v2 = block.b9;
+			var _v2 = block.l;
 			if (_v2.$ === 1) {
 				if (!_v2.b.b) {
 					var name = _v2.a;
@@ -13352,7 +13269,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$inlineExample = F2(
 				return '';
 			}
 		}();
-		var _v1 = block.i;
+		var _v1 = block.g;
 		switch (_v1.$) {
 			case 1:
 				var name = _v1.a;
@@ -13370,17 +13287,17 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$inlineExample = F2(
 var $elm$core$List$sum = function (numbers) {
 	return A3($elm$core$List$foldl, $elm$core$Basics$add, 0, numbers);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$textLength = function (_v0) {
+var $author$project$Mark$Internal$Description$textLength = function (_v0) {
 	var str = _v0.b;
 	return $elm$core$String$length(str);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$length = function (inlineEl) {
+var $author$project$Mark$Internal$Description$length = function (inlineEl) {
 	if (!inlineEl.$) {
 		var txt = inlineEl.b;
-		return $mdgriffith$elm_markup$Mark$Internal$Description$textLength(txt);
+		return $author$project$Mark$Internal$Description$textLength(txt);
 	} else {
 		var details = inlineEl.a;
-		var _v1 = details.i;
+		var _v1 = details.g;
 		switch (_v1.$) {
 			case 0:
 				return 0;
@@ -13390,22 +13307,22 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$length = function (inlineEl
 			default:
 				var txts = _v1.a;
 				return $elm$core$List$sum(
-					A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$Internal$Description$textLength, txts));
+					A2($elm$core$List$map, $author$project$Mark$Internal$Description$textLength, txts));
 		}
 	}
 };
-var $mdgriffith$elm_markup$Mark$matchKinds = F2(
+var $author$project$Mark$matchKinds = F2(
 	function (inline, blockKind) {
 		var recordName = function () {
-			var _v2 = inline.cr;
+			var _v2 = inline.cu;
 			if (_v2.$ === 1) {
 				var rec = _v2.a;
-				return $elm$core$Maybe$Just(rec.fz);
+				return $elm$core$Maybe$Just(rec.s);
 			} else {
 				return $elm$core$Maybe$Nothing;
 			}
 		}();
-		var _v0 = _Utils_Tuple3(recordName, inline.i, blockKind);
+		var _v0 = _Utils_Tuple3(recordName, inline.g, blockKind);
 		_v0$3:
 		while (true) {
 			if (!_v0.a.$) {
@@ -13443,17 +13360,17 @@ var $mdgriffith$elm_markup$Mark$matchKinds = F2(
 		}
 		return false;
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$recordName = function (desc) {
+var $author$project$Mark$Internal$Description$recordName = function (desc) {
 	if (desc.$ === 1) {
 		var details = desc.a;
-		return $elm$core$Maybe$Just(details.fz);
+		return $elm$core$Maybe$Just(details.s);
 	} else {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $mdgriffith$elm_markup$Mark$convertTextDescription = F4(
+var $author$project$Mark$convertTextDescription = F4(
 	function (id, options, comp, cursor) {
-		var blockLength = $mdgriffith$elm_markup$Mark$Internal$Description$length(comp);
+		var blockLength = $author$project$Mark$Internal$Description$length(comp);
 		if (!comp.$) {
 			var range = comp.a;
 			var _v1 = comp.b;
@@ -13462,14 +13379,14 @@ var $mdgriffith$elm_markup$Mark$convertTextDescription = F4(
 			return {
 				U: cursor.U + blockLength,
 				as: A3(
-					$mdgriffith$elm_markup$Mark$Internal$Description$mergeWith,
+					$author$project$Mark$Internal$Description$mergeWith,
 					$elm$core$List$cons,
-					$mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+					$author$project$Mark$Internal$Outcome$Success(
 						A3(
 							options.gy,
 							{
 								R: id,
-								f_: {cM: cursor.U, c9: cursor.U + blockLength}
+								f_: {cO: cursor.U, c9: cursor.U + blockLength}
 							},
 							styling,
 							str)),
@@ -13480,13 +13397,13 @@ var $mdgriffith$elm_markup$Mark$convertTextDescription = F4(
 			var recordName = A2(
 				$elm$core$Maybe$withDefault,
 				'',
-				$mdgriffith$elm_markup$Mark$Internal$Description$recordName(details.cr));
+				$author$project$Mark$Internal$Description$recordName(details.cu));
 			var matchInlineName = F3(
 				function (name, almostInlineBlock, maybeFound) {
 					if (maybeFound.$ === 1) {
-						var _v4 = almostInlineBlock(details.i);
+						var _v4 = almostInlineBlock(details.g);
 						var inlineDetails = _v4;
-						return A2($mdgriffith$elm_markup$Mark$matchKinds, details, inlineDetails.i) ? $elm$core$Maybe$Just(inlineDetails) : $elm$core$Maybe$Nothing;
+						return A2($author$project$Mark$matchKinds, details, inlineDetails.g) ? $elm$core$Maybe$Just(inlineDetails) : $elm$core$Maybe$Nothing;
 					} else {
 						return maybeFound;
 					}
@@ -13499,19 +13416,19 @@ var $mdgriffith$elm_markup$Mark$convertTextDescription = F4(
 			if (maybeMatched.$ === 1) {
 				return {
 					U: cursor.U + blockLength,
-					as: $mdgriffith$elm_markup$Mark$Internal$Description$uncertain(
+					as: $author$project$Mark$Internal$Description$uncertain(
 						{
-							dI: $mdgriffith$elm_markup$Mark$Internal$Error$UnknownInline(
+							af: $author$project$Mark$Internal$Error$UnknownInline(
 								A2(
 									$elm$core$List$map,
 									function (inline) {
 										return A2(
-											$mdgriffith$elm_markup$Mark$Internal$Description$inlineExample,
-											details.i,
-											inline($mdgriffith$elm_markup$Mark$Internal$Description$EmptyAnnotation));
+											$author$project$Mark$Internal$Description$inlineExample,
+											details.g,
+											inline($author$project$Mark$Internal$Description$EmptyAnnotation));
 									},
 									options.fk)),
-							o: details.o
+							n: details.n
 						})
 				};
 			} else {
@@ -13519,34 +13436,34 @@ var $mdgriffith$elm_markup$Mark$convertTextDescription = F4(
 				return {
 					U: cursor.U + blockLength,
 					as: A3(
-						$mdgriffith$elm_markup$Mark$Internal$Description$mergeWith,
+						$author$project$Mark$Internal$Description$mergeWith,
 						$elm$core$List$cons,
-						matched.l(details.cr),
+						matched.j(details.cu),
 						cursor.as)
 				};
 			}
 		}
 	});
-var $mdgriffith$elm_markup$Mark$renderText = F2(
+var $author$project$Mark$renderText = F2(
 	function (options, description) {
 		if (description.$ === 9) {
 			var details = description.a;
 			return A2(
-				$mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered,
+				$author$project$Mark$Internal$Description$mapSuccessAndRecovered,
 				$elm$core$List$reverse,
 				A3(
 					$elm$core$List$foldl,
-					A2($mdgriffith$elm_markup$Mark$convertTextDescription, details.R, options),
+					A2($author$project$Mark$convertTextDescription, details.R, options),
 					{
 						U: 0,
-						as: $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(_List_Nil)
+						as: $author$project$Mark$Internal$Outcome$Success(_List_Nil)
 					},
 					details.gd).as);
 		} else {
-			return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+			return $author$project$Mark$Internal$Outcome$Failure(0);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$DescribeText = function (a) {
+var $author$project$Mark$Internal$Description$DescribeText = function (a) {
 	return {$: 9, a: a};
 };
 var $elm$core$List$maybeCons = F3(
@@ -13567,7 +13484,7 @@ var $elm$core$List$filterMap = F2(
 			_List_Nil,
 			xs);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$firstChar = function (str) {
+var $author$project$Mark$Internal$Parser$firstChar = function (str) {
 	var _v0 = $elm$core$String$uncons(str);
 	if (_v0.$ === 1) {
 		return $elm$core$Maybe$Nothing;
@@ -13577,79 +13494,79 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$firstChar = function (str) {
 		return $elm$core$Maybe$Just(fst);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$replacementStartingChars = function (replacements) {
+var $author$project$Mark$Internal$Parser$replacementStartingChars = function (replacements) {
 	var first = function (repl) {
 		if (!repl.$) {
 			var x = repl.a;
 			var y = repl.b;
-			return $mdgriffith$elm_markup$Mark$Internal$Parser$firstChar(x);
+			return $author$project$Mark$Internal$Parser$firstChar(x);
 		} else {
 			var range = repl.a;
-			return $mdgriffith$elm_markup$Mark$Internal$Parser$firstChar(range.cx.a);
+			return $author$project$Mark$Internal$Parser$firstChar(range.bY.a);
 		}
 	};
 	return A2($elm$core$List$filterMap, first, replacements);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Bold = 0;
-var $mdgriffith$elm_markup$Mark$Internal$Parser$ContinueWith = function (a) {
+var $author$project$Mark$Internal$Description$Bold = 0;
+var $author$project$Mark$Internal$Parser$ContinueWith = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$DescribeNothing = function (a) {
+var $author$project$Mark$Internal$Description$DescribeNothing = function (a) {
 	return {$: 11, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$InlineBlock = function (a) {
+var $author$project$Mark$Internal$Description$InlineBlock = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Italic = 1;
-var $mdgriffith$elm_markup$Mark$Internal$Parser$StopWith = function (a) {
+var $author$project$Mark$Internal$Description$Italic = 1;
+var $author$project$Mark$Internal$Parser$StopWith = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$Strike = 2;
-var $mdgriffith$elm_markup$Mark$Internal$Description$Styled = F2(
+var $author$project$Mark$Internal$Description$Strike = 2;
+var $author$project$Mark$Internal$Description$Styled = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$TextCursor = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Parser$addText = F2(
+var $author$project$Mark$Internal$Parser$TextCursor = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Parser$addText = F2(
 	function (newTxt, _v0) {
 		var cursor = _v0;
-		var _v1 = cursor.p;
+		var _v1 = cursor.o;
 		var styles = _v1.a;
 		var txt = _v1.b;
 		return _Utils_update(
 			cursor,
 			{
-				p: A2(
-					$mdgriffith$elm_markup$Mark$Internal$Description$Text,
+				o: A2(
+					$author$project$Mark$Internal$Description$Text,
 					styles,
 					_Utils_ap(txt, newTxt))
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$addToTextCursor = F2(
+var $author$project$Mark$Internal$Parser$addToTextCursor = F2(
 	function (_new, _v0) {
 		var cursor = _v0;
 		return _Utils_update(
 			cursor,
 			{
-				g: A2($elm$core$List$cons, _new, cursor.g)
+				f: A2($elm$core$List$cons, _new, cursor.f)
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$advanceTo = F2(
+var $author$project$Mark$Internal$Parser$advanceTo = F2(
 	function (target, _v0) {
 		var cursor = _v0;
-		return {w: cursor.w, p: cursor.p, g: cursor.g, cx: target};
+		return {w: cursor.w, o: cursor.o, f: cursor.f, bY: target};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$EscapedChar = {$: 9};
-var $mdgriffith$elm_markup$Mark$Internal$Parser$almostReplacement = F2(
+var $author$project$Mark$Internal$Error$EscapedChar = {$: 9};
+var $author$project$Mark$Internal$Parser$almostReplacement = F2(
 	function (replacements, existing) {
 		var first = function (repl) {
 			if (!repl.$) {
 				var x = repl.a;
 				var y = repl.b;
-				return $mdgriffith$elm_markup$Mark$Internal$Parser$firstChar(x);
+				return $author$project$Mark$Internal$Parser$firstChar(x);
 			} else {
 				var range = repl.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Parser$firstChar(range.cx.a);
+				return $author$project$Mark$Internal$Parser$firstChar(range.bY.a);
 			}
 		};
 		var captureChar = function (_char) {
@@ -13657,7 +13574,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$almostReplacement = F2(
 				$elm$parser$Parser$Advanced$keeper,
 				$elm$parser$Parser$Advanced$succeed(
 					function (c) {
-						return A2($mdgriffith$elm_markup$Mark$Internal$Parser$addText, c, existing);
+						return A2($author$project$Mark$Internal$Parser$addText, c, existing);
 					}),
 				$elm$parser$Parser$Advanced$getChompedString(
 					A2(
@@ -13665,7 +13582,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$almostReplacement = F2(
 						function (c) {
 							return _Utils_eq(c, _char) && ((_char !== '{') && ((_char !== '*') && (_char !== '/')));
 						},
-						$mdgriffith$elm_markup$Mark$Internal$Error$EscapedChar)));
+						$author$project$Mark$Internal$Error$EscapedChar)));
 		};
 		var allFirstChars = A2($elm$core$List$filterMap, first, replacements);
 		return A2(
@@ -13673,23 +13590,23 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$almostReplacement = F2(
 			captureChar,
 			A2($elm$core$List$cons, '1', allFirstChars));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Error$ExpectingInlineName = function (a) {
+var $author$project$Mark$Internal$Error$ExpectingInlineName = function (a) {
 	return {$: 6, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$InlineEnd = {$: 2};
-var $mdgriffith$elm_markup$Mark$Internal$Error$InlineStart = {$: 1};
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$okUnit = $elm$core$Result$Ok(0);
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$chompWhile = function (_while) {
+var $author$project$Mark$Internal$Error$InlineEnd = {$: 2};
+var $author$project$Mark$Internal$Error$InlineStart = {$: 1};
+var $author$project$Mark$Internal$TolerantParser$okUnit = $elm$core$Result$Ok(0);
+var $author$project$Mark$Internal$TolerantParser$chompWhile = function (_while) {
 	return A2(
 		$elm$parser$Parser$Advanced$ignorer,
-		$elm$parser$Parser$Advanced$succeed($mdgriffith$elm_markup$Mark$Internal$TolerantParser$okUnit),
+		$elm$parser$Parser$Advanced$succeed($author$project$Mark$Internal$TolerantParser$okUnit),
 		$elm$parser$Parser$Advanced$chompWhile(_while));
 };
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$FastForwardTo = function (a) {
+var $author$project$Mark$Internal$TolerantParser$FastForwardTo = function (a) {
 	return {$: 0, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$fastForwardTo = $mdgriffith$elm_markup$Mark$Internal$TolerantParser$FastForwardTo;
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$ignore = F2(
+var $author$project$Mark$Internal$TolerantParser$fastForwardTo = $author$project$Mark$Internal$TolerantParser$FastForwardTo;
+var $author$project$Mark$Internal$TolerantParser$ignore = F2(
 	function (ignorePls, keepPls) {
 		return A2(
 			$elm$parser$Parser$Advanced$andThen,
@@ -13715,7 +13632,7 @@ var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$ignore = F2(
 			},
 			keepPls);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$keep = F2(
+var $author$project$Mark$Internal$TolerantParser$keep = F2(
 	function (newDataParser, fnParser) {
 		return A2(
 			$elm$parser$Parser$Advanced$andThen,
@@ -13743,7 +13660,7 @@ var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$keep = F2(
 			},
 			fnParser);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$oneOf = F2(
+var $author$project$Mark$Internal$TolerantParser$oneOf = F2(
 	function (prob, options) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_Utils_ap(
@@ -13756,17 +13673,17 @@ var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$oneOf = F2(
 								[prob])))
 					])));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$StopWith = function (a) {
+var $author$project$Mark$Internal$TolerantParser$StopWith = function (a) {
 	return {$: 2, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$stopWith = function (err) {
-	return $mdgriffith$elm_markup$Mark$Internal$TolerantParser$StopWith(err);
+var $author$project$Mark$Internal$TolerantParser$stopWith = function (err) {
+	return $author$project$Mark$Internal$TolerantParser$StopWith(err);
 };
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$succeed = function (x) {
+var $author$project$Mark$Internal$TolerantParser$succeed = function (x) {
 	return $elm$parser$Parser$Advanced$succeed(
 		$elm$core$Result$Ok(x));
 };
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$till = F2(
+var $author$project$Mark$Internal$TolerantParser$till = F2(
 	function (chars, prob) {
 		return A2(
 			$elm$parser$Parser$Advanced$ignorer,
@@ -13792,7 +13709,7 @@ var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$till = F2(
 						$elm$parser$Parser$Advanced$succeed(false)
 					])));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$runToken = F2(
+var $author$project$Mark$Internal$TolerantParser$runToken = F2(
 	function (details, tokenParser) {
 		var _v0 = details.dA;
 		switch (_v0.$) {
@@ -13807,8 +13724,8 @@ var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$runToken = F2(
 							$elm$parser$Parser$Advanced$succeed(
 								$elm$core$Result$Err(
 									_List_fromArray(
-										[details.dI]))),
-							A2($mdgriffith$elm_markup$Mark$Internal$TolerantParser$till, skipTo, details.dI))
+										[details.af]))),
+							A2($author$project$Mark$Internal$TolerantParser$till, skipTo, details.af))
 						]));
 			case 1:
 				return A2($elm$parser$Parser$Advanced$map, $elm$core$Result$Ok, tokenParser);
@@ -13825,158 +13742,158 @@ var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$runToken = F2(
 						]));
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$token = function (details) {
+var $author$project$Mark$Internal$TolerantParser$token = function (details) {
 	return A2(
-		$mdgriffith$elm_markup$Mark$Internal$TolerantParser$runToken,
+		$author$project$Mark$Internal$TolerantParser$runToken,
 		details,
 		$elm$parser$Parser$Advanced$token(
-			A2($elm$parser$Parser$Advanced$Token, details.du, details.dI)));
+			A2($elm$parser$Parser$Advanced$Token, details.du, details.af)));
 };
-var $mdgriffith$elm_markup$Mark$Internal$TolerantParser$try = $elm$parser$Parser$Advanced$map($elm$core$Result$Ok);
-var $mdgriffith$elm_markup$Mark$Internal$Parser$attrContainer = function (recordBlocks) {
+var $author$project$Mark$Internal$TolerantParser$try = $elm$parser$Parser$Advanced$map($elm$core$Result$Ok);
+var $author$project$Mark$Internal$Parser$attrContainer = function (recordBlocks) {
 	return A2(
-		$mdgriffith$elm_markup$Mark$Internal$TolerantParser$ignore,
-		$mdgriffith$elm_markup$Mark$Internal$TolerantParser$token(
+		$author$project$Mark$Internal$TolerantParser$ignore,
+		$author$project$Mark$Internal$TolerantParser$token(
 			{
 				du: '}',
-				dA: $mdgriffith$elm_markup$Mark$Internal$TolerantParser$fastForwardTo(
+				dA: $author$project$Mark$Internal$TolerantParser$fastForwardTo(
 					_List_fromArray(
 						['}', '\n'])),
-				dI: $mdgriffith$elm_markup$Mark$Internal$Error$InlineEnd
+				af: $author$project$Mark$Internal$Error$InlineEnd
 			}),
 		A2(
-			$mdgriffith$elm_markup$Mark$Internal$TolerantParser$ignore,
-			$mdgriffith$elm_markup$Mark$Internal$TolerantParser$chompWhile(
+			$author$project$Mark$Internal$TolerantParser$ignore,
+			$author$project$Mark$Internal$TolerantParser$chompWhile(
 				function (c) {
 					return c === ' ';
 				}),
 			A2(
-				$mdgriffith$elm_markup$Mark$Internal$TolerantParser$keep,
+				$author$project$Mark$Internal$TolerantParser$keep,
 				A2(
-					$mdgriffith$elm_markup$Mark$Internal$TolerantParser$oneOf,
-					$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingInlineName(''),
+					$author$project$Mark$Internal$TolerantParser$oneOf,
+					$author$project$Mark$Internal$Error$ExpectingInlineName(''),
 					A2(
 						$elm$core$List$map,
 						A2(
 							$elm$core$Basics$composeL,
-							A2($elm$core$Basics$composeL, $mdgriffith$elm_markup$Mark$Internal$TolerantParser$try, $elm$core$Tuple$second),
-							A2($mdgriffith$elm_markup$Mark$Internal$Description$getParser, 1, $mdgriffith$elm_markup$Mark$Internal$Id$initialSeed)),
+							A2($elm$core$Basics$composeL, $author$project$Mark$Internal$TolerantParser$try, $elm$core$Tuple$second),
+							A2($author$project$Mark$Internal$Description$getParser, 1, $author$project$Mark$Internal$Id$initialSeed)),
 						recordBlocks)),
 				A2(
-					$mdgriffith$elm_markup$Mark$Internal$TolerantParser$ignore,
-					$mdgriffith$elm_markup$Mark$Internal$TolerantParser$chompWhile(
+					$author$project$Mark$Internal$TolerantParser$ignore,
+					$author$project$Mark$Internal$TolerantParser$chompWhile(
 						function (c) {
 							return c === ' ';
 						}),
 					A2(
-						$mdgriffith$elm_markup$Mark$Internal$TolerantParser$ignore,
-						$mdgriffith$elm_markup$Mark$Internal$TolerantParser$token(
+						$author$project$Mark$Internal$TolerantParser$ignore,
+						$author$project$Mark$Internal$TolerantParser$token(
 							{
 								du: '{',
-								dA: $mdgriffith$elm_markup$Mark$Internal$TolerantParser$stopWith($mdgriffith$elm_markup$Mark$Internal$Error$InlineStart),
-								dI: $mdgriffith$elm_markup$Mark$Internal$Error$InlineStart
+								dA: $author$project$Mark$Internal$TolerantParser$stopWith($author$project$Mark$Internal$Error$InlineStart),
+								af: $author$project$Mark$Internal$Error$InlineStart
 							}),
-						$mdgriffith$elm_markup$Mark$Internal$TolerantParser$succeed($elm$core$Basics$identity))))));
+						$author$project$Mark$Internal$TolerantParser$succeed($elm$core$Basics$identity))))));
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$clearText = function (_v0) {
+var $author$project$Mark$Internal$Parser$clearText = function (_v0) {
 	var styles = _v0.a;
-	return A2($mdgriffith$elm_markup$Mark$Internal$Description$Text, styles, '');
+	return A2($author$project$Mark$Internal$Description$Text, styles, '');
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$flipStyle = F2(
+var $author$project$Mark$Internal$Parser$flipStyle = F2(
 	function (newStyle, textStyle) {
 		var styles = textStyle.a;
 		var str = textStyle.b;
 		switch (newStyle) {
 			case 0:
 				return A2(
-					$mdgriffith$elm_markup$Mark$Internal$Description$Text,
+					$author$project$Mark$Internal$Description$Text,
 					_Utils_update(
 						styles,
-						{cS: !styles.cS}),
+						{cU: !styles.cU}),
 					str);
 			case 1:
 				return A2(
-					$mdgriffith$elm_markup$Mark$Internal$Description$Text,
+					$author$project$Mark$Internal$Description$Text,
 					_Utils_update(
 						styles,
 						{dq: !styles.dq}),
 					str);
 			default:
 				return A2(
-					$mdgriffith$elm_markup$Mark$Internal$Description$Text,
+					$author$project$Mark$Internal$Description$Text,
 					_Utils_update(
 						styles,
-						{d4: !styles.d4}),
+						{d3: !styles.d3}),
 					str);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$measure = F2(
+var $author$project$Mark$Internal$Parser$measure = F2(
 	function (start, textStr) {
 		var len = $elm$core$String$length(textStr);
 		return _Utils_update(
 			start,
-			{b6: start.b6 + len, b: start.b + len});
+			{b7: start.b7 + len, cp: start.cp + len});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$changeStyle = F2(
+var $author$project$Mark$Internal$Parser$changeStyle = F2(
 	function (_v0, styleToken) {
 		var cursor = _v0;
-		var newText = $mdgriffith$elm_markup$Mark$Internal$Parser$clearText(
-			A2($mdgriffith$elm_markup$Mark$Internal$Parser$flipStyle, styleToken, cursor.p));
+		var newText = $author$project$Mark$Internal$Parser$clearText(
+			A2($author$project$Mark$Internal$Parser$flipStyle, styleToken, cursor.o));
 		var cursorText = function () {
-			var _v1 = cursor.p;
+			var _v1 = cursor.o;
 			var txt = _v1.b;
 			return txt;
 		}();
 		if (cursorText === '') {
-			return {w: cursor.w, p: newText, g: cursor.g, cx: cursor.cx};
+			return {w: cursor.w, o: newText, f: cursor.f, bY: cursor.bY};
 		} else {
-			var end = A2($mdgriffith$elm_markup$Mark$Internal$Parser$measure, cursor.cx, cursorText);
+			var end = A2($author$project$Mark$Internal$Parser$measure, cursor.bY, cursorText);
 			return {
 				w: cursor.w,
-				p: newText,
-				g: A2(
+				o: newText,
+				f: A2(
 					$elm$core$List$cons,
 					A2(
-						$mdgriffith$elm_markup$Mark$Internal$Description$Styled,
-						{c4: end, cx: cursor.cx},
-						cursor.p),
-					cursor.g),
-				cx: end
+						$author$project$Mark$Internal$Description$Styled,
+						{bE: end, bY: cursor.bY},
+						cursor.o),
+					cursor.f),
+				bY: end
 			};
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$commitText = function (existingTextCursor) {
+var $author$project$Mark$Internal$Parser$commitText = function (existingTextCursor) {
 	var cursor = existingTextCursor;
-	var _v0 = cursor.p;
+	var _v0 = cursor.o;
 	if (_v0.b === '') {
 		return existingTextCursor;
 	} else {
 		var styles = _v0.a;
 		var cursorText = _v0.b;
-		var end = A2($mdgriffith$elm_markup$Mark$Internal$Parser$measure, cursor.cx, cursorText);
+		var end = A2($author$project$Mark$Internal$Parser$measure, cursor.bY, cursorText);
 		return {
 			w: cursor.w,
-			p: A2($mdgriffith$elm_markup$Mark$Internal$Description$Text, styles, ''),
-			g: A2(
+			o: A2($author$project$Mark$Internal$Description$Text, styles, ''),
+			f: A2(
 				$elm$core$List$cons,
 				A2(
-					$mdgriffith$elm_markup$Mark$Internal$Description$Styled,
-					{c4: end, cx: cursor.cx},
-					cursor.p),
-				cursor.g),
-			cx: end
+					$author$project$Mark$Internal$Description$Styled,
+					{bE: end, bY: cursor.bY},
+					cursor.o),
+				cursor.f),
+			bY: end
 		};
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$getCurrentStyle = function (_v0) {
+var $author$project$Mark$Internal$Parser$getCurrentStyle = function (_v0) {
 	var cursor = _v0;
-	var _v1 = cursor.p;
+	var _v1 = cursor.o;
 	var s = _v1.a;
 	return s;
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$onlyAnnotation = function (thisBlock) {
+var $author$project$Mark$Internal$Parser$onlyAnnotation = function (thisBlock) {
 	var details = thisBlock;
-	var _v0 = details.i;
+	var _v0 = details.g;
 	switch (_v0.$) {
 		case 0:
 			return $elm$core$Maybe$Nothing;
@@ -13989,9 +13906,9 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$onlyAnnotation = function (thisB
 			return $elm$core$Maybe$Just(thisBlock);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$onlyVerbatim = function (thisBlock) {
+var $author$project$Mark$Internal$Parser$onlyVerbatim = function (thisBlock) {
 	var details = thisBlock;
-	var _v0 = details.i;
+	var _v0 = details.g;
 	switch (_v0.$) {
 		case 0:
 			return $elm$core$Maybe$Nothing;
@@ -14012,8 +13929,8 @@ var $elm$parser$Parser$Advanced$problem = function (x) {
 			A2($elm$parser$Parser$Advanced$fromState, s, x));
 	};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Error$Escape = {$: 8};
-var $mdgriffith$elm_markup$Mark$Internal$Parser$addBalance = F2(
+var $author$project$Mark$Internal$Error$Escape = {$: 8};
+var $author$project$Mark$Internal$Parser$addBalance = F2(
 	function (id, _v0) {
 		var cursor = _v0;
 		return _Utils_update(
@@ -14022,17 +13939,17 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$addBalance = F2(
 				w: A2($elm$core$List$cons, id, cursor.w)
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$balanceId = function (balance) {
+var $author$project$Mark$Internal$Parser$balanceId = function (balance) {
 	var join = function (_v0) {
 		var x = _v0.a;
 		var y = _v0.b;
 		return _Utils_ap(x, y);
 	};
 	return _Utils_ap(
-		join(balance.cx),
-		join(balance.c4));
+		join(balance.bY),
+		join(balance.bE));
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$removeBalance = F2(
+var $author$project$Mark$Internal$Parser$removeBalance = F2(
 	function (id, _v0) {
 		var cursor = _v0;
 		return _Utils_update(
@@ -14044,7 +13961,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$removeBalance = F2(
 					cursor.w)
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$replace = F2(
+var $author$project$Mark$Internal$Parser$replace = F2(
 	function (replacements, existing) {
 		var replaceWith = function (repl) {
 			if (!repl.$) {
@@ -14056,53 +13973,53 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$replace = F2(
 						$elm$parser$Parser$Advanced$ignorer,
 						$elm$parser$Parser$Advanced$succeed(
 							function (_v1) {
-								return A2($mdgriffith$elm_markup$Mark$Internal$Parser$addText, y, existing);
+								return A2($author$project$Mark$Internal$Parser$addText, y, existing);
 							}),
 						$elm$parser$Parser$Advanced$token(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								x,
-								$mdgriffith$elm_markup$Mark$Internal$Error$Expecting(x)))),
+								$author$project$Mark$Internal$Error$Expecting(x)))),
 					$elm$parser$Parser$Advanced$succeed(0));
 			} else {
 				var range = repl.a;
-				var id = $mdgriffith$elm_markup$Mark$Internal$Parser$balanceId(range);
+				var id = $author$project$Mark$Internal$Parser$balanceId(range);
 				var balanceCache = function () {
 					var cursor = existing;
 					return cursor.w;
 				}();
 				if (A2($elm$core$List$member, id, balanceCache)) {
-					var _v2 = range.c4;
+					var _v2 = range.bE;
 					var x = _v2.a;
 					var y = _v2.b;
 					return A2(
 						$elm$parser$Parser$Advanced$ignorer,
 						$elm$parser$Parser$Advanced$succeed(
 							A2(
-								$mdgriffith$elm_markup$Mark$Internal$Parser$removeBalance,
+								$author$project$Mark$Internal$Parser$removeBalance,
 								id,
-								A2($mdgriffith$elm_markup$Mark$Internal$Parser$addText, y, existing))),
+								A2($author$project$Mark$Internal$Parser$addText, y, existing))),
 						$elm$parser$Parser$Advanced$token(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								x,
-								$mdgriffith$elm_markup$Mark$Internal$Error$Expecting(x))));
+								$author$project$Mark$Internal$Error$Expecting(x))));
 				} else {
-					var _v3 = range.cx;
+					var _v3 = range.bY;
 					var x = _v3.a;
 					var y = _v3.b;
 					return A2(
 						$elm$parser$Parser$Advanced$ignorer,
 						$elm$parser$Parser$Advanced$succeed(
 							A2(
-								$mdgriffith$elm_markup$Mark$Internal$Parser$addBalance,
+								$author$project$Mark$Internal$Parser$addBalance,
 								id,
-								A2($mdgriffith$elm_markup$Mark$Internal$Parser$addText, y, existing))),
+								A2($author$project$Mark$Internal$Parser$addText, y, existing))),
 						$elm$parser$Parser$Advanced$token(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								x,
-								$mdgriffith$elm_markup$Mark$Internal$Error$Expecting(x))));
+								$author$project$Mark$Internal$Error$Expecting(x))));
 				}
 			}
 		};
@@ -14112,48 +14029,48 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$replace = F2(
 				$elm$parser$Parser$Advanced$ignorer,
 				$elm$parser$Parser$Advanced$succeed(
 					function (esc) {
-						return A2($mdgriffith$elm_markup$Mark$Internal$Parser$addText, esc, existing);
+						return A2($author$project$Mark$Internal$Parser$addText, esc, existing);
 					}),
 				$elm$parser$Parser$Advanced$token(
-					A2($elm$parser$Parser$Advanced$Token, '\\', $mdgriffith$elm_markup$Mark$Internal$Error$Escape))),
+					A2($elm$parser$Parser$Advanced$Token, '\\', $author$project$Mark$Internal$Error$Escape))),
 			$elm$parser$Parser$Advanced$getChompedString(
 				A2(
 					$elm$parser$Parser$Advanced$chompIf,
 					$elm$core$Basics$always(true),
-					$mdgriffith$elm_markup$Mark$Internal$Error$EscapedChar)));
+					$author$project$Mark$Internal$Error$EscapedChar)));
 		return A2(
 			$elm$core$List$cons,
 			escaped,
 			A2($elm$core$List$map, replaceWith, replacements));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$resetBalancedReplacements = F2(
+var $author$project$Mark$Internal$Parser$resetBalancedReplacements = F2(
 	function (newBalance, _v0) {
 		var cursor = _v0;
 		return _Utils_update(
 			cursor,
 			{w: newBalance});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$resetTextWith = F2(
+var $author$project$Mark$Internal$Parser$resetTextWith = F2(
 	function (_v0, _v1) {
 		var styles = _v0.a;
 		var cursor = _v1;
 		return _Utils_update(
 			cursor,
 			{
-				p: A2($mdgriffith$elm_markup$Mark$Internal$Description$Text, styles, '')
+				o: A2($author$project$Mark$Internal$Description$Text, styles, '')
 			});
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$getStyles = function (_v0) {
+var $author$project$Mark$Internal$Parser$getStyles = function (_v0) {
 	var styles = _v0.a;
 	return styles;
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$getCurrentStyles = function (_v0) {
+var $author$project$Mark$Internal$Parser$getCurrentStyles = function (_v0) {
 	var cursor = _v0;
-	return $mdgriffith$elm_markup$Mark$Internal$Parser$getStyles(cursor.p);
+	return $author$project$Mark$Internal$Parser$getStyles(cursor.o);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$stylingChars = _List_fromArray(
-	['~', '[', '/', '*', '\n', '{', '`']);
-var $mdgriffith$elm_markup$Mark$Internal$Parser$toText = function (textDesc) {
+var $author$project$Mark$Internal$Parser$stylingChars = _List_fromArray(
+	['~', '[', '/', '*', '\n', '`']);
+var $author$project$Mark$Internal$Parser$toText = function (textDesc) {
 	if (!textDesc.$) {
 		var txt = textDesc.b;
 		return $elm$core$Maybe$Just(txt);
@@ -14161,7 +14078,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$toText = function (textDesc) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill = F3(
+var $author$project$Mark$Internal$Parser$simpleStyledTextTill = F3(
 	function (until, replacements, cursor) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
@@ -14170,19 +14087,19 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill = F3(
 					$elm$parser$Parser$Advanced$map,
 					$elm$parser$Parser$Advanced$Loop,
 					$elm$parser$Parser$Advanced$oneOf(
-						A2($mdgriffith$elm_markup$Mark$Internal$Parser$replace, replacements, cursor))),
+						A2($author$project$Mark$Internal$Parser$replace, replacements, cursor))),
 					A2(
 					$elm$parser$Parser$Advanced$map,
 					$elm$parser$Parser$Advanced$Loop,
 					$elm$parser$Parser$Advanced$oneOf(
-						A2($mdgriffith$elm_markup$Mark$Internal$Parser$almostReplacement, replacements, cursor))),
+						A2($author$project$Mark$Internal$Parser$almostReplacement, replacements, cursor))),
 					A2(
 					$elm$parser$Parser$Advanced$keeper,
 					$elm$parser$Parser$Advanced$succeed(
 						A2(
 							$elm$core$Basics$composeL,
 							$elm$parser$Parser$Advanced$Loop,
-							$mdgriffith$elm_markup$Mark$Internal$Parser$changeStyle(cursor))),
+							$author$project$Mark$Internal$Parser$changeStyle(cursor))),
 					$elm$parser$Parser$Advanced$oneOf(
 						_List_fromArray(
 							[
@@ -14193,7 +14110,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill = F3(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										'/',
-										$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('/')))),
+										$author$project$Mark$Internal$Error$Expecting('/')))),
 								A2(
 								$elm$parser$Parser$Advanced$map,
 								$elm$core$Basics$always(2),
@@ -14201,7 +14118,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill = F3(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										'~',
-										$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('~')))),
+										$author$project$Mark$Internal$Error$Expecting('~')))),
 								A2(
 								$elm$parser$Parser$Advanced$map,
 								$elm$core$Basics$always(0),
@@ -14209,16 +14126,16 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill = F3(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										'*',
-										$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('*'))))
+										$author$project$Mark$Internal$Error$Expecting('*'))))
 							]))),
 					A2(
 					$elm$parser$Parser$Advanced$andThen,
 					function (_new) {
 						if ((_new === '') || (_new === '\n')) {
-							var _v0 = $mdgriffith$elm_markup$Mark$Internal$Parser$commitText(cursor);
+							var _v0 = $author$project$Mark$Internal$Parser$commitText(cursor);
 							var txt = _v0;
 							var styling = function () {
-								var _v1 = txt.p;
+								var _v1 = txt.o;
 								var s = _v1.a;
 								return s;
 							}();
@@ -14226,12 +14143,12 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill = F3(
 								$elm$parser$Parser$Advanced$Done(
 									_Utils_Tuple2(
 										$elm$core$List$reverse(
-											A2($elm$core$List$filterMap, $mdgriffith$elm_markup$Mark$Internal$Parser$toText, txt.g)),
+											A2($elm$core$List$filterMap, $author$project$Mark$Internal$Parser$toText, txt.f)),
 										txt)));
 						} else {
 							return $elm$parser$Parser$Advanced$succeed(
 								$elm$parser$Parser$Advanced$Loop(
-									A2($mdgriffith$elm_markup$Mark$Internal$Parser$addText, _new, cursor)));
+									A2($author$project$Mark$Internal$Parser$addText, _new, cursor)));
 						}
 					},
 					$elm$parser$Parser$Advanced$getChompedString(
@@ -14249,21 +14166,21 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill = F3(
 											_Utils_ap(
 												until,
 												_Utils_ap(
-													$mdgriffith$elm_markup$Mark$Internal$Parser$stylingChars,
-													$mdgriffith$elm_markup$Mark$Internal$Parser$replacementStartingChars(replacements))))));
+													$author$project$Mark$Internal$Parser$stylingChars,
+													$author$project$Mark$Internal$Parser$replacementStartingChars(replacements))))));
 							})))
 				]));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$textCursor = F2(
+var $author$project$Mark$Internal$Parser$textCursor = F2(
 	function (inheritedStyles, startingPos) {
 		return {
 			w: _List_Nil,
-			p: A2($mdgriffith$elm_markup$Mark$Internal$Description$Text, inheritedStyles, ''),
-			g: _List_Nil,
-			cx: startingPos
+			o: A2($author$project$Mark$Internal$Description$Text, inheritedStyles, ''),
+			f: _List_Nil,
+			bY: startingPos
 		};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$textSelection = F2(
+var $author$project$Mark$Internal$Parser$textSelection = F2(
 	function (replacements, found) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
@@ -14276,13 +14193,13 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$textSelection = F2(
 							function (str) {
 								return _Utils_Tuple2(
 									$elm$core$Maybe$Nothing,
-									$mdgriffith$elm_markup$Mark$Internal$Description$SelectString(str));
+									$author$project$Mark$Internal$Description$SelectString(str));
 							}),
 						$elm$parser$Parser$Advanced$token(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								'`',
-								$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('`')))),
+								$author$project$Mark$Internal$Error$Expecting('`')))),
 					A2(
 						$elm$parser$Parser$Advanced$ignorer,
 						$elm$parser$Parser$Advanced$getChompedString(
@@ -14304,23 +14221,23 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$textSelection = F2(
 								var cursor = _v0.b;
 								return _Utils_Tuple2(
 									$elm$core$Maybe$Just(cursor),
-									$mdgriffith$elm_markup$Mark$Internal$Description$SelectText(txts));
+									$author$project$Mark$Internal$Description$SelectText(txts));
 							}),
 						$elm$parser$Parser$Advanced$token(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								'[',
-								$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('[')))),
+								$author$project$Mark$Internal$Error$Expecting('[')))),
 					A2(
 						$elm$parser$Parser$Advanced$ignorer,
 						A2(
 							$elm$parser$Parser$Advanced$loop,
 							A2(
-								$mdgriffith$elm_markup$Mark$Internal$Parser$textCursor,
-								$mdgriffith$elm_markup$Mark$Internal$Parser$getCurrentStyles(found),
-								{b6: 1, bm: 1, b: 0}),
+								$author$project$Mark$Internal$Parser$textCursor,
+								$author$project$Mark$Internal$Parser$getCurrentStyles(found),
+								{b7: 1, cl: 1, cp: 0}),
 							A2(
-								$mdgriffith$elm_markup$Mark$Internal$Parser$simpleStyledTextTill,
+								$author$project$Mark$Internal$Parser$simpleStyledTextTill,
 								_List_fromArray(
 									['\n', ']']),
 								replacements)),
@@ -14328,11 +14245,11 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$textSelection = F2(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								']',
-								$mdgriffith$elm_markup$Mark$Internal$Error$Expecting(']')))))
+								$author$project$Mark$Internal$Error$Expecting(']')))))
 				]));
 	});
 var $elm$core$String$trimRight = _String_trimRight;
-var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
+var $author$project$Mark$Internal$Parser$styledTextLoop = F5(
 	function (options, context, meaningful, untilStrings, found) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
@@ -14341,19 +14258,19 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 					$elm$parser$Parser$Advanced$map,
 					$elm$parser$Parser$Advanced$Loop,
 					$elm$parser$Parser$Advanced$oneOf(
-						A2($mdgriffith$elm_markup$Mark$Internal$Parser$replace, options.fO, found))),
+						A2($author$project$Mark$Internal$Parser$replace, options.fO, found))),
 					A2(
 					$elm$parser$Parser$Advanced$map,
 					$elm$parser$Parser$Advanced$Loop,
 					$elm$parser$Parser$Advanced$oneOf(
-						A2($mdgriffith$elm_markup$Mark$Internal$Parser$almostReplacement, options.fO, found))),
+						A2($author$project$Mark$Internal$Parser$almostReplacement, options.fO, found))),
 					A2(
 					$elm$parser$Parser$Advanced$keeper,
 					$elm$parser$Parser$Advanced$succeed(
 						A2(
 							$elm$core$Basics$composeL,
 							$elm$parser$Parser$Advanced$Loop,
-							$mdgriffith$elm_markup$Mark$Internal$Parser$changeStyle(found))),
+							$author$project$Mark$Internal$Parser$changeStyle(found))),
 					$elm$parser$Parser$Advanced$oneOf(
 						_List_fromArray(
 							[
@@ -14364,7 +14281,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										'/',
-										$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('/')))),
+										$author$project$Mark$Internal$Error$Expecting('/')))),
 								A2(
 								$elm$parser$Parser$Advanced$map,
 								$elm$core$Basics$always(2),
@@ -14372,7 +14289,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										'~',
-										$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('~')))),
+										$author$project$Mark$Internal$Error$Expecting('~')))),
 								A2(
 								$elm$parser$Parser$Advanced$map,
 								$elm$core$Basics$always(0),
@@ -14380,7 +14297,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										'*',
-										$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('*'))))
+										$author$project$Mark$Internal$Error$Expecting('*'))))
 							]))),
 					A2(
 					$elm$parser$Parser$Advanced$keeper,
@@ -14399,23 +14316,23 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 											} else {
 												var newCursor = maybeNewCursor.a;
 												return A2(
-													$mdgriffith$elm_markup$Mark$Internal$Parser$resetTextWith,
-													newCursor.p,
-													A2($mdgriffith$elm_markup$Mark$Internal$Parser$resetBalancedReplacements, newCursor.w, curs));
+													$author$project$Mark$Internal$Parser$resetTextWith,
+													newCursor.o,
+													A2($author$project$Mark$Internal$Parser$resetBalancedReplacements, newCursor.w, curs));
 											}
 										};
 										return $elm$parser$Parser$Advanced$Loop(
 											A2(
-												$mdgriffith$elm_markup$Mark$Internal$Parser$advanceTo,
+												$author$project$Mark$Internal$Parser$advanceTo,
 												end,
 												resetCursor(
 													A2(
-														$mdgriffith$elm_markup$Mark$Internal$Parser$addToTextCursor,
+														$author$project$Mark$Internal$Parser$addToTextCursor,
 														newInlineBlock(
-															{c4: end, cx: start}),
-														$mdgriffith$elm_markup$Mark$Internal$Parser$commitText(found)))));
+															{bE: end, bY: start}),
+														$author$project$Mark$Internal$Parser$commitText(found)))));
 									})),
-							$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition),
+							$author$project$Mark$Internal$Parser$getPosition),
 						A2(
 							$elm$parser$Parser$Advanced$andThen,
 							function (_v2) {
@@ -14434,52 +14351,52 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 														if (selection.$ === 2) {
 															var str = selection.a;
 															return A2(
-																$mdgriffith$elm_markup$Mark$Internal$Description$Styled,
+																$author$project$Mark$Internal$Description$Styled,
 																range,
 																A2(
-																	$mdgriffith$elm_markup$Mark$Internal$Description$Text,
-																	$mdgriffith$elm_markup$Mark$Internal$Parser$getCurrentStyle(found),
+																	$author$project$Mark$Internal$Description$Text,
+																	$author$project$Mark$Internal$Parser$getCurrentStyle(found),
 																	str));
 														} else {
-															return $mdgriffith$elm_markup$Mark$Internal$Description$InlineBlock(
+															return $author$project$Mark$Internal$Description$InlineBlock(
 																{
-																	i: selection,
-																	o: range,
-																	cr: $mdgriffith$elm_markup$Mark$Internal$Description$DescribeNothing(
-																		$mdgriffith$elm_markup$Mark$Internal$Id$step($mdgriffith$elm_markup$Mark$Internal$Id$initialSeed).a)
+																	g: selection,
+																	n: range,
+																	cu: $author$project$Mark$Internal$Description$DescribeNothing(
+																		$author$project$Mark$Internal$Id$step($author$project$Mark$Internal$Id$initialSeed).a)
 																});
 														}
 													} else {
 														var errs = attrResult.a;
-														return $mdgriffith$elm_markup$Mark$Internal$Description$InlineBlock(
+														return $author$project$Mark$Internal$Description$InlineBlock(
 															{
-																i: selection,
-																o: range,
-																cr: $mdgriffith$elm_markup$Mark$Internal$Description$DescribeNothing(
-																	$mdgriffith$elm_markup$Mark$Internal$Id$step($mdgriffith$elm_markup$Mark$Internal$Id$initialSeed).a)
+																g: selection,
+																n: range,
+																cu: $author$project$Mark$Internal$Description$DescribeNothing(
+																	$author$project$Mark$Internal$Id$step($author$project$Mark$Internal$Id$initialSeed).a)
 															});
 													}
 												} else {
 													var foundFields = attrResult.a;
-													return $mdgriffith$elm_markup$Mark$Internal$Description$InlineBlock(
-														{i: selection, o: range, cr: foundFields});
+													return $author$project$Mark$Internal$Description$InlineBlock(
+														{g: selection, n: range, cu: foundFields});
 												}
 											});
 									},
-									$mdgriffith$elm_markup$Mark$Internal$Parser$attrContainer(
+									$author$project$Mark$Internal$Parser$attrContainer(
 										function () {
 											switch (selection.$) {
 												case 2:
-													return A2($elm$core$List$filterMap, $mdgriffith$elm_markup$Mark$Internal$Parser$onlyVerbatim, options.fk);
+													return A2($elm$core$List$filterMap, $author$project$Mark$Internal$Parser$onlyVerbatim, options.fk);
 												case 1:
-													return A2($elm$core$List$filterMap, $mdgriffith$elm_markup$Mark$Internal$Parser$onlyAnnotation, options.fk);
+													return A2($elm$core$List$filterMap, $author$project$Mark$Internal$Parser$onlyAnnotation, options.fk);
 												default:
 													return _List_Nil;
 											}
 										}()));
 							},
-							A2($mdgriffith$elm_markup$Mark$Internal$Parser$textSelection, options.fO, found))),
-					$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition),
+							A2($author$project$Mark$Internal$Parser$textSelection, options.fO, found))),
+					$author$project$Mark$Internal$Parser$getPosition),
 					A2(
 					$elm$parser$Parser$Advanced$keeper,
 					$elm$parser$Parser$Advanced$succeed(
@@ -14487,22 +14404,22 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 							var _new = _v8.a;
 							var _final = _v8.b;
 							if ((_new === '') || _final) {
-								var _v9 = $mdgriffith$elm_markup$Mark$Internal$Parser$commitText(
+								var _v9 = $author$project$Mark$Internal$Parser$commitText(
 									A2(
-										$mdgriffith$elm_markup$Mark$Internal$Parser$addText,
+										$author$project$Mark$Internal$Parser$addText,
 										$elm$core$String$trimRight(_new),
 										found));
 								var txt = _v9;
 								var styling = function () {
-									var _v10 = txt.p;
+									var _v10 = txt.o;
 									var s = _v10.a;
 									return s;
 								}();
 								return $elm$parser$Parser$Advanced$Done(
-									$elm$core$List$reverse(txt.g));
+									$elm$core$List$reverse(txt.f));
 							} else {
 								return $elm$parser$Parser$Advanced$Loop(
-									A2($mdgriffith$elm_markup$Mark$Internal$Parser$addText, _new, found));
+									A2($author$project$Mark$Internal$Parser$addText, _new, found));
 							}
 						}),
 					A2(
@@ -14516,8 +14433,8 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 										$elm$parser$Parser$Advanced$succeed(
 											_Utils_Tuple2(str, true)),
 										$elm$parser$Parser$Advanced$token(
-											A2($elm$parser$Parser$Advanced$Token, '\n\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline))),
-										$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+											A2($elm$parser$Parser$Advanced$Token, '\n\n', $author$project$Mark$Internal$Error$Newline))),
+										$author$project$Mark$Internal$Parser$withIndent(
 										function (indentation) {
 											return A2(
 												$elm$parser$Parser$Advanced$keeper,
@@ -14542,7 +14459,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 															A2(
 																$elm$parser$Parser$Advanced$Token,
 																'\n' + A2($elm$core$String$repeat, indentation, ' '),
-																$mdgriffith$elm_markup$Mark$Internal$Error$Newline)))),
+																$author$project$Mark$Internal$Error$Newline)))),
 												$elm$parser$Parser$Advanced$oneOf(
 													_Utils_ap(
 														_List_fromArray(
@@ -14550,13 +14467,13 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 																A2(
 																$elm$parser$Parser$Advanced$map,
 																$elm$core$Basics$always(
-																	$mdgriffith$elm_markup$Mark$Internal$Parser$StopWith('')),
-																$elm$parser$Parser$Advanced$end($mdgriffith$elm_markup$Mark$Internal$Error$End)),
+																	$author$project$Mark$Internal$Parser$StopWith('')),
+																$elm$parser$Parser$Advanced$end($author$project$Mark$Internal$Error$End)),
 																A2(
 																$elm$parser$Parser$Advanced$map,
 																$elm$core$Basics$always(
-																	$mdgriffith$elm_markup$Mark$Internal$Parser$StopWith('')),
-																$mdgriffith$elm_markup$Mark$Internal$Parser$newline)
+																	$author$project$Mark$Internal$Parser$StopWith('')),
+																$author$project$Mark$Internal$Parser$newline)
 															]),
 														function () {
 															if (context === 2) {
@@ -14566,22 +14483,22 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 																		$elm$parser$Parser$Advanced$andThen,
 																		$elm$core$Basics$always(
 																			$elm$parser$Parser$Advanced$problem(
-																				$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('---'))),
+																				$author$project$Mark$Internal$Error$Expecting('---'))),
 																		$elm$parser$Parser$Advanced$backtrackable(
 																			$elm$parser$Parser$Advanced$token(
-																				A2($elm$parser$Parser$Advanced$Token, '-', $mdgriffith$elm_markup$Mark$Internal$Error$Newline)))),
+																				A2($elm$parser$Parser$Advanced$Token, '-', $author$project$Mark$Internal$Error$Newline)))),
 																		A2(
 																		$elm$parser$Parser$Advanced$andThen,
 																		$elm$core$Basics$always(
 																			$elm$parser$Parser$Advanced$problem(
-																				$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('1.'))),
+																				$author$project$Mark$Internal$Error$Expecting('1.'))),
 																		$elm$parser$Parser$Advanced$backtrackable(
 																			$elm$parser$Parser$Advanced$token(
-																				A2($elm$parser$Parser$Advanced$Token, '1.', $mdgriffith$elm_markup$Mark$Internal$Error$Newline)))),
+																				A2($elm$parser$Parser$Advanced$Token, '1.', $author$project$Mark$Internal$Error$Newline)))),
 																		A2(
 																		$elm$parser$Parser$Advanced$map,
 																		function (c) {
-																			return $mdgriffith$elm_markup$Mark$Internal$Parser$ContinueWith('\n' + c);
+																			return $author$project$Mark$Internal$Parser$ContinueWith('\n' + c);
 																		},
 																		$elm$parser$Parser$Advanced$getChompedString(
 																			A2(
@@ -14589,13 +14506,13 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 																				function (c) {
 																					return (c !== '-') && ((c !== '1') && (c !== ' '));
 																				},
-																				$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('char'))))
+																				$author$project$Mark$Internal$Error$Expecting('char'))))
 																	]);
 															} else {
 																return _List_fromArray(
 																	[
 																		$elm$parser$Parser$Advanced$succeed(
-																		$mdgriffith$elm_markup$Mark$Internal$Parser$ContinueWith('\n'))
+																		$author$project$Mark$Internal$Parser$ContinueWith('\n'))
 																	]);
 															}
 														}())));
@@ -14605,12 +14522,12 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 										$elm$parser$Parser$Advanced$succeed(
 											_Utils_Tuple2(str, true)),
 										$elm$parser$Parser$Advanced$token(
-											A2($elm$parser$Parser$Advanced$Token, '\n', $mdgriffith$elm_markup$Mark$Internal$Error$Newline))),
+											A2($elm$parser$Parser$Advanced$Token, '\n', $author$project$Mark$Internal$Error$Newline))),
 										A2(
 										$elm$parser$Parser$Advanced$ignorer,
 										$elm$parser$Parser$Advanced$succeed(
 											_Utils_Tuple2(str, true)),
-										$elm$parser$Parser$Advanced$end($mdgriffith$elm_markup$Mark$Internal$Error$End)),
+										$elm$parser$Parser$Advanced$end($author$project$Mark$Internal$Error$End)),
 										$elm$parser$Parser$Advanced$succeed(
 										_Utils_Tuple2(str, false))
 									]));
@@ -14622,9 +14539,9 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop = F5(
 								}))))
 				]));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$styledText = F6(
+var $author$project$Mark$Internal$Parser$styledText = F6(
 	function (options, context, seed, startingPos, inheritedStyles, until) {
-		var vacantText = A2($mdgriffith$elm_markup$Mark$Internal$Parser$textCursor, inheritedStyles, startingPos);
+		var vacantText = A2($author$project$Mark$Internal$Parser$textCursor, inheritedStyles, startingPos);
 		var untilStrings = A2($elm$core$List$map, $elm$core$String$fromChar, until);
 		var meaningful = A2(
 			$elm$core$List$cons,
@@ -14638,9 +14555,9 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledText = F6(
 					_Utils_ap(
 						until,
 						_Utils_ap(
-							$mdgriffith$elm_markup$Mark$Internal$Parser$stylingChars,
-							$mdgriffith$elm_markup$Mark$Internal$Parser$replacementStartingChars(options.fO))))));
-		var _v0 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+							$author$project$Mark$Internal$Parser$stylingChars,
+							$author$project$Mark$Internal$Parser$replacementStartingChars(options.fO))))));
+		var _v0 = $author$project$Mark$Internal$Id$step(seed);
 		var newId = _v0.a;
 		var newSeed = _v0.b;
 		return $elm$parser$Parser$Advanced$oneOf(
@@ -14651,43 +14568,43 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$styledText = F6(
 					function (_v1) {
 						var pos = _v1.a;
 						var textNodes = _v1.b;
-						return $mdgriffith$elm_markup$Mark$Internal$Description$DescribeText(
-							{R: newId, o: pos, gd: textNodes});
+						return $author$project$Mark$Internal$Description$DescribeText(
+							{R: newId, n: pos, gd: textNodes});
 					},
-					$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
+					$author$project$Mark$Internal$Parser$withRange(
 						A2(
 							$elm$parser$Parser$Advanced$loop,
 							vacantText,
-							A4($mdgriffith$elm_markup$Mark$Internal$Parser$styledTextLoop, options, context, meaningful, untilStrings))))
+							A4($author$project$Mark$Internal$Parser$styledTextLoop, options, context, meaningful, untilStrings))))
 				]));
 	});
-var $mdgriffith$elm_markup$Mark$textWith = function (options) {
-	var inlineRecords = A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$recordToInlineBlock, options.fk);
+var $author$project$Mark$textWith = function (options) {
+	var inlineRecords = A2($elm$core$List$map, $author$project$Mark$recordToInlineBlock, options.fk);
 	var inlineExpectations = A2(
 		$elm$core$List$map,
 		function (_v2) {
 			var rec = _v2;
-			return $mdgriffith$elm_markup$Mark$Internal$Description$ExpectInlineBlock(
+			return $author$project$Mark$Internal$Description$ExpectInlineBlock(
 				{
-					ak: rec.aj,
-					i: $mdgriffith$elm_markup$Mark$Internal$Description$blockKindToSelection(rec.ah),
-					fz: rec.fz
+					al: rec.ak,
+					g: $author$project$Mark$Internal$Description$blockKindToSelection(rec.ai),
+					s: rec.s
 				});
 		},
 		options.fk);
 	return {
-		l: $mdgriffith$elm_markup$Mark$renderText(
+		j: $author$project$Mark$renderText(
 			{
 				fk: inlineRecords,
 				gy: $elm$core$Basics$always(options.gy)
 			}),
-		b9: $mdgriffith$elm_markup$Mark$Internal$Description$ExpectTextBlock(inlineExpectations),
-		i: $mdgriffith$elm_markup$Mark$Internal$Description$Value,
-		n: F2(
+		l: $author$project$Mark$Internal$Description$ExpectTextBlock(inlineExpectations),
+		g: $author$project$Mark$Internal$Description$Value,
+		m: F2(
 			function (context, seed) {
-				var _v0 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+				var _v0 = $author$project$Mark$Internal$Id$step(seed);
 				var newSeed = _v0.b;
-				var _v1 = $mdgriffith$elm_markup$Mark$Internal$Id$step(newSeed);
+				var _v1 = $author$project$Mark$Internal$Id$step(newSeed);
 				var returnSeed = _v1.b;
 				return _Utils_Tuple2(
 					returnSeed,
@@ -14695,12 +14612,12 @@ var $mdgriffith$elm_markup$Mark$textWith = function (options) {
 						$elm$parser$Parser$Advanced$andThen,
 						function (pos) {
 							return A6(
-								$mdgriffith$elm_markup$Mark$Internal$Parser$styledText,
+								$author$project$Mark$Internal$Parser$styledText,
 								{
 									fk: A2(
 										$elm$core$List$map,
 										function (x) {
-											return x($mdgriffith$elm_markup$Mark$Internal$Description$EmptyAnnotation);
+											return x($author$project$Mark$Internal$Description$EmptyAnnotation);
 										},
 										inlineRecords),
 									fO: options.fO
@@ -14708,17 +14625,17 @@ var $mdgriffith$elm_markup$Mark$textWith = function (options) {
 								context,
 								newSeed,
 								pos,
-								$mdgriffith$elm_markup$Mark$Internal$Description$emptyStyles,
+								$author$project$Mark$Internal$Description$emptyStyles,
 								_List_Nil);
 						},
-						$mdgriffith$elm_markup$Mark$Internal$Parser$getPosition));
+						$author$project$Mark$Internal$Parser$getPosition));
 			})
 	};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$VerbatimNamed = function (a) {
+var $author$project$Mark$Internal$Description$VerbatimNamed = function (a) {
 	return {$: 2, a: a};
 };
-var $mdgriffith$elm_markup$Mark$selectedString = function (sel) {
+var $author$project$Mark$selectedString = function (sel) {
 	switch (sel.$) {
 		case 0:
 			return '';
@@ -14730,51 +14647,51 @@ var $mdgriffith$elm_markup$Mark$selectedString = function (sel) {
 			return str;
 	}
 };
-var $mdgriffith$elm_markup$Mark$verbatim = F2(
+var $author$project$Mark$verbatim = F2(
 	function (name, view) {
 		return {
-			ah: $mdgriffith$elm_markup$Mark$Internal$Description$VerbatimNamed(name),
-			aj: _List_Nil,
+			ai: $author$project$Mark$Internal$Description$VerbatimNamed(name),
+			ak: _List_Nil,
 			aD: F2(
 				function (desc, selected) {
 					if (desc.$ === 1) {
 						var details = desc.a;
-						if (_Utils_eq(details.fz, name)) {
-							var _v1 = details.g;
+						if (_Utils_eq(details.s, name)) {
+							var _v1 = details.f;
 							if (!_v1.$) {
 								var pos = _v1.a;
 								var fieldDescriptions = _v1.b;
-								return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+								return $author$project$Mark$Internal$Outcome$Success(
 									_Utils_Tuple3(
 										pos,
 										fieldDescriptions,
 										view(
-											$mdgriffith$elm_markup$Mark$selectedString(selected))));
+											$author$project$Mark$selectedString(selected))));
 							} else {
 								var unexpected = _v1.a;
-								return $mdgriffith$elm_markup$Mark$Internal$Description$uncertain(unexpected);
+								return $author$project$Mark$Internal$Description$uncertain(unexpected);
 							}
 						} else {
-							return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+							return $author$project$Mark$Internal$Outcome$Failure(0);
 						}
 					} else {
-						return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+						return $author$project$Mark$Internal$Outcome$Failure(0);
 					}
 				}),
-			ak: _List_Nil,
-			fz: name
+			al: _List_Nil,
+			s: name
 		};
 	});
-var $author$project$ElmMarkup$text = $mdgriffith$elm_markup$Mark$textWith(
+var $author$project$ElmMarkup$text = $author$project$Mark$textWith(
 	{
 		fk: _List_fromArray(
 			[
 				A3(
-				$mdgriffith$elm_markup$Mark$field,
+				$author$project$Mark$field,
 				'url',
-				$mdgriffith$elm_markup$Mark$string,
+				$author$project$Mark$string,
 				A2(
-					$mdgriffith$elm_markup$Mark$annotation,
+					$author$project$Mark$annotation,
 					'link',
 					F2(
 						function (texts, url) {
@@ -14794,7 +14711,7 @@ var $author$project$ElmMarkup$text = $mdgriffith$elm_markup$Mark$textWith(
 									texts));
 						}))),
 				A2(
-				$mdgriffith$elm_markup$Mark$verbatim,
+				$author$project$Mark$verbatim,
 				'name',
 				function (str) {
 					return A2(
@@ -14806,21 +14723,21 @@ var $author$project$ElmMarkup$text = $mdgriffith$elm_markup$Mark$textWith(
 							]));
 				})
 			]),
-		fO: $mdgriffith$elm_markup$Mark$commonReplacements,
+		fO: $author$project$Mark$commonReplacements,
 		gy: F2(
 			function (styles, string) {
 				return A2($author$project$ElmMarkup$styledText, styles, string);
 			})
 	});
 var $author$project$ElmMarkup$header1 = A3(
-	$mdgriffith$elm_markup$Mark$block,
+	$author$project$Mark$block,
 	'H1',
 	function (children) {
 		return A2($elm$html$Html$h3, _List_Nil, children);
 	},
 	$author$project$ElmMarkup$text);
 var $author$project$ElmMarkup$header2 = A3(
-	$mdgriffith$elm_markup$Mark$block,
+	$author$project$Mark$block,
 	'H2',
 	function (children) {
 		return A2($elm$html$Html$h4, _List_Nil, children);
@@ -14828,7 +14745,7 @@ var $author$project$ElmMarkup$header2 = A3(
 	$author$project$ElmMarkup$text);
 var $elm$html$Html$h5 = _VirtualDom_node('h5');
 var $author$project$ElmMarkup$header3 = A3(
-	$mdgriffith$elm_markup$Mark$block,
+	$author$project$Mark$block,
 	'H3',
 	function (children) {
 		return A2($elm$html$Html$h5, _List_Nil, children);
@@ -14842,17 +14759,17 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $author$project$ElmMarkup$image = $mdgriffith$elm_markup$Mark$toBlock(
+var $author$project$ElmMarkup$image = $author$project$Mark$toBlock(
 	A3(
-		$mdgriffith$elm_markup$Mark$field,
+		$author$project$Mark$field,
 		'description',
-		$mdgriffith$elm_markup$Mark$string,
+		$author$project$Mark$string,
 		A3(
-			$mdgriffith$elm_markup$Mark$field,
+			$author$project$Mark$field,
 			'src',
-			$mdgriffith$elm_markup$Mark$string,
+			$author$project$Mark$string,
 			A2(
-				$mdgriffith$elm_markup$Mark$record,
+				$author$project$Mark$record,
 				'Image',
 				F2(
 					function (src, description) {
@@ -14865,17 +14782,17 @@ var $author$project$ElmMarkup$image = $mdgriffith$elm_markup$Mark$toBlock(
 								]),
 							_List_Nil);
 					})))));
-var $mdgriffith$elm_markup$Mark$map = F2(
+var $author$project$Mark$map = F2(
 	function (fn, _v0) {
 		var details = _v0;
 		return {
-			l: A2(
+			j: A2(
 				$elm$core$Basics$composeL,
-				$mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered(fn),
-				details.l),
-			b9: details.b9,
-			i: details.i,
-			n: details.n
+				$author$project$Mark$Internal$Description$mapSuccessAndRecovered(fn),
+				details.j),
+			l: details.l,
+			g: details.g,
+			m: details.m
 		};
 	});
 var $elm$html$Html$ol = _VirtualDom_node('ol');
@@ -14886,8 +14803,8 @@ var $author$project$ElmMarkup$renderItem = function (_v2) {
 		_List_Nil,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$div, _List_Nil, item.eV),
-				$author$project$ElmMarkup$renderList(item.eR)
+				A2($elm$html$Html$div, _List_Nil, item.eU),
+				$author$project$ElmMarkup$renderList(item.eQ)
 			]));
 };
 var $author$project$ElmMarkup$renderList = function (_v0) {
@@ -14905,32 +14822,32 @@ var $author$project$ElmMarkup$renderList = function (_v0) {
 		_List_Nil,
 		A2($elm$core$List$map, $author$project$ElmMarkup$renderItem, _enum.fr));
 };
-var $mdgriffith$elm_markup$Mark$Bullet = 0;
-var $mdgriffith$elm_markup$Mark$Internal$Description$Bullet = {$: 0};
-var $mdgriffith$elm_markup$Mark$Internal$Description$DescribeTree = function (a) {
+var $author$project$Mark$Bullet = 0;
+var $author$project$Mark$Internal$Description$Bullet = {$: 0};
+var $author$project$Mark$Internal$Description$DescribeTree = function (a) {
 	return {$: 5, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Enumerated = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectTree = F2(
+var $author$project$Mark$Enumerated = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Description$ExpectTree = F2(
 	function (a, b) {
 		return {$: 10, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Number = 1;
-var $mdgriffith$elm_markup$Mark$Internal$Description$ParseInTree = 2;
-var $mdgriffith$elm_markup$Mark$Internal$Description$TreeExpectation = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Description$Nested = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Parser$TreeBuilder = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Parser$addToLevel = F3(
+var $author$project$Mark$Number = 1;
+var $author$project$Mark$Internal$Description$ParseInTree = 2;
+var $author$project$Mark$Internal$Description$TreeExpectation = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Description$Nested = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Parser$TreeBuilder = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Parser$addToLevel = F3(
 	function (index, brandNewItem, _v0) {
 		var parent = _v0;
 		if (index <= 0) {
 			return _Utils_update(
 				parent,
 				{
-					eR: A2($elm$core$List$cons, brandNewItem, parent.eR)
+					eQ: A2($elm$core$List$cons, brandNewItem, parent.eQ)
 				});
 		} else {
-			var _v1 = parent.eR;
+			var _v1 = parent.eQ;
 			if (!_v1.b) {
 				return parent;
 			} else {
@@ -14939,18 +14856,18 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$addToLevel = F3(
 				return _Utils_update(
 					parent,
 					{
-						eR: A2(
+						eQ: A2(
 							$elm$core$List$cons,
-							A3($mdgriffith$elm_markup$Mark$Internal$Parser$addToLevel, index - 1, brandNewItem, top),
+							A3($author$project$Mark$Internal$Parser$addToLevel, index - 1, brandNewItem, top),
 							remain)
 					});
 			}
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$addItem = F4(
+var $author$project$Mark$Internal$Parser$addItem = F4(
 	function (indentation, icon, content, _v0) {
 		var builder = _v0;
-		var newItem = {eR: _List_Nil, eV: content, fe: icon};
+		var newItem = {eQ: _List_Nil, eU: content, fe: icon};
 		var _v1 = builder.a3;
 		if (!_v1.b) {
 			return {
@@ -14971,7 +14888,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$addItem = F4(
 				a3: A2(
 					$elm$core$List$cons,
 					A3(
-						$mdgriffith$elm_markup$Mark$Internal$Parser$addToLevel,
+						$author$project$Mark$Internal$Parser$addToLevel,
 						(($elm$core$Basics$abs(indentation) / 4) | 0) - 1,
 						newItem,
 						lvl),
@@ -14980,8 +14897,8 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$addItem = F4(
 			};
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$emptyTreeBuilder = {a3: _List_Nil, bP: 0};
-var $mdgriffith$elm_markup$Mark$Internal$Parser$dive = function (cursor) {
+var $author$project$Mark$Internal$Parser$emptyTreeBuilder = {a3: _List_Nil, bP: 0};
+var $author$project$Mark$Internal$Parser$dive = function (cursor) {
 	return _Utils_update(
 		cursor,
 		{
@@ -14989,38 +14906,38 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$dive = function (cursor) {
 			bK: A2($elm$core$List$cons, cursor.fi, cursor.bK)
 		});
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$next = function (cursor) {
+var $author$project$Mark$Internal$Parser$next = function (cursor) {
 	return _Utils_update(
 		cursor,
 		{fi: cursor.fi + 1});
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$rev = F2(
+var $author$project$Mark$Internal$Parser$rev = F2(
 	function (nest, _v1) {
 		var cursor = _v1.a;
 		var found = _v1.b;
 		return _Utils_Tuple2(
-			$mdgriffith$elm_markup$Mark$Internal$Parser$next(cursor),
+			$author$project$Mark$Internal$Parser$next(cursor),
 			A2(
 				$elm$core$List$cons,
-				A2($mdgriffith$elm_markup$Mark$Internal$Parser$reverseTree, cursor, nest),
+				A2($author$project$Mark$Internal$Parser$reverseTree, cursor, nest),
 				found));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$reverseTree = F2(
+var $author$project$Mark$Internal$Parser$reverseTree = F2(
 	function (cursor, _v0) {
 		var nest = _v0;
 		return {
-			eR: A3(
+			eQ: A3(
 				$elm$core$List$foldl,
-				$mdgriffith$elm_markup$Mark$Internal$Parser$rev,
+				$author$project$Mark$Internal$Parser$rev,
 				_Utils_Tuple2(
-					$mdgriffith$elm_markup$Mark$Internal$Parser$dive(cursor),
+					$author$project$Mark$Internal$Parser$dive(cursor),
 					_List_Nil),
-				nest.eR).b,
-			eV: $elm$core$List$reverse(nest.eV),
+				nest.eQ).b,
+			eU: $elm$core$List$reverse(nest.eU),
 			fe: nest.fe
 		};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$renderLevels = function (levels) {
+var $author$project$Mark$Internal$Parser$renderLevels = function (levels) {
 	if (!levels.b) {
 		return _List_Nil;
 	} else {
@@ -15029,14 +14946,14 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$renderLevels = function (levels)
 			F2(
 				function (index, level) {
 					return A2(
-						$mdgriffith$elm_markup$Mark$Internal$Parser$reverseTree,
+						$author$project$Mark$Internal$Parser$reverseTree,
 						{fi: index, bK: _List_Nil},
 						level);
 				}),
 			levels);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$buildTree = F2(
+var $author$project$Mark$Internal$Parser$buildTree = F2(
 	function (baseIndent, items) {
 		var groupByIcon = F2(
 			function (item, maybeCursor) {
@@ -15048,9 +14965,9 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$buildTree = F2(
 							{
 								ay: _List_Nil,
 								fe: icon,
-								h: item.h,
+								ci: item.ci,
 								fr: _List_fromArray(
-									[item.eV])
+									[item.eU])
 							});
 					} else {
 						return $elm$core$Maybe$Nothing;
@@ -15064,20 +14981,20 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$buildTree = F2(
 								return {
 									ay: cursor.ay,
 									fe: cursor.fe,
-									h: cursor.h,
-									fr: A2($elm$core$List$cons, item.eV, cursor.fr)
+									ci: cursor.ci,
+									fr: A2($elm$core$List$cons, item.eU, cursor.fr)
 								};
 							} else {
 								var icon = _v5.a;
 								return {
 									ay: A2(
 										$elm$core$List$cons,
-										{eV: cursor.fr, fe: cursor.fe, h: cursor.h},
+										{eU: cursor.fr, fe: cursor.fe, ci: cursor.ci},
 										cursor.ay),
 									fe: icon,
-									h: item.h,
+									ci: item.ci,
 									fr: _List_fromArray(
-										[item.eV])
+										[item.eU])
 								};
 							}
 						}());
@@ -15085,7 +15002,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$buildTree = F2(
 			});
 		var gather = F2(
 			function (item, builder) {
-				return A4($mdgriffith$elm_markup$Mark$Internal$Parser$addItem, item.h - baseIndent, item.fe, item.eV, builder);
+				return A4($author$project$Mark$Internal$Parser$addItem, item.ci - baseIndent, item.fe, item.eU, builder);
 			});
 		var finalizeGrouping = function (maybeCursor) {
 			if (maybeCursor.$ === 1) {
@@ -15098,7 +15015,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$buildTree = F2(
 				} else {
 					return A2(
 						$elm$core$List$cons,
-						{eV: cursor.fr, fe: cursor.fe, h: cursor.h},
+						{eU: cursor.fr, fe: cursor.fe, ci: cursor.ci},
 						cursor.ay);
 				}
 			}
@@ -15106,19 +15023,19 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$buildTree = F2(
 		var newTree = A3(
 			$elm$core$List$foldl,
 			gather,
-			$mdgriffith$elm_markup$Mark$Internal$Parser$emptyTreeBuilder,
+			$author$project$Mark$Internal$Parser$emptyTreeBuilder,
 			$elm$core$List$reverse(
 				finalizeGrouping(
 					A3($elm$core$List$foldl, groupByIcon, $elm$core$Maybe$Nothing, items))));
 		var builder = newTree;
 		return $elm$core$List$reverse(
-			$mdgriffith$elm_markup$Mark$Internal$Parser$renderLevels(builder.a3));
+			$author$project$Mark$Internal$Parser$renderLevels(builder.a3));
 	});
-var $mdgriffith$elm_markup$Mark$getNestedIcon = function (_v0) {
+var $author$project$Mark$getNestedIcon = function (_v0) {
 	var cursor = _v0;
 	return cursor.fe;
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$descending = F2(
+var $author$project$Mark$Internal$Parser$descending = F2(
 	function (base, prev) {
 		return (_Utils_cmp(prev, base) < 1) ? _List_Nil : $elm$core$List$reverse(
 			A2(
@@ -15132,11 +15049,11 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$descending = F2(
 							A2(
 								$elm$parser$Parser$Advanced$Token,
 								A2($elm$core$String$repeat, level, ' '),
-								$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(level))));
+								$author$project$Mark$Internal$Error$ExpectingIndentation(level))));
 				},
 				A2($elm$core$List$range, 0, (((prev - 4) - base) / 4) | 0)));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$expectIndentation = F2(
+var $author$project$Mark$Internal$Parser$expectIndentation = F2(
 	function (base, previous) {
 		return A2(
 			$elm$parser$Parser$Advanced$andThen,
@@ -15144,7 +15061,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$expectIndentation = F2(
 				var indentLevel = _v0.a;
 				var extraSpaces = _v0.b;
 				return (extraSpaces === '') ? $elm$parser$Parser$Advanced$succeed(indentLevel) : $elm$parser$Parser$Advanced$problem(
-					$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(base + indentLevel));
+					$author$project$Mark$Internal$Error$ExpectingIndentation(base + indentLevel));
 			},
 			A2(
 				$elm$parser$Parser$Advanced$keeper,
@@ -15162,7 +15079,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$expectIndentation = F2(
 										A2(
 											$elm$parser$Parser$Advanced$Token,
 											A2($elm$core$String$repeat, previous + 4, ' '),
-											$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(previous + 4)))),
+											$author$project$Mark$Internal$Error$ExpectingIndentation(previous + 4)))),
 									A2(
 									$elm$parser$Parser$Advanced$ignorer,
 									$elm$parser$Parser$Advanced$succeed(previous),
@@ -15170,32 +15087,32 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$expectIndentation = F2(
 										A2(
 											$elm$parser$Parser$Advanced$Token,
 											A2($elm$core$String$repeat, previous, ' '),
-											$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(previous))))
+											$author$project$Mark$Internal$Error$ExpectingIndentation(previous))))
 								]),
-							A2($mdgriffith$elm_markup$Mark$Internal$Parser$descending, base, previous)))),
+							A2($author$project$Mark$Internal$Parser$descending, base, previous)))),
 				$elm$parser$Parser$Advanced$getChompedString(
 					$elm$parser$Parser$Advanced$chompWhile(
 						function (c) {
 							return c === ' ';
 						}))));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$AutoNumber = function (a) {
+var $author$project$Mark$Internal$Description$AutoNumber = function (a) {
 	return {$: 1, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Parser$iconParser = $elm$parser$Parser$Advanced$oneOf(
+var $author$project$Mark$Internal$Parser$iconParser = $elm$parser$Parser$Advanced$oneOf(
 	_List_fromArray(
 		[
 			A2(
 			$elm$parser$Parser$Advanced$ignorer,
 			A2(
 				$elm$parser$Parser$Advanced$ignorer,
-				$elm$parser$Parser$Advanced$succeed($mdgriffith$elm_markup$Mark$Internal$Description$Bullet),
+				$elm$parser$Parser$Advanced$succeed($author$project$Mark$Internal$Description$Bullet),
 				A2(
 					$elm$parser$Parser$Advanced$chompIf,
 					function (c) {
 						return c === '-';
 					},
-					$mdgriffith$elm_markup$Mark$Internal$Error$Expecting('-'))),
+					$author$project$Mark$Internal$Error$Expecting('-'))),
 			$elm$parser$Parser$Advanced$chompWhile(
 				function (c) {
 					return (c === '-') || (c === ' ');
@@ -15205,15 +15122,15 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$iconParser = $elm$parser$Parser$
 			A2(
 				$elm$parser$Parser$Advanced$ignorer,
 				$elm$parser$Parser$Advanced$succeed(
-					$mdgriffith$elm_markup$Mark$Internal$Description$AutoNumber(1)),
+					$author$project$Mark$Internal$Description$AutoNumber(1)),
 				$elm$parser$Parser$Advanced$token(
-					A2($elm$parser$Parser$Advanced$Token, '1', $mdgriffith$elm_markup$Mark$Internal$Error$Newline))),
+					A2($elm$parser$Parser$Advanced$Token, '1', $author$project$Mark$Internal$Error$Newline))),
 			$elm$parser$Parser$Advanced$chompWhile(
 				function (c) {
 					return (c === '.') || (c === ' ');
 				}))
 		]));
-var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedBlocksOrNewlines = F4(
+var $author$project$Mark$Internal$Parser$indentedBlocksOrNewlines = F4(
 	function (context, seed, item, _v0) {
 		var indentation = _v0.a;
 		var existing = _v0.b;
@@ -15226,8 +15143,8 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedBlocksOrNewlines = F4(
 						return $elm$parser$Parser$Advanced$Done(
 							$elm$core$List$reverse(existing));
 					},
-					$elm$parser$Parser$Advanced$end($mdgriffith$elm_markup$Mark$Internal$Error$End)),
-					$mdgriffith$elm_markup$Mark$Internal$Parser$skipBlankLineWith(
+					$elm$parser$Parser$Advanced$end($author$project$Mark$Internal$Error$End)),
+					$author$project$Mark$Internal$Parser$skipBlankLineWith(
 					$elm$parser$Parser$Advanced$Loop(
 						_Utils_Tuple2(indentation, existing))),
 					$elm$parser$Parser$Advanced$oneOf(
@@ -15236,7 +15153,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedBlocksOrNewlines = F4(
 							A2(
 							$elm$parser$Parser$Advanced$andThen,
 							function (newIndent) {
-								var _v2 = A3($mdgriffith$elm_markup$Mark$Internal$Description$getParser, context, seed, item);
+								var _v2 = A3($author$project$Mark$Internal$Description$getParser, context, seed, item);
 								var itemSeed = _v2.a;
 								var itemParser = _v2.b;
 								return A2(
@@ -15252,74 +15169,74 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$indentedBlocksOrNewlines = F4(
 													$elm$parser$Parser$Advanced$succeed(
 														F2(
 															function (iconResult, itemResult) {
-																var newIndex = {eD: indentation.eD, fL: newIndent};
+																var newIndex = {eC: indentation.eC, fL: newIndent};
 																return $elm$parser$Parser$Advanced$Loop(
 																	_Utils_Tuple2(
 																		newIndex,
 																		A2(
 																			$elm$core$List$cons,
 																			{
-																				eV: itemResult,
+																				eU: itemResult,
 																				fe: $elm$core$Maybe$Just(iconResult),
-																				h: newIndent
+																				ci: newIndent
 																			},
 																			existing)));
 															})),
-													$mdgriffith$elm_markup$Mark$Internal$Parser$iconParser),
+													$author$project$Mark$Internal$Parser$iconParser),
 												A2($elm$parser$Parser$Advanced$withIndent, newIndent + 4, itemParser)),
 											_Utils_eq(newIndent - 4, indentation.fL) ? _List_fromArray(
 												[
 													A2(
 													$elm$parser$Parser$Advanced$map,
 													function (foundBlock) {
-														var newIndex = {eD: indentation.eD, fL: indentation.fL};
+														var newIndex = {eC: indentation.eC, fL: indentation.fL};
 														return $elm$parser$Parser$Advanced$Loop(
 															_Utils_Tuple2(
 																newIndex,
 																A2(
 																	$elm$core$List$cons,
-																	{eV: foundBlock, fe: $elm$core$Maybe$Nothing, h: indentation.fL},
+																	{eU: foundBlock, fe: $elm$core$Maybe$Nothing, ci: indentation.fL},
 																	existing)));
 													},
 													itemParser)
 												]) : _List_Nil)));
 							},
-							A2($mdgriffith$elm_markup$Mark$Internal$Parser$expectIndentation, indentation.eD, indentation.fL)),
+							A2($author$project$Mark$Internal$Parser$expectIndentation, indentation.eC, indentation.fL)),
 							$elm$parser$Parser$Advanced$succeed(
 							$elm$parser$Parser$Advanced$Done(
 								$elm$core$List$reverse(existing)))
 						]))
 				]));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Index$Index = F2(
+var $author$project$Mark$Internal$Index$Index = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Index$increment = function (_v0) {
+var $author$project$Mark$Internal$Index$increment = function (_v0) {
 	var i = _v0.a;
 	var base = _v0.b;
-	return A2($mdgriffith$elm_markup$Mark$Internal$Index$Index, i + 1, base);
+	return A2($author$project$Mark$Internal$Index$Index, i + 1, base);
 };
-var $mdgriffith$elm_markup$Mark$Internal$Outcome$mapSuccess = F2(
+var $author$project$Mark$Internal$Outcome$mapSuccess = F2(
 	function (fn, outcome) {
 		switch (outcome.$) {
 			case 0:
 				var s = outcome.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+				return $author$project$Mark$Internal$Outcome$Success(
 					fn(s));
 			case 1:
 				var a = outcome.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(a);
+				return $author$project$Mark$Internal$Outcome$Almost(a);
 			default:
 				var f = outcome.a;
-				return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(f);
+				return $author$project$Mark$Internal$Outcome$Failure(f);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Index$top = function (_v0) {
+var $author$project$Mark$Internal$Index$top = function (_v0) {
 	var i = _v0.a;
 	return i;
 };
-var $mdgriffith$elm_markup$Mark$reduceRender = F4(
+var $author$project$Mark$reduceRender = F4(
 	function (index, getIcon, fn, list) {
 		return function (_v4) {
 			var i = _v4.a;
@@ -15328,7 +15245,7 @@ var $mdgriffith$elm_markup$Mark$reduceRender = F4(
 			return _Utils_Tuple3(
 				i,
 				ic,
-				A2($mdgriffith$elm_markup$Mark$Internal$Outcome$mapSuccess, $elm$core$List$reverse, outcome));
+				A2($author$project$Mark$Internal$Outcome$mapSuccess, $elm$core$List$reverse, outcome));
 		}(
 			A3(
 				$elm$core$List$foldl,
@@ -15337,7 +15254,7 @@ var $mdgriffith$elm_markup$Mark$reduceRender = F4(
 						var i = _v0.a;
 						var existingIcon = _v0.b;
 						var gathered = _v0.c;
-						var icon = (!$mdgriffith$elm_markup$Mark$Internal$Index$top(i)) ? getIcon(item) : existingIcon;
+						var icon = (!$author$project$Mark$Internal$Index$top(i)) ? getIcon(item) : existingIcon;
 						var newItem = function () {
 							if (!gathered.$) {
 								var remain = gathered.a;
@@ -15345,26 +15262,26 @@ var $mdgriffith$elm_markup$Mark$reduceRender = F4(
 								switch (_v2.$) {
 									case 0:
 										var newThing = _v2.a;
-										return $mdgriffith$elm_markup$Mark$Internal$Outcome$Success(
+										return $author$project$Mark$Internal$Outcome$Success(
 											A2($elm$core$List$cons, newThing, remain));
 									case 1:
 										if (!_v2.a.$) {
 											var err = _v2.a.a;
-											return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
-												$mdgriffith$elm_markup$Mark$Internal$Description$Uncertain(err));
+											return $author$project$Mark$Internal$Outcome$Almost(
+												$author$project$Mark$Internal$Description$Uncertain(err));
 										} else {
 											var _v3 = _v2.a;
 											var err = _v3.a;
 											var data = _v3.b;
-											return $mdgriffith$elm_markup$Mark$Internal$Outcome$Almost(
+											return $author$project$Mark$Internal$Outcome$Almost(
 												A2(
-													$mdgriffith$elm_markup$Mark$Internal$Description$Recovered,
+													$author$project$Mark$Internal$Description$Recovered,
 													err,
 													A2($elm$core$List$cons, data, remain)));
 										}
 									default:
 										var f = _v2.a;
-										return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(f);
+										return $author$project$Mark$Internal$Outcome$Failure(f);
 								}
 							} else {
 								var almostOrfailure = gathered;
@@ -15372,70 +15289,70 @@ var $mdgriffith$elm_markup$Mark$reduceRender = F4(
 							}
 						}();
 						return _Utils_Tuple3(
-							$mdgriffith$elm_markup$Mark$Internal$Index$increment(i),
+							$author$project$Mark$Internal$Index$increment(i),
 							icon,
 							newItem);
 					}),
 				_Utils_Tuple3(
 					index,
-					$mdgriffith$elm_markup$Mark$Internal$Description$Bullet,
-					$mdgriffith$elm_markup$Mark$Internal$Outcome$Success(_List_Nil)),
+					$author$project$Mark$Internal$Description$Bullet,
+					$author$project$Mark$Internal$Outcome$Success(_List_Nil)),
 				list));
 	});
-var $mdgriffith$elm_markup$Mark$Item = $elm$core$Basics$identity;
-var $mdgriffith$elm_markup$Mark$Internal$Index$zero = A2($mdgriffith$elm_markup$Mark$Internal$Index$Index, 0, _List_Nil);
-var $mdgriffith$elm_markup$Mark$Internal$Index$dedent = function (_v0) {
+var $author$project$Mark$Item = $elm$core$Basics$identity;
+var $author$project$Mark$Internal$Index$zero = A2($author$project$Mark$Internal$Index$Index, 0, _List_Nil);
+var $author$project$Mark$Internal$Index$dedent = function (_v0) {
 	var i = _v0.a;
 	var base = _v0.b;
 	if (!base.b) {
-		return $mdgriffith$elm_markup$Mark$Internal$Index$zero;
+		return $author$project$Mark$Internal$Index$zero;
 	} else {
 		var topI = base.a;
 		var newBase = base.b;
-		return A2($mdgriffith$elm_markup$Mark$Internal$Index$Index, topI, newBase);
+		return A2($author$project$Mark$Internal$Index$Index, topI, newBase);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Index$indent = function (_v0) {
+var $author$project$Mark$Internal$Index$indent = function (_v0) {
 	var i = _v0.a;
 	var base = _v0.b;
 	return A2(
-		$mdgriffith$elm_markup$Mark$Internal$Index$Index,
+		$author$project$Mark$Internal$Index$Index,
 		0,
 		A2($elm$core$List$cons, i, base));
 };
-var $mdgriffith$elm_markup$Mark$Internal$Index$toList = function (_v0) {
+var $author$project$Mark$Internal$Index$toList = function (_v0) {
 	var i = _v0.a;
 	var base = _v0.b;
 	return _Utils_Tuple2(i, base);
 };
-var $mdgriffith$elm_markup$Mark$renderTreeNodeSmall = F4(
+var $author$project$Mark$renderTreeNodeSmall = F4(
 	function (contentBlock, icon, index, _v0) {
 		var cursor = _v0;
 		var _v1 = A4(
-			$mdgriffith$elm_markup$Mark$reduceRender,
-			$mdgriffith$elm_markup$Mark$Internal$Index$indent(index),
-			$mdgriffith$elm_markup$Mark$getNestedIcon,
-			$mdgriffith$elm_markup$Mark$renderTreeNodeSmall(contentBlock),
-			cursor.eR);
+			$author$project$Mark$reduceRender,
+			$author$project$Mark$Internal$Index$indent(index),
+			$author$project$Mark$getNestedIcon,
+			$author$project$Mark$renderTreeNodeSmall(contentBlock),
+			cursor.eQ);
 		var newIndex = _v1.a;
 		var childrenIcon = _v1.b;
 		var renderedChildren = _v1.c;
 		var _v2 = A4(
-			$mdgriffith$elm_markup$Mark$reduceRender,
-			$mdgriffith$elm_markup$Mark$Internal$Index$dedent(newIndex),
-			$elm$core$Basics$always($mdgriffith$elm_markup$Mark$Internal$Description$Bullet),
+			$author$project$Mark$reduceRender,
+			$author$project$Mark$Internal$Index$dedent(newIndex),
+			$elm$core$Basics$always($author$project$Mark$Internal$Description$Bullet),
 			F3(
 				function (icon_, i, content) {
-					return A2($mdgriffith$elm_markup$Mark$Internal$Description$renderBlock, contentBlock, content);
+					return A2($author$project$Mark$Internal$Description$renderBlock, contentBlock, content);
 				}),
-			cursor.eV);
+			cursor.eU);
 		var renderedContent = _v2.c;
 		return A3(
-			$mdgriffith$elm_markup$Mark$Internal$Description$mergeWith,
+			$author$project$Mark$Internal$Description$mergeWith,
 			F2(
 				function (content, children) {
 					return {
-						eR: {
+						eQ: {
 							fe: function () {
 								if (!childrenIcon.$) {
 									return 0;
@@ -15445,41 +15362,41 @@ var $mdgriffith$elm_markup$Mark$renderTreeNodeSmall = F4(
 							}(),
 							fr: children
 						},
-						eV: content,
-						fi: $mdgriffith$elm_markup$Mark$Internal$Index$toList(index)
+						eU: content,
+						fi: $author$project$Mark$Internal$Index$toList(index)
 					};
 				}),
 			renderedContent,
 			renderedChildren);
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Id$reseed = function (_v0) {
+var $author$project$Mark$Internal$Id$reseed = function (_v0) {
 	var seed = _v0;
 	return A2($elm$core$List$cons, 0, seed);
 };
-var $mdgriffith$elm_markup$Mark$tree = F3(
+var $author$project$Mark$tree = F3(
 	function (name, view, contentBlock) {
-		var blockExpectation = $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(contentBlock);
+		var blockExpectation = $author$project$Mark$Internal$Description$getBlockExpectation(contentBlock);
 		var expectation = A2(
-			$mdgriffith$elm_markup$Mark$Internal$Description$ExpectTree,
-			$mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation(contentBlock),
+			$author$project$Mark$Internal$Description$ExpectTree,
+			$author$project$Mark$Internal$Description$getBlockExpectation(contentBlock),
 			_List_fromArray(
 				[
 					{
-					eR: _List_Nil,
-					eV: _List_fromArray(
+					eQ: _List_Nil,
+					eU: _List_fromArray(
 						[blockExpectation]),
-					fe: $mdgriffith$elm_markup$Mark$Internal$Description$Bullet
+					fe: $author$project$Mark$Internal$Description$Bullet
 				}
 				]));
 		return {
-			l: function (description) {
+			j: function (description) {
 				if (description.$ === 5) {
 					var details = description.a;
 					return function (_v1) {
 						var icon = _v1.b;
 						var outcome = _v1.c;
 						return A2(
-							$mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered,
+							$author$project$Mark$Internal$Description$mapSuccessAndRecovered,
 							function (nodes) {
 								return view(
 									{
@@ -15496,26 +15413,26 @@ var $mdgriffith$elm_markup$Mark$tree = F3(
 							outcome);
 					}(
 						A4(
-							$mdgriffith$elm_markup$Mark$reduceRender,
-							$mdgriffith$elm_markup$Mark$Internal$Index$zero,
-							$mdgriffith$elm_markup$Mark$getNestedIcon,
-							$mdgriffith$elm_markup$Mark$renderTreeNodeSmall(contentBlock),
-							details.eR));
+							$author$project$Mark$reduceRender,
+							$author$project$Mark$Internal$Index$zero,
+							$author$project$Mark$getNestedIcon,
+							$author$project$Mark$renderTreeNodeSmall(contentBlock),
+							details.eQ));
 				} else {
-					return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+					return $author$project$Mark$Internal$Outcome$Failure(0);
 				}
 			},
-			b9: expectation,
-			i: $mdgriffith$elm_markup$Mark$Internal$Description$Named(name),
-			n: F2(
+			l: expectation,
+			g: $author$project$Mark$Internal$Description$Named(name),
+			m: F2(
 				function (context, seed) {
-					var _v3 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+					var _v3 = $author$project$Mark$Internal$Id$step(seed);
 					var newId = _v3.a;
 					var newSeed = _v3.b;
-					var reseeded = $mdgriffith$elm_markup$Mark$Internal$Id$reseed(newSeed);
+					var reseeded = $author$project$Mark$Internal$Id$reseed(newSeed);
 					return _Utils_Tuple2(
 						reseeded,
-						$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+						$author$project$Mark$Internal$Parser$withIndent(
 							function (baseIndent) {
 								return A2(
 									$elm$parser$Parser$Advanced$keeper,
@@ -15530,53 +15447,53 @@ var $mdgriffith$elm_markup$Mark$tree = F3(
 													A2(
 														$elm$parser$Parser$Advanced$Token,
 														name,
-														$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingBlockName(name)))),
+														$author$project$Mark$Internal$Error$ExpectingBlockName(name)))),
 											$elm$parser$Parser$Advanced$chompWhile(
 												function (c) {
 													return c === ' ';
 												})),
-										$mdgriffith$elm_markup$Mark$Internal$Parser$skipBlankLineWith(0)),
+										$author$project$Mark$Internal$Parser$skipBlankLineWith(0)),
 									A2(
 										$elm$parser$Parser$Advanced$map,
 										function (_v4) {
 											var pos = _v4.a;
 											var result = _v4.b;
-											return $mdgriffith$elm_markup$Mark$Internal$Description$DescribeTree(
+											return $author$project$Mark$Internal$Description$DescribeTree(
 												{
-													eR: A2($mdgriffith$elm_markup$Mark$Internal$Parser$buildTree, baseIndent + 4, result),
+													eQ: A2($author$project$Mark$Internal$Parser$buildTree, baseIndent + 4, result),
 													aC: expectation,
 													R: newId,
-													o: pos
+													n: pos
 												});
 										},
-										$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
+										$author$project$Mark$Internal$Parser$withRange(
 											A2(
 												$elm$parser$Parser$Advanced$loop,
 												_Utils_Tuple2(
-													{eD: baseIndent + 4, fL: baseIndent + 4},
+													{eC: baseIndent + 4, fL: baseIndent + 4},
 													_List_Nil),
-												A3($mdgriffith$elm_markup$Mark$Internal$Parser$indentedBlocksOrNewlines, 2, seed, contentBlock)))));
+												A3($author$project$Mark$Internal$Parser$indentedBlocksOrNewlines, 2, seed, contentBlock)))));
 							}));
 				})
 		};
 	});
 var $author$project$ElmMarkup$list = A3(
-	$mdgriffith$elm_markup$Mark$tree,
+	$author$project$Mark$tree,
 	'List',
 	$author$project$ElmMarkup$renderList,
 	A2(
-		$mdgriffith$elm_markup$Mark$map,
+		$author$project$Mark$map,
 		$elm$html$Html$div(_List_Nil),
 		$author$project$ElmMarkup$text));
-var $mdgriffith$elm_markup$Mark$Internal$Description$ExpectManyOf = function (a) {
+var $author$project$Mark$Internal$Description$ExpectManyOf = function (a) {
 	return {$: 3, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$ManyOf = function (a) {
+var $author$project$Mark$Internal$Description$ManyOf = function (a) {
 	return {$: 3, a: a};
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$blockName = function (_v0) {
+var $author$project$Mark$Internal$Description$blockName = function (_v0) {
 	var details = _v0;
-	var _v1 = details.i;
+	var _v1 = details.g;
 	switch (_v1.$) {
 		case 1:
 			var name = _v1.a;
@@ -15591,31 +15508,31 @@ var $mdgriffith$elm_markup$Mark$Internal$Description$blockName = function (_v0) 
 			return $elm$core$Maybe$Just(name);
 	}
 };
-var $mdgriffith$elm_markup$Mark$Internal$Description$getParserNoBar = F3(
+var $author$project$Mark$Internal$Description$getParserNoBar = F3(
 	function (context, seed, _v0) {
 		var details = _v0;
-		var _v1 = details.i;
+		var _v1 = details.g;
 		switch (_v1.$) {
 			case 1:
 				var name = _v1.a;
-				return A2(details.n, context, seed);
+				return A2(details.m, context, seed);
 			case 0:
-				return A2(details.n, context, seed);
+				return A2(details.m, context, seed);
 			case 2:
 				var name = _v1.a;
-				return A2(details.n, context, seed);
+				return A2(details.m, context, seed);
 			default:
 				var name = _v1.a;
-				return A2(details.n, context, seed);
+				return A2(details.m, context, seed);
 		}
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser = F2(
+var $author$project$Mark$Internal$Parser$makeBlocksParser = F2(
 	function (blocks, seed) {
 		var gatherParsers = F2(
 			function (myBlock, details) {
-				var _v2 = A3($mdgriffith$elm_markup$Mark$Internal$Description$getParserNoBar, 0, seed, myBlock);
+				var _v2 = A3($author$project$Mark$Internal$Description$getParserNoBar, 0, seed, myBlock);
 				var parser = _v2.b;
-				var _v3 = $mdgriffith$elm_markup$Mark$Internal$Description$blockName(myBlock);
+				var _v3 = $author$project$Mark$Internal$Description$blockName(myBlock);
 				if (!_v3.$) {
 					var name = _v3.a;
 					return {
@@ -15635,7 +15552,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser = F2(
 							A2(
 								$elm$parser$Parser$Advanced$map,
 								$elm$core$Result$Ok,
-								$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(parser)),
+								$author$project$Mark$Internal$Parser$withRange(parser)),
 							details.K)
 					};
 				}
@@ -15657,7 +15574,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser = F2(
 					},
 					result);
 			},
-			$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
+			$author$project$Mark$Internal$Parser$withRange(
 				A2(
 					$elm$parser$Parser$Advanced$keeper,
 					A2(
@@ -15666,7 +15583,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser = F2(
 							$elm$parser$Parser$Advanced$ignorer,
 							$elm$parser$Parser$Advanced$succeed($elm$core$Basics$identity),
 							$elm$parser$Parser$Advanced$token(
-								A2($elm$parser$Parser$Advanced$Token, '|>', $mdgriffith$elm_markup$Mark$Internal$Error$BlockStart))),
+								A2($elm$parser$Parser$Advanced$Token, '|>', $author$project$Mark$Internal$Error$BlockStart))),
 						$elm$parser$Parser$Advanced$chompWhile(
 							function (c) {
 								return c === ' ';
@@ -15676,7 +15593,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser = F2(
 							$elm$core$List$reverse(children.J),
 							_List_fromArray(
 								[
-									$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+									$author$project$Mark$Internal$Parser$withIndent(
 									function (indentation) {
 										return A2(
 											$elm$parser$Parser$Advanced$keeper,
@@ -15687,18 +15604,18 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser = F2(
 													return $elm$core$Result$Err(
 														_Utils_Tuple2(
 															pos,
-															$mdgriffith$elm_markup$Mark$Internal$Error$UnknownBlock(children.H)));
+															$author$project$Mark$Internal$Error$UnknownBlock(children.H)));
 												}),
 											A2(
 												$elm$parser$Parser$Advanced$ignorer,
 												A2(
 													$elm$parser$Parser$Advanced$ignorer,
-													$mdgriffith$elm_markup$Mark$Internal$Parser$withRange($mdgriffith$elm_markup$Mark$Internal$Parser$word),
-													$mdgriffith$elm_markup$Mark$Internal$Parser$newline),
+													$author$project$Mark$Internal$Parser$withRange($author$project$Mark$Internal$Parser$word),
+													$author$project$Mark$Internal$Parser$newline),
 												A2(
 													$elm$parser$Parser$Advanced$loop,
 													'',
-													$mdgriffith$elm_markup$Mark$Internal$Parser$raggedIndentedStringAbove(indentation))));
+													$author$project$Mark$Internal$Parser$raggedIndentedStringAbove(indentation))));
 									})
 								]))))));
 		return $elm$parser$Parser$Advanced$oneOf(
@@ -15707,7 +15624,7 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser = F2(
 				blockParser,
 				$elm$core$List$reverse(children.K)));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Parser$blocksOrNewlines = F3(
+var $author$project$Mark$Internal$Parser$blocksOrNewlines = F3(
 	function (indentation, blocks, cursor) {
 		return $elm$parser$Parser$Advanced$oneOf(
 			_List_fromArray(
@@ -15716,28 +15633,28 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$blocksOrNewlines = F3(
 					$elm$parser$Parser$Advanced$map,
 					function (_v0) {
 						return $elm$parser$Parser$Advanced$Done(
-							$elm$core$List$reverse(cursor.g));
+							$elm$core$List$reverse(cursor.f));
 					},
-					$elm$parser$Parser$Advanced$end($mdgriffith$elm_markup$Mark$Internal$Error$End)),
+					$elm$parser$Parser$Advanced$end($author$project$Mark$Internal$Error$End)),
 					A2(
 					$elm$parser$Parser$Advanced$ignorer,
 					$elm$parser$Parser$Advanced$succeed(
 						$elm$parser$Parser$Advanced$Loop(
-							{g: cursor.g, dE: true, dY: cursor.dY})),
-					$mdgriffith$elm_markup$Mark$Internal$Parser$newlineWith('empty newline')),
+							{f: cursor.f, dE: true, dX: cursor.dX})),
+					$author$project$Mark$Internal$Parser$newlineWith('empty newline')),
 					(!cursor.dE) ? A2(
 					$elm$parser$Parser$Advanced$map,
 					function (foundBlock) {
-						var _v1 = $mdgriffith$elm_markup$Mark$Internal$Id$step(cursor.dY);
+						var _v1 = $author$project$Mark$Internal$Id$step(cursor.dX);
 						var newSeed = _v1.b;
 						return $elm$parser$Parser$Advanced$Loop(
 							{
-								g: A2($elm$core$List$cons, foundBlock, cursor.g),
+								f: A2($elm$core$List$cons, foundBlock, cursor.f),
 								dE: true,
-								dY: newSeed
+								dX: newSeed
 							});
 					},
-					A2($mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser, blocks, cursor.dY)) : $elm$parser$Parser$Advanced$oneOf(
+					A2($author$project$Mark$Internal$Parser$makeBlocksParser, blocks, cursor.dX)) : $elm$parser$Parser$Advanced$oneOf(
 					_List_fromArray(
 						[
 							A2(
@@ -15746,37 +15663,37 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$blocksOrNewlines = F3(
 								$elm$parser$Parser$Advanced$ignorer,
 								$elm$parser$Parser$Advanced$succeed(
 									function (foundBlock) {
-										var _v2 = $mdgriffith$elm_markup$Mark$Internal$Id$step(cursor.dY);
+										var _v2 = $author$project$Mark$Internal$Id$step(cursor.dX);
 										var newSeed = _v2.b;
 										return $elm$parser$Parser$Advanced$Loop(
 											{
-												g: A2($elm$core$List$cons, foundBlock, cursor.g),
+												f: A2($elm$core$List$cons, foundBlock, cursor.f),
 												dE: true,
-												dY: newSeed
+												dX: newSeed
 											});
 									}),
 								$elm$parser$Parser$Advanced$token(
 									A2(
 										$elm$parser$Parser$Advanced$Token,
 										A2($elm$core$String$repeat, indentation, ' '),
-										$mdgriffith$elm_markup$Mark$Internal$Error$ExpectingIndentation(indentation)))),
-							A2($mdgriffith$elm_markup$Mark$Internal$Parser$makeBlocksParser, blocks, cursor.dY)),
+										$author$project$Mark$Internal$Error$ExpectingIndentation(indentation)))),
+							A2($author$project$Mark$Internal$Parser$makeBlocksParser, blocks, cursor.dX)),
 							A2(
 							$elm$parser$Parser$Advanced$ignorer,
 							A2(
 								$elm$parser$Parser$Advanced$ignorer,
 								$elm$parser$Parser$Advanced$succeed(
 									$elm$parser$Parser$Advanced$Loop(
-										{g: cursor.g, dE: true, dY: cursor.dY})),
+										{f: cursor.f, dE: true, dX: cursor.dX})),
 								$elm$parser$Parser$Advanced$backtrackable(
 									$elm$parser$Parser$Advanced$chompWhile(
 										function (c) {
 											return c === ' ';
 										}))),
-							$elm$parser$Parser$Advanced$backtrackable($mdgriffith$elm_markup$Mark$Internal$Parser$newline)),
+							$elm$parser$Parser$Advanced$backtrackable($author$project$Mark$Internal$Parser$newline)),
 							$elm$parser$Parser$Advanced$succeed(
 							$elm$parser$Parser$Advanced$Done(
-								$elm$core$List$reverse(cursor.g)))
+								$elm$core$List$reverse(cursor.f)))
 						])),
 					A2(
 					$elm$parser$Parser$Advanced$ignorer,
@@ -15784,36 +15701,36 @@ var $mdgriffith$elm_markup$Mark$Internal$Parser$blocksOrNewlines = F3(
 						$elm$parser$Parser$Advanced$ignorer,
 						$elm$parser$Parser$Advanced$succeed(
 							$elm$parser$Parser$Advanced$Loop(
-								{g: cursor.g, dE: true, dY: cursor.dY})),
+								{f: cursor.f, dE: true, dX: cursor.dX})),
 						$elm$parser$Parser$Advanced$chompWhile(
 							function (c) {
 								return c === ' ';
 							})),
-					$mdgriffith$elm_markup$Mark$Internal$Parser$newlineWith('ws-line'))
+					$author$project$Mark$Internal$Parser$newlineWith('ws-line'))
 				]));
 	});
-var $mdgriffith$elm_markup$Mark$Internal$Description$resultToFound = function (result) {
+var $author$project$Mark$Internal$Description$resultToFound = function (result) {
 	if (!result.$) {
 		var _v1 = result.a;
 		var range = _v1.a;
 		var desc = _v1.b;
-		return A2($mdgriffith$elm_markup$Mark$Internal$Description$Found, range, desc);
+		return A2($author$project$Mark$Internal$Description$Found, range, desc);
 	} else {
 		var _v2 = result.a;
 		var range = _v2.a;
 		var prob = _v2.b;
-		return $mdgriffith$elm_markup$Mark$Internal$Description$Unexpected(
-			{dI: prob, o: range});
+		return $author$project$Mark$Internal$Description$Unexpected(
+			{af: prob, n: range});
 	}
 };
-var $mdgriffith$elm_markup$Mark$manyOf = function (blocks) {
-	var expectations = A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$Internal$Description$getBlockExpectation, blocks);
+var $author$project$Mark$manyOf = function (blocks) {
+	var expectations = A2($elm$core$List$map, $author$project$Mark$Internal$Description$getBlockExpectation, blocks);
 	return {
-		l: function (desc) {
+		j: function (desc) {
 			var matchBlock = F3(
 				function (description, blck, found) {
 					if (found.$ === 2) {
-						var _v4 = A2($mdgriffith$elm_markup$Mark$Internal$Description$renderBlock, blck, description);
+						var _v4 = A2($author$project$Mark$Internal$Description$renderBlock, blck, description);
 						if (_v4.$ === 2) {
 							return found;
 						} else {
@@ -15831,19 +15748,19 @@ var $mdgriffith$elm_markup$Mark$manyOf = function (blocks) {
 					if (found.$ === 1) {
 						var unexpected = found.a;
 						return _Utils_Tuple2(
-							$mdgriffith$elm_markup$Mark$Internal$Description$uncertain(unexpected),
+							$author$project$Mark$Internal$Description$uncertain(unexpected),
 							index + 1);
 					} else {
 						var range = found.a;
 						var child = found.b;
 						return _Utils_Tuple2(
 							A3(
-								$mdgriffith$elm_markup$Mark$Internal$Description$mergeWith,
+								$author$project$Mark$Internal$Description$mergeWith,
 								$elm$core$List$cons,
 								A3(
 									$elm$core$List$foldl,
 									matchBlock(child),
-									$mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0),
+									$author$project$Mark$Internal$Outcome$Failure(0),
 									blocks),
 								existingResult),
 							index + 1);
@@ -15852,29 +15769,29 @@ var $mdgriffith$elm_markup$Mark$manyOf = function (blocks) {
 			if (desc.$ === 3) {
 				var many = desc.a;
 				return A2(
-					$mdgriffith$elm_markup$Mark$Internal$Description$mapSuccessAndRecovered,
+					$author$project$Mark$Internal$Description$mapSuccessAndRecovered,
 					$elm$core$List$reverse,
 					A3(
 						$elm$core$List$foldl,
-						A2(getRendered, many.R, many.cZ),
+						A2(getRendered, many.R, many.c$),
 						_Utils_Tuple2(
-							$mdgriffith$elm_markup$Mark$Internal$Outcome$Success(_List_Nil),
+							$author$project$Mark$Internal$Outcome$Success(_List_Nil),
 							0),
-						many.eR).a);
+						many.eQ).a);
 			} else {
-				return $mdgriffith$elm_markup$Mark$Internal$Outcome$Failure(0);
+				return $author$project$Mark$Internal$Outcome$Failure(0);
 			}
 		},
-		b9: $mdgriffith$elm_markup$Mark$Internal$Description$ExpectManyOf(expectations),
-		i: $mdgriffith$elm_markup$Mark$Internal$Description$Value,
-		n: F2(
+		l: $author$project$Mark$Internal$Description$ExpectManyOf(expectations),
+		g: $author$project$Mark$Internal$Description$Value,
+		m: F2(
 			function (context, seed) {
-				var _v5 = $mdgriffith$elm_markup$Mark$Internal$Id$step(seed);
+				var _v5 = $author$project$Mark$Internal$Id$step(seed);
 				var parentId = _v5.a;
 				var newSeed = _v5.b;
-				var _v6 = $mdgriffith$elm_markup$Mark$Internal$Id$step(newSeed);
+				var _v6 = $author$project$Mark$Internal$Id$step(newSeed);
 				var childStart = _v6.b;
-				var reseeded = $mdgriffith$elm_markup$Mark$Internal$Id$reseed(childStart);
+				var reseeded = $author$project$Mark$Internal$Id$reseed(childStart);
 				return _Utils_Tuple2(
 					reseeded,
 					A2(
@@ -15883,41 +15800,41 @@ var $mdgriffith$elm_markup$Mark$manyOf = function (blocks) {
 							function (_v7) {
 								var range = _v7.a;
 								var results = _v7.b;
-								return $mdgriffith$elm_markup$Mark$Internal$Description$ManyOf(
+								return $author$project$Mark$Internal$Description$ManyOf(
 									{
-										eR: A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$Internal$Description$resultToFound, results),
-										cZ: expectations,
+										eQ: A2($elm$core$List$map, $author$project$Mark$Internal$Description$resultToFound, results),
+										c$: expectations,
 										R: parentId,
-										o: range
+										n: range
 									});
 							}),
-						$mdgriffith$elm_markup$Mark$Internal$Parser$withRange(
-							$mdgriffith$elm_markup$Mark$Internal$Parser$withIndent(
+						$author$project$Mark$Internal$Parser$withRange(
+							$author$project$Mark$Internal$Parser$withIndent(
 								function (indentation) {
 									return A2(
 										$elm$parser$Parser$Advanced$loop,
-										{g: _List_Nil, dE: false, dY: childStart},
-										A2($mdgriffith$elm_markup$Mark$Internal$Parser$blocksOrNewlines, indentation, blocks));
+										{f: _List_Nil, dE: false, dX: childStart},
+										A2($author$project$Mark$Internal$Parser$blocksOrNewlines, indentation, blocks));
 								}))));
 			})
 	};
 };
 var $author$project$ElmMarkup$metadataBlock = A3(
-	$mdgriffith$elm_markup$Mark$block,
+	$author$project$Mark$block,
 	'Metadata',
 	function (str) {
 		return str;
 	},
-	$mdgriffith$elm_markup$Mark$string);
+	$author$project$Mark$string);
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$ElmMarkup$document = A2(
-	$mdgriffith$elm_markup$Mark$documentWith,
+	$author$project$Mark$documentWith,
 	F2(
 		function (metadata, body) {
 			return A2($elm$html$Html$article, _List_Nil, body);
 		}),
 	{
-		eH: $mdgriffith$elm_markup$Mark$manyOf(
+		eG: $author$project$Mark$manyOf(
 			_List_fromArray(
 				[
 					$author$project$ElmMarkup$header1,
@@ -15927,13 +15844,13 @@ var $author$project$ElmMarkup$document = A2(
 					$author$project$ElmMarkup$list,
 					$author$project$ElmMarkup$code,
 					A2(
-					$mdgriffith$elm_markup$Mark$map,
+					$author$project$Mark$map,
 					$elm$html$Html$p(_List_Nil),
 					$author$project$ElmMarkup$text)
 				])),
-		fv: $author$project$ElmMarkup$metadataBlock
+		fw: $author$project$ElmMarkup$metadataBlock
 	});
-var $mdgriffith$elm_markup$Mark$Error$formatErrorString = function (error) {
+var $author$project$Mark$Error$formatErrorString = function (error) {
 	return $elm$core$String$toUpper(error.bc) + ('\n\n' + A2(
 		$elm$core$String$join,
 		'',
@@ -15942,21 +15859,21 @@ var $mdgriffith$elm_markup$Mark$Error$formatErrorString = function (error) {
 			function ($) {
 				return $.gd;
 			},
-			error.aq)));
+			error.fv)));
 };
-var $mdgriffith$elm_markup$Mark$Error$toString = function (error) {
+var $author$project$Mark$Error$toString = function (error) {
 	if (!error.$) {
 		var details = error.a;
-		return $mdgriffith$elm_markup$Mark$Error$formatErrorString(
-			{aq: details.aq, bc: details.bc});
+		return $author$project$Mark$Error$formatErrorString(
+			{fv: details.fv, bc: details.bc});
 	} else {
 		var global = error.a;
-		return $mdgriffith$elm_markup$Mark$Error$formatErrorString(
-			{aq: global.aq, bc: global.bc});
+		return $author$project$Mark$Error$formatErrorString(
+			{fv: global.fv, bc: global.bc});
 	}
 };
 var $author$project$ElmMarkup$markupToHtml = function (markup) {
-	var _v0 = A2($mdgriffith$elm_markup$Mark$compile, $author$project$ElmMarkup$document, markup);
+	var _v0 = A2($author$project$Mark$compile, $author$project$ElmMarkup$document, markup);
 	switch (_v0.$) {
 		case 0:
 			var html = _v0.a;
@@ -15965,26 +15882,26 @@ var $author$project$ElmMarkup$markupToHtml = function (markup) {
 					[html]));
 		case 1:
 			var result = _v0.a.fP;
-			var errors = _v0.a.e5;
+			var errors = _v0.a.e4;
 			return $elm$core$Result$Err(
 				A2(
 					$elm$core$String$join,
 					'\n',
-					A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$Error$toString, errors)));
+					A2($elm$core$List$map, $author$project$Mark$Error$toString, errors)));
 		default:
 			var errors = _v0.a;
 			return $elm$core$Result$Err(
 				A2(
 					$elm$core$String$join,
 					'\n',
-					A2($elm$core$List$map, $mdgriffith$elm_markup$Mark$Error$toString, errors)));
+					A2($elm$core$List$map, $author$project$Mark$Error$toString, errors)));
 	}
 };
 var $author$project$Post$main = A2(
 	$author$project$Elmstatic$layout,
 	$author$project$Elmstatic$decodePost,
 	function (content) {
-		var _v0 = $author$project$ElmMarkup$markupToHtml(content.eV);
+		var _v0 = $author$project$ElmMarkup$markupToHtml(content.eU);
 		if (!_v0.$) {
 			var html = _v0.a;
 			return A2(
@@ -16002,7 +15919,7 @@ var $author$project$Post$main = A2(
 	});
 var $author$project$Elmstatic$Page = F4(
 	function (content, format, siteTitle, title) {
-		return {eV: content, dc: format, bX: siteTitle, bc: title};
+		return {eU: content, dc: format, bX: siteTitle, bc: title};
 	});
 var $author$project$Elmstatic$decodePage = A5(
 	$elm$json$Json$Decode$map4,
@@ -16018,6 +15935,6 @@ var $author$project$Page$main = A2(
 		return A2(
 			$author$project$Layouts$pageLayout,
 			content.bc,
-			$author$project$ElmMarkup$markupToHtml(content.eV));
+			$author$project$ElmMarkup$markupToHtml(content.eU));
 	});
 _Platform_export({'Page':{'init':$author$project$Page$main($elm$json$Json$Decode$value)(0)},'Tag':{'init':$author$project$Tag$main($elm$json$Json$Decode$value)(0)},'Posts':{'init':$author$project$Posts$main($elm$json$Json$Decode$value)(0)},'Post':{'init':$author$project$Post$main($elm$json$Json$Decode$value)(0)}});}(this));

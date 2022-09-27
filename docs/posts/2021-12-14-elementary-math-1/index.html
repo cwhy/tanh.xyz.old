@@ -1,18 +1,16 @@
 <!doctype html><html><head><title>Multiplication from scratch | tanh.xyz</title><meta charset="utf-8"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/languages/elm.min.js"></script><script>hljs.initHighlightingOnLoad();</script><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/styles/default.min.css" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Red+Hat+Text|Crimson+Pro|Livvic|Jetbrain+Mono" rel="stylesheet" type="text/css"></head><body><div class="header-text"><a href="/" style="text-decoration: none;"><h1><span style="text-decoration: underline solid #66220065;">tanh</span><span style="color: rgb(102, 34, 0);">.</span><span style="text-decoration: line-through solid #66220065 ;">xyz</span></h1></a></div><div class="navigation"><ul><li><a href="/posts">Posts</a></li><li><a href="/about">About</a></li></ul></div><div class="sidebar"></div><div class="sidebar2"></div><div class="content"><h2>Multiplication from scratch</h2><div class="post-metadata"><span>2021-12-14</span><span>•</span><a href="/tags/programming">programming</a><a href="/tags/math">math</a></div><article><p>On a weekend, I thought of an interesting challenge: trying int multiplication without using arithmatic or math library.
-In a more specific manner, it is “int multiplication without number types” – yeah, no numbers are involved.</p><p>But how do we represent the inputs and outputs then? – We still have strings</p><p>So we are looking for something like a function like this:
-|&gt; Code
-    lang = python
-    code =
-        mult(“123134254”, “32131”)</p><p>we already know the algorithm!
-let’s go back to our primary school and experience the hardship
-|&gt; Code
-    lang = python
-    code =
-        digits_str = ()</p></article></div><link href="/fonts/font.css" rel="stylesheet" type="text/css"><link href="/styles.css" rel="stylesheet" type="text/css"><span><style>pre  code {
-    overflow-x:scroll !important;
-}
-
-h1 {
+In a more specific manner, it is “int multiplication without number types” – yeah, no numbers are involved.</p><p>But how do we represent the inputs and outputs then? – We still have strings</p><p>So we are looking for something like a function like this:</p><pre><code class="python"># def mult_digit(digit1, digit2): ...</code></pre><p>we already know the algorithm!
+let’s go back to our primary school and experience the hardship</p><pre><code class="python">multiplication_table = [
+    ['1',  '2',  '3',  '4',  '5',  '6',  '7',  '8',  '9'],
+    ['2',  '4',  '6',  '8', '10', '12', '14', '16', '18'],
+    ['3',  '6',  '9', '12', '15', '18', '21', '24', '27'],
+    ['4',  '8', '12', '16', '20', '24', '28', '32', '36'],
+    ['5', '10', '15', '20', '25', '30', '35', '40', '45'],
+    ['6', '12', '18', '24', '30', '36', '42', '48', '54'],
+    ['7', '14', '21', '28', '35', '42', '49', '56', '63'],
+    ['8', '16', '24', '32', '40', '48', '56', '64', '72'],
+    ['9', '18', '27', '36', '45', '54', '63', '72', '81']
+    ]</code></pre></article></div><link href="/fonts/font.css" rel="stylesheet" type="text/css"><link href="/styles.css" rel="stylesheet" type="text/css"><span><style>h1 {
     font-size:2.3rem;
     font-family:Livvic, Arial, Helvetica, sans-serif;
     line-height:1.4rem;
